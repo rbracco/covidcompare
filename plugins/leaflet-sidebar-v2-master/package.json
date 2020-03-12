@@ -1,0 +1,44 @@
+{
+  "name": "leaflet-sidebar-v2",
+  "version": "3.2.2",
+  "description": "A responsive sidebar just for Leaflet",
+  "keywords": [
+    "gis",
+    "leaflet",
+    "control",
+    "map"
+  ],
+  "main": "js/leaflet-sidebar.js",
+  "style": "css/leaflet-sidebar.css",
+  "homepage": "https://github.com/nickpeihl/leaflet-sidebar-v2",
+  "bugs": "https://github.com/nickpeihl/leaflet-sidebar-v2/issues",
+  "license": "MIT",
+  "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
+  "contributors": [
+    "Norwin <noerw@gmx.de> (http://github.com/noerw)",
+    "Nick Peihl <nickpeihl@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nickpeihl/leaflet-sidebar-v2.git"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-csslint": "^1.0.1",
+    "gulp-jshint": "^2.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.1",
+    "gulp-zip": "^5.0.0",
+    "jshint": "^2.9.6"
+  },
+  "scripts": {
+    "test": "gulp lint",
+    "lint": "gulp lint",
+    "minify": "gulp minify",
+    "zip": "gulp zip",
+    "watch": "gulp watch"
+  },
+  "types": "index.d.ts"
+}

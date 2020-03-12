@@ -1,0 +1,26 @@
+{
+  "name": "leaflet-sidebar-v2",
+  "version": "1.0.0",
+  "homepage": "https://github.com/nickpeihl/leaflet-sidebar-v2",
+  "authors": [
+    "Tobias Bieniek <tobias.bieniek@qsc.de>",
+    "Nick Peihl <nickpeihl@gmail.com>"
+  ],
+  "description": "A responsive sidebar just for Leaflet",
+  "main": [
+    "css/leaflet-sidebar.css",
+    "js/leaflet-sidebar.js"
+  ],
+  "keywords": [
+    "gis",
+    "leaflet",
+    "openlayers",
+    "map"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "doc",
+    "examples",
+    ".gitignore"
+  ]
+}

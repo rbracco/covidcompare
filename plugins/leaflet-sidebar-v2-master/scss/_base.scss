@@ -1,0 +1,249 @@
+$threshold-lg: 1200px !default;
+$threshold-md: 992px !default;
+$threshold-sm: 768px !default;
+
+$width-lg: 460px !default;
+$width-md: 390px !default;
+$width-sm: 305px !default;
+$width-xs: 100% !default;
+
+$sidebar-z-index: 2000 !default;
+$sidebar-transition: 500ms !default;
+
+$tab-size: 40px !default;
+$tab-font-size: 12pt !default;
+$tab-bg: null !default;
+$tab-transition: 80ms !default;
+
+$header-fg: $tab-active-fg !default;
+$header-bg: $tab-active-bg !default;
+
+$content-bg: rgba(255, 255, 255, 0.95) !default;
+$content-padding-vertical: 10px !default;
+$content-padding-horizontal: 20px !default;
+
+.leaflet-sidebar {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    width: $width-xs;
+
+    overflow: hidden;
+
+    z-index: $sidebar-z-index;
+
+    &.collapsed {
+        width: $tab-size;
+    }
+
+    @media(min-width:$threshold-sm) {
+        top: $sidebar-margins;
+        bottom: $sidebar-margins;
+
+        transition: width $sidebar-transition;
+    }
+
+    @media(min-width:$threshold-sm) and (max-width:$threshold-md - 1px) {
+        width: $width-sm;
+        max-width: $width-sm;
+    }
+
+    @media(min-width:$threshold-md) and (max-width:$threshold-lg - 1px) {
+        width: $width-md;
+        max-width: $width-md;
+    }
+
+    @media(min-width:$threshold-lg) {
+        width: $width-lg;
+        max-width: $width-lg;
+    }
+}
+
+.leaflet-sidebar-left {
+    left: 0;
+
+    @media(min-width:$threshold-sm) {
+        left: $sidebar-margins;
+    }
+}
+
+.leaflet-sidebar-right {
+    right: 0;
+
+    @media(min-width:$threshold-sm) {
+        right: $sidebar-margins;
+    }
+}
+
+.leaflet-sidebar-tabs {
+    top: 0;
+    bottom: 0;
+    height: 100%;
+
+    .leaflet-sidebar-left & {
+        left: 0;
+    }
+
+    .leaflet-sidebar-right & {
+        right: 0;
+    }
+
+    background-color: $tabs-bg;
+
+    &, & > ul {
+        position: absolute;
+
+        width: $tab-size;
+
+        margin: 0;
+        padding: 0;
+
+        list-style-type: none;
+
+        & > li {
+            width: 100%;
+            height: $tab-size;
+
+            color: $tab-fg;
+            @if $tab-bg { background: $tab-bg; }
+
+            font-size: $tab-font-size;
+
+            overflow: hidden;
+
+            transition: all $tab-transition;
+
+            &:hover {
+                color: $tab-hover-fg;
+                background-color: $tab-hover-bg;
+            }
+
+            &.active {
+                color: $tab-active-fg;
+                background-color: $tab-active-bg;
+            }
+
+            &.disabled {
+                color: fade-out($tab-fg, 0.6);
+
+                &:hover {
+                    @if $tab-bg {
+                        background: $tab-bg;
+                    } @else {
+                        background: transparent;
+                    }
+                }
+
+                & > a {
+                    cursor: default;
+                }
+            }
+
+            & > a {
+                display: block;
+
+                width: 100%;
+                height: 100%;
+
+                line-height: $tab-size;
+
+                color: inherit;
+                text-decoration: none;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    & > ul + ul {
+        bottom: 0;
+    }
+}
+
+.leaflet-sidebar-content {
+    position: absolute;
+
+    .leaflet-sidebar-left & {
+        left: $tab-size;
+        right: 0;
+    }
+
+    .leaflet-sidebar-right & {
+        left: 0;
+        right: $tab-size;
+    }
+
+    top: 0;
+    bottom: 0;
+
+    background-color: $content-bg;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .leaflet-sidebar.collapsed > & {
+        overflow-y: hidden;
+    }
+}
+
+ .collapsed > .leaflet-sidebar-content {
+    overflow-y:hidden; }
+
+
+.leaflet-sidebar-pane {
+    display: none;
+
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+
+    padding: $content-padding-vertical $content-padding-horizontal;
+
+    &.active {
+        display: block;
+    }
+
+    @media(min-width:$threshold-sm) and (max-width:$threshold-md - 1px) {
+        min-width: $width-sm - $tab-size;
+    }
+
+    @media(min-width:$threshold-md) and (max-width:$threshold-lg - 1px) {
+        min-width: $width-md - $tab-size;
+    }
+
+    @media(min-width:$threshold-lg) {
+        min-width: $width-lg - $tab-size;
+    }
+}
+
+.leaflet-sidebar-header {
+    margin: (-$content-padding-vertical) (-$content-padding-horizontal) 0;
+    height: $tab-size;
+    padding: 0 $content-padding-horizontal;
+    line-height: $tab-size;
+    font-size: $tab-font-size * 1.2;
+    color: $header-fg;
+    background-color: $header-bg;
+
+    .leaflet-sidebar-right & {
+        padding-left: $tab-size;
+    }
+}
+
+.leaflet-sidebar-close {
+    position: absolute;
+    top: 0;
+    width: $tab-size;
+    height: $tab-size;
+    text-align: center;
+    cursor: pointer;
+
+    .leaflet-sidebar-left & {
+        right: 0;
+    }
+
+    .leaflet-sidebar-right & {
+        left: 0;
+    }
+}
