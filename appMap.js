@@ -145,7 +145,7 @@ function stateStyle(feature) {
 
 function onEachState(feature, layer) {
     layer.on({
-        mouseover: highlightFeature,
+        mouseover: highlightState,
         mouseout: resetHighlightState,
         click: zoomToFeature
     });
@@ -171,6 +171,7 @@ function highlightCounty(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
+    info.updateCounty(layer.feature.properties);
 }
 
 function zoomToFeature(e) {
@@ -179,16 +180,15 @@ function zoomToFeature(e) {
 
 function resetHighlightState(e) {
     stateLayer.resetStyle(e.target);
-    info.update();
+    info.updateState();
 }
 
 function resetHighlightCounty(e) {
     countyLayer.resetStyle(e.target);
-    info.update();
 }
 
 
-function highlightFeature(e) {
+function highlightState(e) {
     var layer = e.target;
 
     layer.setStyle({
@@ -201,7 +201,8 @@ function highlightFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature.properties);
+
+    info.updateState(layer.feature.properties);
 }
 
 
@@ -228,16 +229,23 @@ var info = L.control();
 
 info.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
+    this.updateState();
     return this._div;
 };
 
 // method that we will use to update the control based on feature properties passed
-info.update = function (props) {
+info.updateState = function (props) {
     console.log(props)
     this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
         '<b>' + props.name + '</b><br />' + props.population + ' people'
         : 'Hover over a state');
+};
+
+info.updateCounty = function (props) {
+    cases = dataCovid[props.GEO_ID] || 0
+    this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+        `<b>${props.NAME} County </b><br />${props.POP} people<br/>${cases} cases`
+        : 'Hover over a county');
 };
 
 info.addTo(map);
