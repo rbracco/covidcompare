@@ -22,21 +22,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 let centroids = getCountyCentroids()
 
-function getCountyCentroids(){
-    let centroids = {}
-    for(let feat of countyCentroids["features"]){
-        centroids[feat["properties"]["GEO_ID"]] = feat["geometry"]["coordinates"]
-    }
-    return centroids
-}
-
-//get the distance in kilometers between two centroids
-function getDistance(c0, c1){
-    let latDist = Math.abs(c0[0]-c1[0])
-    let longDist = Math.abs(c0[1]-c1[1])
-    return Math.sqrt(latDist*latDist + longDist*longDist) * 111
-}
-
 //It will speed it up massively if I just iterate over dataCovid (where we have cases) instead of every county
 function getNeighboringCountyRisk(geoID){
     let neighborRisk = 0.0
@@ -249,10 +234,6 @@ info.updateCounty = function (props) {
 };
 
 info.addTo(map);
-
-
-
-
 
 // // create the sidebar instance and add it to the map
 // var sidebar = L.control.sidebar({ container: 'sidebar' })
