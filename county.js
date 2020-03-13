@@ -37,3 +37,16 @@ function getCountyColor(props){
            isNaN(risk)    ? '#000000':
                          '#bbbbbb';
 }
+
+function onEachCounty(feature, layer){
+    layer.on({
+        mouseover: highlightCounty,
+        mouseout: resetHighlightCounty,
+        click: zoomToFeature
+    });
+}
+
+function resetHighlightCounty(e) {
+    countyLayer.resetStyle(e.target);
+}
+

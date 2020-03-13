@@ -12,3 +12,7 @@ function getDistance(c0, c1){
     let longDist = Math.abs(c0[1]-c1[1])
     return Math.sqrt(latDist*latDist + longDist*longDist) * 111
 }
+
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
