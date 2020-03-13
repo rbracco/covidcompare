@@ -77,7 +77,10 @@ info.onAdd = function (map) {
 // method that we will use to update the control based on feature properties passed
 info.updateState = function (props) {
     this._div.innerHTML = '<h4>Covid19 by State</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + props.population + ' people'
+        `<b>${props.name}</b><br/>
+        ${props.population} people<br/>
+        ${props.beds} hospital beds<br/>
+        ${(props.beds/(props.population/1000)).toFixed(2)} beds per 1000`
         : 'Hover over a state');
 };
 
@@ -89,3 +92,13 @@ info.updateCounty = function (props) {
 };
 
 info.addTo(map);
+
+// for(let hospital of dataHospitals){
+//     console.log(typeof hospital.BEDS)
+//     var circle = L.circle([hospital.Y, hospital.X], {
+//         color: 'green',
+//         fillColor: '#0f3',
+//         fillOpacity: 0.5,
+//         radius: 1
+//     }).addTo(map);
+// }
