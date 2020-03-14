@@ -101,7 +101,7 @@ info.updateState = function (props) {
 
 info.updateCounty = function (props) {
     let cases = props.cases || 0
-    let title = props ? `<h3>${props.NAME}</h3>`:`<h3>Hover over a county</h3>`
+    let title = props ? `<h3>${props.NAME} County</h3>`:`<h3>Hover over a county</h3>`
     let body = props ? 
         `<b>Covid19 Cases</b><br/>
         ${cases} cases<br/>
