@@ -76,6 +76,7 @@ info.onAdd = function (map) {
 
 // method that we will use to update the control based on feature properties passed
 info.updateState = function (props) {
+    console.log(props)
     this._div.innerHTML = '<h4>Covid19 by State</h4>' +  (props ?
         `<b>${props.name}</b><br/>
         ${props.population} people<br/>
@@ -94,7 +95,6 @@ info.updateCounty = function (props) {
 info.addTo(map);
 
 // for(let hospital of dataHospitals){
-//     console.log(typeof hospital.BEDS)
 //     var circle = L.circle([hospital.Y, hospital.X], {
 //         color: 'green',
 //         fillColor: '#0f3',

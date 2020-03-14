@@ -22,7 +22,14 @@ function getStateRisk(stateID, props, originalCall=true){
         neighborRisk = getNeighboringStateRisk(stateID)
     }
     let stateRisk = dataCovidState[stateID]["CASES"]/props.population
-    return stateRisk + neighborRisk
+    let totalRisk = stateRisk + neighborRisk
+    dataCovidState[stateID]["RISK"] = totalRisk
+    for (let state of statesData["features"]){
+        if(state.id == stateID){
+            state["properties"]["risk"] = totalRisk
+        }
+    }
+    return totalRisk
 }
 
 function getStateColor(stateID, props){
