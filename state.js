@@ -1,16 +1,17 @@
 function mergeCovidStateData(){
     for (let stateID of Object.keys(dataCovidState)){
         let {CASES, DEATHS, ABBR, LAT, LONG} = dataCovidState[stateID]
-        for (let state of statesData["features"]){
-            if(state.id == stateID){
-                state["properties"]["CASES"] = CASES
-                state["properties"]["DEATHS"] = DEATHS
-                state["properties"]["ABBR"] = ABBR
-                state["properties"]["LAT"] = LAT
-                state["properties"]["LONG"] = LONG
-            }
-        }
+        let state = getState(stateID)
+        state["properties"]["CASES"] = CASES
+        state["properties"]["DEATHS"] = DEATHS
+        state["properties"]["ABBR"] = ABBR
+        state["properties"]["LAT"] = LAT
+        state["properties"]["LONG"] = LONG
     }
+}
+
+function getState(stateID){
+    return statesData["features"].find(element => element["id"] == stateID)
 }
 
 function getNeighboringStateRisk(stateID){
@@ -34,10 +35,6 @@ function getNeighboringStateRisk(stateID){
     return neighborRisk
 }
 
-function getState(stateID){
-    return statesData["features"].find(element => element["id"] == stateID)
-}
-
 function calcStateRisk(stateID, originalCall=true){
     let neighborRisk = 0
     let stateRisk = 0
@@ -49,10 +46,9 @@ function calcStateRisk(stateID, originalCall=true){
     }
     let {population, CASES} = props
     stateRisk = CASES/population
-    let totalRisk = stateRisk + neighborRisk
     props["LOCALRISK"] = stateRisk
     props["TOTALRISK"] = stateRisk + props["NEIGHBORRISK"]
-    return totalRisk
+    return props["TOTALRISK"]
 }
 
 function calcRiskAllStates(){

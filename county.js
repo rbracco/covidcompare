@@ -1,8 +1,21 @@
+function mergeCovidCountyData(){
+    for (let geoID of Object.keys(dataCovidCounty)){
+        let cases = dataCovidCounty[geoID] 
+        let county = getCounty(geoID)
+        county["properties"]["cases"] = cases
+    }
+}
+
+function getCounty(countyID){
+    return countyData["features"].find(element => element["properties"]["GEO_ID"] == countyID)
+}
+
+
 function getNeighboringCountyRisk(geoID){
     let neighborRisk = 0.0
     for (let feat of countyData["features"]){
         let geoID2 = feat["properties"]["GEO_ID"]
-        if((geoID != geoID2) & (geoID2 in dataCovid)){
+        if((geoID != geoID2) & (geoID2 in dataCovidCounty)){
             let distance = getDistance(centroids[geoID], centroids[geoID2])
             let curNeighborRisk = getCountyRisk(feat["properties"], originalCall=false)
             if(! isNaN(curNeighborRisk)){
@@ -16,16 +29,24 @@ function getNeighboringCountyRisk(geoID){
 function getCountyRisk(props, originalCall=true){
     let pop = props.POP
     let geoID = props.GEO_ID
-    pop = parseInt(pop)
-    cases = dataCovid[geoID] || 0
-    let risk = cases/pop
-    
+    cases = dataCovidCounty[geoID] || 0
+    let countyRisk = cases/pop
+    props["LOCALRISK"] = countyRisk
     let neighborRisk = 0
     if(originalCall){
         neighborRisk = getNeighboringCountyRisk(geoID)
+        props["NEIGHBORRISK"] = neighborRisk
     }
-    return risk + neighborRisk
+    props["TOTALRISK"] = countyRisk + props["NEIGHBORRISK"]
+    return props["TOTALRISK"]
 }
+
+function calcRiskAllCounties(){
+    for(let county of countyData["features"]){
+        calcStateRisk(county["geoID"])
+    }
+}
+
 
 function getCountyColor(props){
     let risk = getCountyRisk(props)

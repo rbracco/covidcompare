@@ -5,6 +5,7 @@ let zoomLevel = 5
 //'mapbox/satellite-v9'
 let tileProvider = 'mapbox/streets-v11'
 let map = L.map('map').setView([lat, long], zoomLevel);
+mergeCovidCountyData()
 mergeCovidStateData()
 calcRiskAllStates()
 let mapAttribution = `<a href="https://www.defineamerican.com" target="_blank">Define American</a> |
@@ -99,15 +100,25 @@ info.updateState = function (props) {
 };
 
 info.updateCounty = function (props) {
-    cases = dataCovid[props.GEO_ID] || 0
-    this._div.innerHTML = '<h4>Covid19 by County</h4>' +  (props ?
-        `<b>${props.NAME} County </b><br />${props.POP} people<br/>${cases} cases`
-        : 'Hover over a county');
+    let cases = props.cases || 0
+    let title = props ? `<h3>${props.NAME}</h3>`:`<h3>Hover over a county</h3>`
+    let body = props ? 
+        `<b>Covid19 Cases</b><br/>
+        ${cases} cases<br/>
+        ${props.POP} people<br/>
+        ${(cases/(props.POP/100000)).toFixed(2)} cases per 100000<br/>
+        <b>Relative Risk<br/></b>
+        Local Risk: ${(100000*props.LOCALRISK).toFixed(3)}<br/>
+        Nearby Risk: ${(100000*props.NEIGHBORRISK).toFixed(3)}<br/>
+        Total Risk: ${(100000*props.TOTALRISK).toFixed(3)}<br/>
+        <br>
+        `
+        : "<br/>"
+        
+    this._div.innerHTML = title + body
 };
 
 info.addTo(map);
-
-
 
 // for(let hospital of dataHospitals){
 //     var circle = L.circle([hospital.Y, hospital.X], {

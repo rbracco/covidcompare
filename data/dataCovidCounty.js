@@ -1,4 +1,4 @@
-let dataCovid = {
+let dataCovidCounty = {
 
     //CALIFORNIA State ID 06
     //Los Angeles CA
