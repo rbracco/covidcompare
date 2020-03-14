@@ -76,15 +76,16 @@ info.onAdd = function (map) {
 
 // method that we will use to update the control based on feature properties passed
 info.updateState = function (props) {
-    console.log(props)
-    this._div.innerHTML = '<h4>Covid19 by State</h4>' +  (props ?
-        `<b>${props.name}</b><br/>
-        ${props.CASES} cases<br/>
-        ${(props.CASES/(props.population/1000)).toFixed(2)} cases per 1000<br/>
+    let title = props ? `<h3>${props.name}</h3>`:`<h3>Hover over a state</h3>`
+    let body = props ? 
+        `${props.CASES} cases<br/>
+        ${(props.CASES/(props.population/100000)).toFixed(2)} cases per 100000<br/>
         ${props.population} people<br/>
         ${props.beds} hospital beds<br/>
-        ${(props.beds/(props.population/1000)).toFixed(2)} beds per 1000`
-        : 'Hover over a state');
+        ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000`
+        : "<br/>"
+    this._div.innerHTML = title + body
+
 };
 
 info.updateCounty = function (props) {
