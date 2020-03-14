@@ -78,12 +78,21 @@ info.onAdd = function (map) {
 info.updateState = function (props) {
     let title = props ? `<h3>${props.name}</h3>`:`<h3>Hover over a state</h3>`
     let body = props ? 
-        `${props.CASES} cases<br/>
-        ${(props.CASES/(props.population/100000)).toFixed(2)} cases per 100000<br/>
+        `<b>Covid19 Cases</b><br/>
+        ${props.CASES} cases<br/>
         ${props.population} people<br/>
+        ${(props.CASES/(props.population/100000)).toFixed(2)} cases per 100000<br/>
+        <b>Hospital Access</b><br>
         ${props.beds} hospital beds<br/>
-        ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000`
+        ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
+        <b>Relative Risk<br/></b>
+        Local Risk: ${(100000*props.LOCALRISK).toFixed(3)}<br/>
+        Nearby Risk: ${(100000*props.NEIGHBORRISK).toFixed(3)}<br/>
+        Total Risk: ${(100000*props.TOTALRISK).toFixed(3)}<br/>
+        <br>
+        `
         : "<br/>"
+        
     this._div.innerHTML = title + body
 
 };

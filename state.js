@@ -1,20 +1,15 @@
 function getNeighboringStateRisk(stateID){
     let neighborRisk = 0.0
-    let centroidState
-    for(let state of statesData["features"]){
-        if(state["id"] == stateID){
-            centroidState = [state["properties"]["LAT"], state["properties"]["LONG"]]
-        }
-    }
+        let state = getState(stateID)
+    let centroidState = [state["properties"]["LAT"], state["properties"]["LONG"]]
+
     for(let state of statesData["features"]){
         let neighborID = state["id"]
-        let props = state["properties"]
         if(neighborID != stateID){
-            //we need to find a way to remove this reference to dataCovidState
-            centroidNeighbor = [props["LAT"], props["LONG"]]
+            let neighborProps = state["properties"]
+            centroidNeighbor = [neighborProps["LAT"], neighborProps["LONG"]]
             let distance = getDistance(centroidState,centroidNeighbor)
             let curNeighborRisk = getStateRisk(neighborID, originalCall=false)
-            //console.log("D", distance, curNeighborRisk)
             if(! isNaN(curNeighborRisk)){
                 neighborRisk += curNeighborRisk/(distance/50)
             }
@@ -23,20 +18,25 @@ function getNeighboringStateRisk(stateID){
     return neighborRisk
 }
 
+function getState(stateID){
+    return statesData["features"].find(element => element["id"] == stateID)
+}
+
 function getStateRisk(stateID, originalCall=true){
     let neighborRisk = 0
     let stateRisk = 0
+    let state = getState(stateID)
+    let props = state["properties"]
     if(originalCall){
         neighborRisk = getNeighboringStateRisk(stateID)
+        props["NEIGHBORRISK"] = neighborRisk
+        console.log(stateID, neighborRisk)
     }
-    let state = statesData["features"].find(element => element["id"] == stateID)
-    let props = state["properties"]
     let {population, CASES} = props
     stateRisk = CASES/population
     let totalRisk = stateRisk + neighborRisk
     props["LOCALRISK"] = stateRisk
-    props["NEIGHBORRISK"] = neighborRisk
-    props["TOTALRISK"] = stateRisk + neighborRisk
+    props["TOTALRISK"] = stateRisk + props["NEIGHBORRISK"]
     return totalRisk
 }
 
