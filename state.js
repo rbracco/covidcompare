@@ -1,13 +1,20 @@
 function getNeighboringStateRisk(stateID){
     let neighborRisk = 0.0
-    for(let state of statesData.features){
+    let centroidState
+    for(let state of statesData["features"]){
+        if(state["id"] == stateID){
+            centroidState = [state["properties"]["LAT"], state["properties"]["LONG"]]
+        }
+    }
+    for(let state of statesData["features"]){
         let neighborID = state["id"]
         let props = state["properties"]
         if(neighborID != stateID){
-            centroidState = [dataCovidState[stateID]["LAT"], dataCovidState[stateID]["LONG"]]
-            centroidNeighbor = [dataCovidState[neighborID]["LAT"], dataCovidState[neighborID]["LONG"]]
+            //we need to find a way to remove this reference to dataCovidState
+            centroidNeighbor = [props["LAT"], props["LONG"]]
             let distance = getDistance(centroidState,centroidNeighbor)
-            let curNeighborRisk = getStateRisk(neighborID, props, originalCall=false)
+            let curNeighborRisk = getStateRisk(neighborID, originalCall=false)
+            //console.log("D", distance, curNeighborRisk)
             if(! isNaN(curNeighborRisk)){
                 neighborRisk += curNeighborRisk/(distance/50)
             }
@@ -16,20 +23,36 @@ function getNeighboringStateRisk(stateID){
     return neighborRisk
 }
 
-function getStateRisk(stateID, props, originalCall=true){
+function getStateRisk(stateID, originalCall=true){
     let neighborRisk = 0
+    let stateRisk = 0
     if(originalCall){
         neighborRisk = getNeighboringStateRisk(stateID)
     }
-    let stateRisk = dataCovidState[stateID]["CASES"]/props.population
+    let state = statesData["features"].find(element => element["id"] == stateID)
+    let props = state["properties"]
+    let {population, CASES} = props
+    stateRisk = CASES/population
     let totalRisk = stateRisk + neighborRisk
-    dataCovidState[stateID]["RISK"] = totalRisk
-    for (let state of statesData["features"]){
-        if(state.id == stateID){
-            state["properties"]["risk"] = totalRisk
+    props["LOCALRISK"] = stateRisk
+    props["NEIGHBORRISK"] = neighborRisk
+    props["TOTALRISK"] = stateRisk + neighborRisk
+    return totalRisk
+}
+
+function mergeCovidStateData(){
+    for (let stateID of Object.keys(dataCovidState)){
+        let {CASES, DEATHS, ABBR, LAT, LONG} = dataCovidState[stateID]
+        for (let state of statesData["features"]){
+            if(state.id == stateID){
+                state["properties"]["CASES"] = CASES
+                state["properties"]["DEATHS"] = DEATHS
+                state["properties"]["ABBR"] = ABBR
+                state["properties"]["LAT"] = LAT
+                state["properties"]["LONG"] = LONG
+            }
         }
     }
-    return totalRisk
 }
 
 function getStateColor(stateID, props){

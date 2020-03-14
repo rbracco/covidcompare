@@ -5,7 +5,7 @@ let zoomLevel = 5
 //'mapbox/satellite-v9'
 let tileProvider = 'mapbox/streets-v11'
 let map = L.map('map').setView([lat, long], zoomLevel);
-
+mergeCovidStateData()
 let mapAttribution = `<a href="https://www.defineamerican.com" target="_blank">Define American</a> |
                     'Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, 
                     <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>, Imagery © 
@@ -79,6 +79,8 @@ info.updateState = function (props) {
     console.log(props)
     this._div.innerHTML = '<h4>Covid19 by State</h4>' +  (props ?
         `<b>${props.name}</b><br/>
+        ${props.CASES} cases<br/>
+        ${(props.CASES/(props.population/1000)).toFixed(2)} cases per 1000<br/>
         ${props.population} people<br/>
         ${props.beds} hospital beds<br/>
         ${(props.beds/(props.population/1000)).toFixed(2)} beds per 1000`
@@ -93,6 +95,8 @@ info.updateCounty = function (props) {
 };
 
 info.addTo(map);
+
+
 
 // for(let hospital of dataHospitals){
 //     var circle = L.circle([hospital.Y, hospital.X], {
