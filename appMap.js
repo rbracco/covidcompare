@@ -6,6 +6,7 @@ let zoomLevel = 5
 let tileProvider = 'mapbox/streets-v11'
 let map = L.map('map').setView([lat, long], zoomLevel);
 mergeCovidStateData()
+calcRiskAllStates()
 let mapAttribution = `<a href="https://www.defineamerican.com" target="_blank">Define American</a> |
                     'Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, 
                     <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>, Imagery © 
