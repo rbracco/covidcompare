@@ -39,7 +39,7 @@ var countyLayer = L.geoJson(countyData,
     { 
         style:countyStyle, 
         onEachFeature:onEachCounty
-    }).addTo(map);
+    })
 
 var stateLayer  = L.geoJson(statesData, 
     { 
@@ -52,14 +52,14 @@ var overlayMaps = {
     "States": stateLayer,
 }
 
-L.control.layers(overlayMaps).addTo(map);
+var layerControl = L.control.layers(overlayMaps).addTo(map);
+layerControl.expand()
 
 var info = L.control();
 function highlightCounty(e) {
     var layer = e.target;
     layer.setStyle({
         weight: 5,
-        color: '#666',
         dashArray: '',
         fillOpacity: 0.7
     });

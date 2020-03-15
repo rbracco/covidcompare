@@ -14,48 +14,50 @@ function getState(stateID){
     return statesData["features"].find(element => element["id"] == stateID)
 }
 
-function getNeighboringStateRisk(stateID){
-    let neighborRisk = 0.0
-        let state = getState(stateID)
-    let centroidState = [state["properties"]["LAT"], state["properties"]["LONG"]]
-
+function calcRiskAllStates(){
     for(let state of statesData["features"]){
-        let centroidNeighbor
-        let neighborID = state["id"]
-        if(neighborID != stateID){
-            let neighborProps = state["properties"]
-            centroidNeighbor = [neighborProps["LAT"], neighborProps["LONG"]]
-            let distance = getDistance(centroidState,centroidNeighbor)
-            let curNeighborRisk = calcStateRisk(neighborID, originalCall=false)
-            if(! isNaN(curNeighborRisk)){
-                neighborRisk += curNeighborRisk/(distance/50)
-            }
-        }
+        calcLocalStateRisk(state["id"])
     }
-    return neighborRisk
+    for(let state of statesData["features"]){
+        console.log("HERE2")
+        calcAllNeighborStateRisk(state["id"])
+    }
 }
 
-function calcStateRisk(stateID, originalCall=true){
-    let neighborRisk = 0
+function calcLocalStateRisk(stateID){
     let stateRisk = 0
     let state = getState(stateID)
     let props = state["properties"]
-    if(originalCall){
-        neighborRisk = getNeighboringStateRisk(stateID)
-        props["NEIGHBORRISK"] = neighborRisk
-    }
     let {population, CASES} = props
     stateRisk = CASES/population
     props["LOCALRISK"] = stateRisk
-    props["TOTALRISK"] = stateRisk + props["NEIGHBORRISK"]
-    return props["TOTALRISK"]
+    return props["LOCALRISK"]
 }
 
-function calcRiskAllStates(){
-    for(let state of statesData["features"]){
-        calcStateRisk(state["id"])
+function calcAllNeighborStateRisk(stateID){
+    let neighborRisk = 0.0
+    let stateOrig = getState(stateID)
+    for(let stateNeighbor of statesData["features"]){
+        neighborRisk += calcNeighborStateRisk(stateOrig, stateNeighbor)
+        console.log("NR", neighborRisk)
     }
+    stateOrig["properties"]["NEIGHBORRISK"] = neighborRisk
+    stateOrig["properties"]["TOTALRISK"] = stateOrig["properties"]["LOCALRISK"] + neighborRisk
+    return neighborRisk
 }
+
+function calcNeighborStateRisk(state1, state2){
+    if(state1["id"] === state2["id"]){
+        return 0
+    }
+    let {LAT, LONG, LOCALRISK} = state2["properties"]
+    let centroidState = [state1["properties"]["LAT"], state1["properties"]["LONG"]]
+    let centroidNeighbor = [LAT, LONG]
+    let distance = getDistance(centroidState,centroidNeighbor)
+    let curNeighborRisk = LOCALRISK
+    return curNeighborRisk/(distance/50)
+}
+
 
 function getStateColor(stateID, props){
     let risk = props["TOTALRISK"]

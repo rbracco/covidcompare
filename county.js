@@ -11,6 +11,7 @@ function getCounty(countyID){
 }
 
 
+
 function getNeighboringCountyRisk(geoID){
     let neighborRisk = 0.0
     for (let feat of countyData["features"]){
@@ -29,7 +30,7 @@ function getNeighboringCountyRisk(geoID){
 function getCountyRisk(props, originalCall=true){
     let pop = props.POP
     let geoID = props.GEO_ID
-    cases = dataCovidCounty[geoID] || 0
+    cases = dataCovidCounty[geoID]
     let countyRisk = cases/pop
     props["LOCALRISK"] = countyRisk
     let neighborRisk = 0
@@ -55,7 +56,7 @@ function getCountyColor(props){
            risk > 0.00001   ? '#fb6a4a':
            risk > 0.000003    ? '#fc9272':
            risk > 0.000001    ? '#fcbba1':
-           isNaN(risk)    ? '#000000':
+           isNaN(risk)    ? '#ffffff':
                          '#bbbbbb';
 }
 
@@ -68,6 +69,13 @@ function onEachCounty(feature, layer){
 }
 
 function resetHighlightCounty(e) {
-    countyLayer.resetStyle(e.target);
+    var layer = e.target;
+    layer.setStyle({
+        weight: 1,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    });
 }
 
