@@ -1,4 +1,4 @@
-# Covid19 Comparison - Live at covidcompare.com/map
+# Covid19 Comparison - Live at <a href="covidcompare.com/map">
 
 Visualizing the relative risk of states and counties to covid19 based on their number of positive cases, population, hospital beds and neighboring states/counties.
 
