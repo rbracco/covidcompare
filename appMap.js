@@ -5,9 +5,13 @@ let zoomLevel = 5
 //'mapbox/satellite-v9'
 let tileProvider = 'mapbox/streets-v11'
 let map = L.map('map').setView([lat, long], zoomLevel);
+let centroids = getCountyCentroids()
 mergeCovidCountyData()
 mergeCovidStateData()
 calcRiskAllStates()
+calcRiskAllCounties()
+//dump countyData to file
+//dump stateData to file
 let mapAttribution = `<a href="https://github.com/rbracco/covidcompare" target="_blank">Github</a> |
                     'Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, 
                     <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>, Imagery © 
@@ -22,7 +26,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: API_KEY_MAPBOX,
 }).addTo(map);
 
-let centroids = getCountyCentroids()
+
 
 function countyStyle(feature) {
     return {
@@ -68,6 +72,7 @@ function highlightCounty(e) {
         layer.bringToFront();
     }
     info.updateCounty(layer.feature.properties);
+    console.log(layer)
 }
 
 info.onAdd = function (map) {

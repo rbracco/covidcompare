@@ -19,7 +19,6 @@ function calcRiskAllStates(){
         calcLocalStateRisk(state["id"])
     }
     for(let state of statesData["features"]){
-        console.log("HERE2")
         calcAllNeighborStateRisk(state["id"])
     }
 }
@@ -39,7 +38,6 @@ function calcAllNeighborStateRisk(stateID){
     let stateOrig = getState(stateID)
     for(let stateNeighbor of statesData["features"]){
         neighborRisk += calcNeighborStateRisk(stateOrig, stateNeighbor)
-        console.log("NR", neighborRisk)
     }
     stateOrig["properties"]["NEIGHBORRISK"] = neighborRisk
     stateOrig["properties"]["TOTALRISK"] = stateOrig["properties"]["LOCALRISK"] + neighborRisk
