@@ -16,7 +16,7 @@ We pull in data on population, hospital beds, and neighboring counties/states to
 
 All of our data is open-source and free to use. The US does not have a good centralized data source for county level infections, or testing data, but we are working on an API to serve it up for other applications.
 
-For county level data a big thanks to [David Zemel](github.com/dzemel), [Sam King](github.com/SamSamDataMan), and [Steve Schmidt](https://www.youtube.com/watch?v=yoYZf-lBF_U) for manually sourcing it from state health department and media websites.
+For county level data a big thanks to [David Zemel](https://www.github.com/dzemel), [Sam King](https://www.github.com/SamSamDataMan), and [Steve Schmidt](https://www.youtube.com/watch?v=yoYZf-lBF_U) for manually sourcing it from state health department and media websites.
 
 For testing data we owe the [Covid tracking team](https://covidtracking.com/about-team/) for their great work and commitment to open-sourcing data during a public health crisis.
 
@@ -47,8 +47,8 @@ We are in need of
 - Much more, this is a fast moving project launched on 3/10/2020.
 
 #### Current Contributors
-- [David Zemel](github.com/dzemel)
-- [Kate Eldridge](github.com/keldri)
-- [Robert Bracco](github.com/rbracco)
-- [Sam King](github.com/SamSamDataMan)
+- [David Zemel](https://www.github.com/dzemel)
+- [Kate Eldridge](https://www.github.github.com/keldri)
+- [Robert Bracco](https://www.github.github.com/rbracco)
+- [Sam King](https://www.github.github.com/SamSamDataMan)
 - [Steve Schmidt](https://www.youtube.com/watch?v=yoYZf-lBF_U)
