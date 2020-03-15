@@ -48,7 +48,7 @@ We are in need of
 
 #### Current Contributors
 - [David Zemel](https://www.github.com/dzemel)
-- [Kate Eldridge](https://www.github.github.com/keldri)
-- [Robert Bracco](https://www.github.github.com/rbracco)
-- [Sam King](https://www.github.github.com/SamSamDataMan)
+- [Kate Eldridge](https://www.github.com/keldri)
+- [Robert Bracco](https://www.github.com/rbracco)
+- [Sam King](https://www.github.com/SamSamDataMan)
 - [Steve Schmidt](https://www.youtube.com/watch?v=yoYZf-lBF_U)
