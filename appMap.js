@@ -34,22 +34,35 @@ function countyStyle(feature) {
     };
 }
 
+// var stateOutlines = L.geoJson(stateData, 
+//     {
+//         color:"#444",
+//         fillOpacity:0,
+//         weight:2,
+//     }).addTo(map)
+// var outlineMaps = {
+//     "State Outlines": stateOutlines
+// }
+    
+
 var countyLayer = L.geoJson(countyData, 
     { 
         style:countyStyle, 
         onEachFeature:onEachCounty
-    })
+    }).addTo(map);
 
 var stateLayer  = L.geoJson(stateData, 
     { 
         style:stateStyle, 
         onEachFeature:onEachState
-    }).addTo(map);
+    })
+
 
 var overlayMaps = {
     "Counties": countyLayer,
     "States": stateLayer,
 }
+
 
 var layerControl = L.control.layers(overlayMaps).addTo(map);
 layerControl.expand()
