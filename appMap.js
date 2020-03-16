@@ -94,9 +94,10 @@ info.updateState = function (props) {
         Total Risk: ${(100000*props.risk.TOTALRISK).toFixed(3)}<br/>
         <b>Testing Data<br/></b>
         Total Tested: ${(props.testing.total)}<br/>
-        ${(props.testing.total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
+        
         Tested Positive: ${(props.testing.positive)}<br/>
         Tested Negative: ${(props.testing.negative)}<br/>
+        ${(props.testing.total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
         <br>
         `
         : "<br/>"
@@ -111,12 +112,12 @@ info.updateCounty = function (props) {
     let body = props ? 
         `<b>Covid19 Cases</b><br/>
         ${cases} cases<br/>
-        ${props.POP} people<br/>
-        ${(cases/(props.POP/100000)).toFixed(2)} cases per 100000<br/>
+        ${props.POPULATION} people<br/>
+        ${(cases/(props.POPULATION/100000)).toFixed(2)} cases per 100000<br/>
         <b>Relative Risk<br/></b>
-        Local Risk: ${(100000*props.risk.LOCALRISK).toFixed(3)}<br/>
-        Nearby Risk: ${(100000*props.risk.NEIGHBORRISK).toFixed(3)}<br/>
-        Total Risk: ${(100000*props.risk.TOTALRISK).toFixed(3)}<br/>
+        Local Risk: ${(100000*props.RISK.LOCALRISK).toFixed(3)}<br/>
+        Nearby Risk: ${(100000*props.RISK.NEIGHBORRISK).toFixed(3)}<br/>
+        Total Risk: ${(100000*props.RISK.TOTALRISK).toFixed(3)}<br/>
         <br>
         `
         : "<br/>"

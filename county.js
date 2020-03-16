@@ -3,7 +3,8 @@ function getCounty(countyID){
 }
 
 function getCountyColor(props){
-    let risk = props["risk"]["TOTALRISK"]
+    
+    let risk = props["RISK"]["TOTALRISK"]
     return risk > 0.0001 ? '#a50f15':
            risk > 0.00003  ? '#de2d26':
            risk > 0.00001   ? '#fb6a4a':
