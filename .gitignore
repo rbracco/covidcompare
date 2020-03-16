@@ -1,25 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@rbracco 
-fastai
-/
-fastai
-2.5k
-647
-17.4k6.2k
- Code Issues 0 Pull requests 0 Actions Projects 0 Wiki Security Insights
-fastai/.gitignore
-@bearpelican bearpelican Turning on nbtest links and including test_api.json. (#1732)
-a49cb25 on Mar 1, 2019
-@jph00@stas00@cuddle-cuddle@ohmeow@sgugger@mcskinner@davidhamann@bearpelican@akomma
-142 lines (112 sloc)  1.51 KB
-  
 .bundle/
 *.bak
 *.log
@@ -39,6 +17,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+data/unused
 .Python
 env/
 build/
