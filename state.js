@@ -1,14 +1,26 @@
-function mergeCovidStateData(){
-    for (let stateID of Object.keys(dataCovidState)){
-        let {CASES, DEATHS, ABBR, LAT, LONG} = dataCovidState[stateID]
-        let state = getState(stateID)
-        state["properties"]["CASES"] = CASES
-        state["properties"]["DEATHS"] = DEATHS
-        state["properties"]["ABBR"] = ABBR
-        state["properties"]["LAT"] = LAT
-        state["properties"]["LONG"] = LONG
-    }
+// function mergeCovidStateData(){
+//     for (let stateID of Object.keys(dataCovidState)){
+//         let {CASES, DEATHS, ABBR, LAT, LONG} = dataCovidState[stateID]
+//         let state = getState(stateID)
+//         state["properties"]["CASES"] = CASES
+//         state["properties"]["DEATHS"] = DEATHS
+//         state["properties"]["ABBR"] = ABBR
+//         state["properties"]["LAT"] = LAT
+//         state["properties"]["LONG"] = LONG
+//     }
+// }
+
+function getCovidStateData(){
+    let apiURL = 'https://covidtracking.com/api/states'
+    axios.get(apiURL).then(resp => {
+        console.log(resp)
+        let dataState = resp["data"]
+        for (let {state, positive} of dataState){
+            console.log(state, positive)
+        }
+    })
 }
+getCovidStateData()
 
 function getState(stateID){
     return statesData["features"].find(element => element["id"] == stateID)
