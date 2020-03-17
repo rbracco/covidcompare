@@ -13,6 +13,6 @@ function getDistance(c0, c1){
     return Math.sqrt(latDist*latDist + longDist*longDist) * 111
 }
 
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
+function zoomToFeature(e, padding) {
+    map.fitBounds(e.target.getBounds(), {padding:padding});
 }

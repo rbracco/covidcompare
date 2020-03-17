@@ -34,9 +34,17 @@ function onEachState(feature, layer) {
     layer.on({
         mouseover: highlightState,
         mouseout: resetHighlightState,
-        click: zoomToFeature
+        click: zoomToCounties,
     });
 }
+
+function zoomToCounties(e){
+    map.removeLayer(stateLayer)
+    map.addLayer(countyLayer)
+    zoomToFeature(e, padding=[100,100])
+    updateSidebar("Counties", filterByProp("STATENAME", e.target.feature.properties.name))
+}
+
 function highlightState(e) {
     var layer = e.target;
 
