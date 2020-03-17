@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Tracking the relative risk of Covid19</title>
 
@@ -10,16 +9,60 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
         integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
         crossorigin=""/>
-
     <link rel="stylesheet" href="stylesMap.css" />
+    <link rel="stylesheet" href="plugins/leaflet-sidebar.css" />
 </head>
 <body>
+    <div id="sidebar" class="leaflet-sidebar collapsed">
+
+        <!-- nav tabs -->
+        <div class="leaflet-sidebar-tabs">
+            <!-- top aligned tabs -->
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+                <li><a href="#about" role="tab"><i class="fa fa-info-circle"></i></a></li>
+            </ul>
+
+            <!-- bottom aligned tabs -->
+            <ul role="tablist">
+                <li><a href="https://github.com/rbracco/covidcompare" target="_blank"><i class="fab fa-github"></i></a></li>
+                <li><a href="mailto:robertbracco1@gmail.com" target="_blank"><i class="fas fa-comments"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- panel content -->
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane" id="home">
+                <h1 class="leaflet-sidebar-header">
+                    United States Covid19 Cases
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div class="data">
+
+                </div>
+            </div>
+            <div class="leaflet-sidebar-pane" id="about">
+                <h1 class="leaflet-sidebar-header">
+                    About Us
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div class="about">
+                    We are a group of data scientists
+                </div>
+
+                
+            </div>
+
+        </div>
+    </div>
     <div id="map"></div>
 
     <script src="https://kit.fontawesome.com/84c6c1f4df.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
+    <script src="plugins/leaflet-sidebar.js"></script>
+    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="data/stateData.js"></script>
     <script src="data/countyData.js"></script>
@@ -28,5 +71,6 @@
     <script src="state.js"></script>
     <script src="county.js"></script>
     <script src="appMap.js"></script>
+    <script src="sidebar.js"></script>
 </body>
 </html>

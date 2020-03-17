@@ -1,6 +1,6 @@
 let API_KEY_MAPBOX = 'pk.eyJ1IjoicmJyYWNjbyIsImEiOiJjazZ6Z3c1c2IwbnNkM21tdmg0eGhmeWJkIn0.IfYSBvXVOMUlmKm8zm-XZA'
 // let dataCovidState = getJSON('data/dataCovidState.json', data => dataCovidState = data);
-let [lat, long] = [37.8, -96]
+let [lat, long] = [42, -104]
 let zoomLevel = 5
 //'mapbox/satellite-v9'
 let tileProvider = 'mapbox/streets-v11'
@@ -51,7 +51,7 @@ var countyLayer = L.geoJson(countyData,
     { 
         style:countyStyle, 
         onEachFeature:onEachCounty,
-    }).addTo(map)
+    })
 
 
 var stateLayer  = L.geoJson(stateData, 
@@ -59,7 +59,7 @@ var stateLayer  = L.geoJson(stateData,
         style:stateStyle, 
         onEachFeature:onEachState,
         
-    })
+    }).addTo(map)
 
 
 var overlayMaps = {

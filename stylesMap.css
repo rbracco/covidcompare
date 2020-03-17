@@ -68,3 +68,22 @@ html, body, #map {
 /* .leaflet-control-layers-toggle {
     background-image: url(images/countyToggle.jpg);
 } */
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, #map {
+    height: 100%;
+    font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.lorem {
+    font-style: italic;
+    text-align: justify;
+}
+
+#sidebar {
+    width:400px;
+}
