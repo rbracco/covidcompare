@@ -20,6 +20,8 @@ let resetMap = () => {
     updateSidebar("States")
 }
 
+console.log(countyData)
+
 function getResetButton() {
     let resetButton = document.createElement('input')
     resetButton.type = "button"
@@ -58,12 +60,13 @@ function updateSidebar(layerName, filt){
     }
     else {
         let data = filt ? countyData["features"].filter(filt):countyData["features"]
-            for(let county of data.sort(sortByProp("CASES"))){
+        for(let county of data.sort(sortByProp("CASES"))){
             let newLI = document.createElement('li')
             let {NAME, STATENAME, CASES} = county["properties"]
-            if(CASES > 0){
-                totalCases += CASES
+            if(CASES <= 0){
+                break
             }
+            totalCases += CASES
             newLI.innerHTML = `<a>${NAME}, ${STATENAME}</a> ${CASES} cases`
             newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
             newOL.appendChild(newLI)
@@ -73,7 +76,7 @@ function updateSidebar(layerName, filt){
     header.innerText = `Total US Cases: ${totalCases}`
     dataDiv.append(header, resetButton,  newOL)
 }
-
+console.log
 function addStates(){
     header = document.createElement('h3')
     header.innerText = `Total US Cases: ${totalCases}`
