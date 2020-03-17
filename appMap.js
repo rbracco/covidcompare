@@ -30,31 +30,35 @@ function countyStyle(feature) {
         opacity: 1,
         color: 'white',
         dashArray: '3',
-        fillOpacity: 0.7
+        fillOpacity: 0.7,
     };
 }
 
-// var stateOutlines = L.geoJson(stateData, 
-//     {
-//         color:"#444",
-//         fillOpacity:0,
-//         weight:2,
-//     }).addTo(map)
-// var outlineMaps = {
-//     "State Outlines": stateOutlines
-// }
-    
+let outlinePane = map.createPane('outlines');
+outlinePane.style.pointerEvents = 'none';
+outlinePane.style.zIndex = 600;
+
+var stateOutlines = L.geoJson(stateData, 
+    {
+        color:"#444",
+        fillOpacity:0,
+        weight:2,
+        pane: outlinePane,
+        interactive:false,
+    }).addTo(map)
 
 var countyLayer = L.geoJson(countyData, 
     { 
         style:countyStyle, 
-        onEachFeature:onEachCounty
-    }).addTo(map);
+        onEachFeature:onEachCounty,
+    }).addTo(map)
+
 
 var stateLayer  = L.geoJson(stateData, 
     { 
         style:stateStyle, 
-        onEachFeature:onEachState
+        onEachFeature:onEachState,
+        
     })
 
 
