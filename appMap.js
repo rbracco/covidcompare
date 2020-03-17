@@ -84,7 +84,6 @@ function highlightCounty(e) {
         layer.bringToFront();
     }
     info.updateCounty(layer.feature.properties);
-    console.log(layer)
 }
 
 info.onAdd = function (map) {
