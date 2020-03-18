@@ -1,4 +1,4 @@
-# Covid19 Comparison - View at <a href="http://www.covidcompare.com">CovidCompare.comm</a>
+# Covid19 Comparison - View at <a href="http://www.covidcompare.com">CovidCompare.com</a>
 
 Visualizing the spread and relative risk of Covid19 at the local level.
 
