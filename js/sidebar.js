@@ -41,11 +41,11 @@ function updateSidebar(layerName, filt, headerText="Total Cases in US:"){
     if(layerName == "States"){
         let data = filt ? stateData["features"].filter(filt):stateData["features"]
 
-        for(let state of data.sort(sortByProp("cases"))){
+        for(let state of data.sort(sortByProp("confirmed"))){
             let newLI = document.createElement('li')
-            let {name, cases, lat, long} = state["properties"]
-            totalCases += cases
-            newLI.innerHTML = `<a>${state["properties"]["name"]}</a> - ${cases} cases`
+            let {name, confirmed, lat, long} = state["properties"]
+            totalCases += confirmed
+            newLI.innerHTML = `<a>${state["properties"]["name"]}</a> - ${confirmed} cases`
             newLI.addEventListener("mouseover", () => info.updateState(state["properties"]))
             newLI.addEventListener("click", (e) => {
                 map.setView([lat, long], 8)

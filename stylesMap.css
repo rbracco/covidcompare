@@ -50,6 +50,11 @@ html, body, #map {
     opacity: 0.7;
 }
 
+.timestamp {
+    font-size: 11px;
+    color: blue;
+}
+
 /* #sidebar {
     width:400px;
 } */
