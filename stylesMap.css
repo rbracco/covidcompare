@@ -13,21 +13,6 @@ html, body, #map {
     margin: auto;
 }
 
-.lorem {
-    text-align: justify;
-    color: #222;
-}
-
-#saysno{
-    font-size: 24px;
-    text-align: center;
-    overflow: hidden;
-}
-
-.height-wrapper {
-    height:60px;
-}
-
 #msg {
     color: red;
     font-size: 24px;
@@ -65,28 +50,9 @@ html, body, #map {
     opacity: 0.7;
 }
 
-/* .leaflet-control-layers-toggle {
-    background-image: url(images/countyToggle.jpg);
-} */
-
-body {
-    padding: 0;
-    margin: 0;
-}
-
-html, body, #map {
-    height: 100%;
-    font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
-}
-
-.lorem {
-    font-style: italic;
-    text-align: justify;
-}
-
-#sidebar {
+/* #sidebar {
     width:400px;
-}
+} */
 
 .about {
     width: 300px;
