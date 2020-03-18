@@ -1,4 +1,4 @@
-var sidebar = L.control.sidebar('sidebar')
+var sidebar = L.control.sidebar({container:'sidebar'})
             .addTo(map)
             .open('home');
 
@@ -32,7 +32,7 @@ function getResetButton() {
     return resetButton
 }
 
-function updateSidebar(layerName, filt){
+function updateSidebar(layerName, filt, headerText="Total Cases in US:"){
     let resetButton = getResetButton()
     let dataDiv = document.querySelector(".data")
     dataDiv.innerHTML = ''
@@ -51,7 +51,7 @@ function updateSidebar(layerName, filt){
                 map.setView([lat, long], 8)
                 map.removeLayer(stateLayer)
                 map.addLayer(countyLayer)
-                updateSidebar("Counties", filterByProp("statename", name))
+                updateSidebar("Counties", filterByProp("statename", name), `Total Cases in ${name}:`)
             })
             newOL.appendChild(newLI)
         }
@@ -71,28 +71,8 @@ function updateSidebar(layerName, filt){
         }
     }
     header = document.createElement('h3')
-    header.innerText = `Total US Cases: ${totalCases}`
+    header.innerText = `${headerText} ${totalCases}`
     dataDiv.append(header, resetButton,  newOL)
-}
-console.log
-function addStates(){
-    header = document.createElement('h3')
-    header.innerText = `Total US Cases: ${totalCases}`
-    states.append(header)
-    states.append(newOL)
-    console.log(stateData)
-}
-
-function addCounties(){
-    
-    let counties =  document.querySelector(".counties")
-    let newOL = document.createElement('ol')
-    let totalCases = 0
-    
-    header = document.createElement('h3')
-    header.innerText = `Total US Cases: ${totalCases}`
-    counties.append(header)
-    counties.append(newOL)
 }
 
 function sortByProp(prop, descending=true){

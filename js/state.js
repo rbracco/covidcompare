@@ -2,20 +2,9 @@ function getState(stateID){
     return statesData["features"].find(element => element["id"] == stateID)
 }
 
-function getStateColor(stateID, props){
-    let risk = props["risk_total"]  
-    return risk > 0.0001 ? '#a50f15':
-           risk > 0.00003  ? '#de2d26':
-           risk > 0.00001   ? '#fb6a4a':
-           risk > 0.000003    ? '#fc9272':
-           risk > 0.000001    ? '#fcbba1':
-           isNaN(risk)    ? '#000000':
-                         '#bbbbbb';
-}
-
 function stateStyle(feature) {
     return {
-        fillColor: getStateColor(feature.id, feature.properties),
+        fillColor: getColor(feature.properties["risk_total"]),
         weight: 1,
         opacity: 1,
         color: 'black',
@@ -36,7 +25,10 @@ function zoomToCounties(e){
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
     zoomToFeature(e, padding=[100,100])
-    updateSidebar("Counties", filterByProp("statename", e.target.feature.properties.name))
+    let stateName = e.target.feature.properties.name
+    let filt = filterByProp("statename", stateName)
+    let headerText = `Total Cases in ${stateName}:`
+    updateSidebar("Counties", filt, headerText)
 }
 
 function highlightState(e) {

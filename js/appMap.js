@@ -25,7 +25,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 function countyStyle(feature) {
     return {
-        fillColor: getCountyColor(feature.properties),
+        fillColor: getColor(feature.properties["risk_total"]),
         weight: 1,
         opacity: 1,
         color: 'white',
@@ -67,10 +67,44 @@ var overlayMaps = {
     "States": stateLayer,
 }
 
+/*-------------------------------LEGEND CONTROL ------------------------------ */
+
+// return risk > 0.0001 ? '#a50f15':
+//            risk > 0.00003  ? '#de2d26':
+//            risk > 0.00001   ? '#fb6a4a':
+//            risk > 0.000003    ? '#fc9272':
+//            risk > 0.000001    ? '#fcbba1':
 
 var layerControl = L.control.layers(overlayMaps).addTo(map);
 layerControl.expand()
 
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0.0, 0.1, 0.3, 1.0, 3.0, 10],
+        labels = [];
+    for(let grade of grades){
+        console.log(grade)
+        console.log("Color", getColor(grade))
+    }
+    div.innerHTML += `<h3>Total Risk</h3>`
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor((grades[i]+0.01)/100000) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        
+    }
+    console.log(div.innerHTML)
+
+    return div;
+};
+
+legend.addTo(map);
+
+/*---------------------------------------------------------------------------------------------------- */
 var info = L.control();
 function highlightCounty(e) {
     var layer = e.target;
