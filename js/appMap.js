@@ -105,15 +105,15 @@ info.updateState = function (props) {
         ${props.beds} hospital beds<br/>
         ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
         <b>Relative Risk<br/></b>
-        Local Risk: ${(100000*props.risk.LOCALRISK).toFixed(3)}<br/>
-        Nearby Risk: ${(100000*props.risk.NEIGHBORRISK).toFixed(3)}<br/>
-        Total Risk: ${(100000*props.risk.TOTALRISK).toFixed(3)}<br/>
+        Local Risk: ${(100000*props.risk_local).toFixed(3)}<br/>
+        Nearby Risk: ${(100000*props.risk_nearby).toFixed(3)}<br/>
+        Total Risk: ${(100000*props.risk_total).toFixed(3)}<br/>
         <b>Testing Data<br/></b>
-        Total Tested: ${(props.testing.total)}<br/>
+        Total Tested: ${(props.total)}<br/>
         
-        Tested Positive: ${(props.testing.positive)}<br/>
-        Tested Negative: ${(props.testing.negative)}<br/>
-        ${(props.testing.total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
+        Tested Positive: ${(props.positive)}<br/>
+        Tested Negative: ${(props.negative)}<br/>
+        ${(props.total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
         <br>
         `
         : "<br/>"
@@ -123,17 +123,18 @@ info.updateState = function (props) {
 };
 
 info.updateCounty = function (props) {
-    let cases = props.CASES || 0
-    let title = props ? `<h3>${props.NAME} County</h3>`:`<h3>Hover over a county</h3>`
+    let cases = props.cases || 0
+    let title = props ? `<h3>${props.name} County</h3>`:`<h3>Hover over a county</h3>`
     let body = props ? 
         `<b>Covid19 Cases</b><br/>
         ${cases} cases<br/>
-        ${props.POPULATION} people<br/>
-        ${(cases/(props.POPULATION/100000)).toFixed(2)} cases per 100000<br/>
+        ${props.deaths || 0} deaths<br/>
+        ${props.population} people<br/>
+        ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
         <b>Relative Risk<br/></b>
-        Local Risk: ${(100000*props.RISK.LOCALRISK).toFixed(3)}<br/>
-        Nearby Risk: ${(100000*props.RISK.NEIGHBORRISK).toFixed(3)}<br/>
-        Total Risk: ${(100000*props.RISK.TOTALRISK).toFixed(3)}<br/>
+        Local Risk: ${(100000*props.risk_local).toFixed(3)}<br/>
+        Nearby Risk: ${(100000*props.risk_nearby).toFixed(3)}<br/>
+        Total Risk: ${(100000*props.risk_total).toFixed(3)}<br/>
         <br>
         `
         : "<br/>"

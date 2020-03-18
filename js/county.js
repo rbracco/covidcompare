@@ -1,10 +1,10 @@
 function getCounty(countyID){
-    return countyData["features"].find(element => element["properties"]["GEO_ID"] == countyID)
+    return countyData["features"].find(element => element["properties"]["geo_id"] == countyID)
 }
 
 function getCountyColor(props){
     
-    let risk = props["RISK"]["TOTALRISK"]
+    let risk = props["risk_total"]
     return risk > 0.0001 ? '#a50f15':
            risk > 0.00003  ? '#de2d26':
            risk > 0.00001   ? '#fb6a4a':

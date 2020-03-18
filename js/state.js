@@ -3,13 +3,7 @@ function getState(stateID){
 }
 
 function getStateColor(stateID, props){
-    let risk;
-    if (parseInt(stateID) === 72) {
-        risk=NaN
-    }
-    else {
-        risk = props["risk"]["TOTALRISK"]
-    }    
+    let risk = props["risk_total"]  
     return risk > 0.0001 ? '#a50f15':
            risk > 0.00003  ? '#de2d26':
            risk > 0.00001   ? '#fb6a4a':
@@ -42,7 +36,7 @@ function zoomToCounties(e){
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
     zoomToFeature(e, padding=[100,100])
-    updateSidebar("Counties", filterByProp("STATENAME", e.target.feature.properties.name))
+    updateSidebar("Counties", filterByProp("statename", e.target.feature.properties.name))
 }
 
 function highlightState(e) {

@@ -1,4 +1,4 @@
-var sidebar = L.control.sidebar({ container: 'sidebar'})
+var sidebar = L.control.sidebar('sidebar')
             .addTo(map)
             .open('home');
 
@@ -46,28 +46,26 @@ function updateSidebar(layerName, filt){
             let {name, cases, lat, long} = state["properties"]
             totalCases += cases
             newLI.innerHTML = `<a>${state["properties"]["name"]}</a> - ${cases} cases`
-            if(name != "Puerto Rico"){
-                newLI.addEventListener("mouseover", () => info.updateState(state["properties"]))
-                newLI.addEventListener("click", (e) => {
-                    map.setView([lat, long], 8)
-                    map.removeLayer(stateLayer)
-                    map.addLayer(countyLayer)
-                    updateSidebar("Counties", filterByProp("STATENAME", name))
-                })
-            }
+            newLI.addEventListener("mouseover", () => info.updateState(state["properties"]))
+            newLI.addEventListener("click", (e) => {
+                map.setView([lat, long], 8)
+                map.removeLayer(stateLayer)
+                map.addLayer(countyLayer)
+                updateSidebar("Counties", filterByProp("statename", name))
+            })
             newOL.appendChild(newLI)
         }
     }
     else {
         let data = filt ? countyData["features"].filter(filt):countyData["features"]
-        for(let county of data.sort(sortByProp("CASES"))){
+        for(let county of data.sort(sortByProp("cases"))){
             let newLI = document.createElement('li')
-            let {NAME, STATENAME, CASES} = county["properties"]
-            if(CASES <= 0){
+            let {name, statename, cases} = county["properties"]
+            if(cases <= 0){
                 break
             }
-            totalCases += CASES
-            newLI.innerHTML = `<a>${NAME}, ${STATENAME}</a> ${CASES} cases`
+            totalCases += cases
+            newLI.innerHTML = `<a>${name}, ${statename}</a> ${cases} cases`
             newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
             newOL.appendChild(newLI)
         }
