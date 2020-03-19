@@ -83,13 +83,9 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0.0, 0.1, 0.3, 1.0, 3.0, 10],
         grades = [10.0, 3.0, 1.0, 0.3, 0.1, 0.0]
         labels = [];
-    for(let grade of grades){
-        console.log(grade)
-        console.log("Color", getColor(grade))
-    }
+
     div.innerHTML += `<h3>Total Risk</h3>`
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
@@ -98,7 +94,6 @@ legend.onAdd = function (map) {
             (grades[i-1] ? grades[i] + '&ndash;' + grades[i-1] + '<br>' : grades[i]+'+<br>');
         
     }
-    console.log(div.innerHTML)
 
     return div;
 };
