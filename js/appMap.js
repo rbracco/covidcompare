@@ -133,10 +133,10 @@ function numberWithCommas(x) {
 }
 // method that we will use to update the control based on feature properties passed
 info.updateState = function (props) {
-    let title = props ? `<h3>${props.name}</h3>`:`<h3>Hover over a state</h3>`
+    let title = props ? `<h3>${props.statename}</h3>`:`<h3>Hover over a state</h3>`
     let body = props ? 
         `<b>Covid19 Cases</b><br/>
-        ${props.confirmed} total cases (${props.active} active)<br/>
+        ${props.cases} total cases (${props.active} active)<br/>
         ${props.recovered} recovered<br/>
         ${props.deaths || 0} deaths<br/>
         <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
