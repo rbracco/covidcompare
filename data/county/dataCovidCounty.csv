@@ -1,544 +1,627 @@
-State_County,State,County,Cases,Deaths,Mortality
-New York_New York,New York,New York,923,10,1.10%
-New York_Westchester,New York,Westchester,380,0,0%
-New York_Nassau,New York,Nassau,140,1,1%
-New York_Suffolk,New York,Suffolk,97,3,3.10%
-New York_Albany,New York,Albany,25,0,0.00%
-New York_Rockland,New York,Rockland,22,1,5%
-New York_Erie,New York,Erie,20,0,0%
-New York_Dutchess,New York,Dutchess,16,0,0%
-New York_Orange,New York,Orange,15,0,0%
-New York_Monroe,New York,Monroe,14,1,7%
-New York_Saratoga,New York,Saratoga,9,0,0%
-New York_Ulster,New York,Ulster,8,0,0%
-New York_Schenectady,New York,Schenectady,5,0,0%
-New York_Tompkins,New York,Tompkins,3,0,0%
-New York_Putnam,New York,Putnam,2,0,0%
-New York_Greene,New York,Greene,2,0,0%
-New York_Allegany,New York,Allegany,2,0,0%
-New York_Onondaga,New York,Onondaga,2,0,0%
-New York_Delaware,New York,Delaware,1,0,0%
-New York_Herkimer,New York,Herkimer,1,0,0%
-New York_Broome,New York,Broome,1,0,0%
-New York_Tioga,New York,Tioga,1,0,0%
-New York_Montgomery,New York,Montgomery,1,0,0%
-New York_Ontario,New York,Ontario,1,0,0%
-New York_Clinton,New York,Clinton,1,0,0%
-New York_Essex,New York,Essex,1,0,0.00%
-New York_Oneida,New York,Oneida,1,0,0%
-New York_Sullivan,New York,Sullivan,1,0,0%
-New York_Rensselaer,New York,Rensselaer,1,0,0.00%
-New York_Wyoming,New York,Wyoming,1,0,0%
-New York_Genesee,New York,Genesee,1,0,0%
-Washington_King,Washington,King,569,46,8%
-Washington_Snohomish,Washington,Snohomish,266,6,2%
-Washington_Pierce,Washington,Pierce,45,0,0%
-Washington_Island,Washington,Island,14,0,0%
-Washington_Skagit,Washington,Skagit,9,0,0%
-Washington_Grant,Washington,Grant,7,1,14%
-Washington_Kitsap,Washington,Kitsap,7,0,0%
-Washington_Whatcom,Washington,Whatcom,6,0,0%
-Washington_Thurston,Washington,Thurston,5,0,0%
-Washington_Yakima,Washington,Yakima,5,0,0%
-Washington_Clark,Washington,Clark,4,2,50%
-Washington_Spokane,Washington,Spokane,4,0,0%
-Washington_Jefferson,Washington,Jefferson,3,0,0%
-Washington_Kittitas,Washington,Kittitas,3,0,0.00%
-Washington_Chelan,Washington,Chelan,2,0,0.00%
-Washington_Grays Harbor,Washington,Grays Harbor,1,0,0%
-Washington_Columbia,Washington,Columbia,1,0,0.00%
-Washington_Lincoln,Washington,Lincoln,1,0,0%
-Washington_Cowlitz,Washington,Cowlitz,1,0,0%
-Washington_Lewis,Washington,Lewis,1,0,0.00%
-Washington_Klickitat,Washington,Klickitat,1,0,0%
-Washington_Franklin,Washington,Franklin,1,0,0%
-Washington_Mason,Washington,Mason,1,0,0.00%
-California_Santa Clara,California,Santa Clara,155,5,3%
-California_Los Angeles,California,Los Angeles,144,1,1%
-California_San Mateo,California,San Mateo,64,1,2%
-California_San Diego,California,San Diego,60,0,0%
-California_San Francisco,California,San Francisco,43,0,0%
-California_Sacramento,California,Sacramento,40,2,5%
-California_Contra Costa,California,Contra Costa,39,0,0%
-California_Orange,California,Orange,29,0,0%
-California_Alameda,California,Alameda,27,0,0%
-California_Riverside,California,Riverside,16,3,19%
-California_Santa Cruz,California,Santa Cruz,13,0,0%
-California_San Joaquin,California,San Joaquin,13,0,0%
-California_Marin,California,Marin,11,0,0%
-California_Ventura,California,Ventura,10,0,0%
-California_Solano,California,Solano,7,0,0%
-California_San Luis Obispo,California,San Luis Obispo,6,0,0%
-California_Placer,California,Placer,5,1,20%
-California_Yolo,California,Yolo,4,0,0%
-California_Stanislaus,California,Stanislaus,4,0,0%
-California_Sonoma,California,Sonoma,4,0,0%
-California_San Benito,California,San Benito,3,0,0%
-California_Tulare,California,Tulare,3,0,0%
-California_San Bernardino,California,San Bernardino,3,0,0%
-California_Fresno,California,Fresno,2,0,0%
-California_Calaveras,California,Calaveras,2,0,0%
-California_Imperial,California,Imperial,2,0,0%
-California_Santa Barbara,California,Santa Barbara,2,0,0%
-California_Monterey,California,Monterey,2,0,0%
-California_Humboldt,California,Humboldt,1,0,0%
-California_Madera,California,Madera,1,0,0%
-California_Shasta,California,Shasta,1,0,0%
-California_Nevada,California,Nevada,1,0,0.00%
-California_Kern,California,Kern,1,0,0%
-New Jersey_Bergen,New Jersey,Bergen,84,2,2%
-New Jersey_Essex,New Jersey,Essex,32,0,0%
-New Jersey_Hudson,New Jersey,Hudson,24,0,0.00%
-New Jersey_Monmouth,New Jersey,Monmouth,22,1,5%
-New Jersey_Middlesex,New Jersey,Middlesex,22,0,0%
-New Jersey_Union,New Jersey,Union,15,0,0%
-New Jersey_Passaic,New Jersey,Passaic,10,0,0%
-New Jersey_Mercer,New Jersey,Mercer,9,0,0%
-New Jersey_Morris,New Jersey,Morris,7,0,0%
-New Jersey_Somerset,New Jersey,Somerset,7,0,0%
-New Jersey_Burlington,New Jersey,Burlington,5,0,0%
-New Jersey_Ocean,New Jersey,Ocean,4,0,0%
-New Jersey_Hunterdon,New Jersey,Hunterdon,4,0,0%
-New Jersey_Camden,New Jersey,Camden,3,0,0%
-New Jersey_Gloucester,New Jersey,Gloucester,2,0,0%
-Massachusetts_Middlesex,Massachusetts,Middlesex,89,0,0%
-Massachusetts_Norfolk,Massachusetts,Norfolk,43,0,0%
-Massachusetts_Suffolk,Massachusetts,Suffolk,42,0,0%
-Massachusetts_Berkshire,Massachusetts,Berkshire,14,0,0%
-Massachusetts_Worcester,Massachusetts,Worcester,8,0,0%
-Massachusetts_Essex,Massachusetts,Essex,8,0,0%
-Massachusetts_Bristol,Massachusetts,Bristol,5,0,0%
-Massachusetts_Plymouth,Massachusetts,Plymouth,5,0,0%
-Massachusetts_Barnstable,Massachusetts,Barnstable,2,0,0%
-Massachusetts_Hampden,Massachusetts,Hampden,1,0,0%
-Florida_Broward,Florida,Broward,48,0,0.00%
-Florida_Miami-Dade,Florida,Miami-Dade,40,0,0%
-Florida_Palm Beach,Florida,Palm Beach,13,0,0%
-Florida_Duval,Florida,Duval,10,0,0%
-Florida_Volusia,Florida,Volusia,9,0,0%
-Florida_Manatee,Florida,Manatee,7,1,14%
-Florida_Hillsborough,Florida,Hillsborough,7,0,0%
-Florida_Collier,Florida,Collier,6,0,0%
-Florida_Orange,Florida,Orange,6,1,17%
-Florida_Osceola,Florida,Osceola,6,0,0%
-Florida_Lee,Florida,Lee,5,2,40%
-Florida_Pinellas,Florida,Pinellas,4,0,0%
-Florida_Seminole,Florida,Seminole,4,0,0%
-Florida_Alachua,Florida,Alachua,4,0,0%
-Florida_Clay,Florida,Clay,4,0,0%
-Florida_Okaloosa,Florida,Okaloosa,2,0,0%
-Florida_Pasco,Florida,Pasco,2,0,0%
-Florida_Sarasota,Florida,Sarasota,2,0,0%
-Florida_Citrus,Florida,Citrus,2,0,0%
-Florida_St. Johns,Florida,St. Johns,2,0,0%
-Florida_Santa Rosa,Florida,Santa Rosa,1,1,100%
-Florida_Charlotte,Florida,Charlotte,1,0,0%
-Florida_Nassau,Florida,Nassau,1,0,0%
-Florida_Escambia,Florida,Escambia,1,0,0%
-Florida_Lake,Florida,Lake,1,0,0%
-Florida_Brevard,Florida,Brevard,1,0,0%
-Florida_Polk,Florida,Polk,1,0,0%
-Louisiana_Orleans,Louisiana,Orleans,136,4,3%
-Louisiana_Jefferson,Louisiana,Jefferson,35,0,0%
-Louisiana_St. Tammany,Louisiana,St. Tammany,6,0,0%
-Louisiana_Caddo,Louisiana,Caddo,4,0,0%
-Louisiana_St. Charles,Louisiana,St. Charles,3,0,0.00%
-Louisiana_Terrebonne,Louisiana,Terrebonne,3,0,0%
-Louisiana_Lafourche,Louisiana,Lafourche,2,0,0%
-Louisiana_St. Bernard,Louisiana,St. Bernard,2,0,0%
-Louisiana_Bossier,Louisiana,Bossier,1,0,0%
-Louisiana_St. John The Baptist,Louisiana,St. John The Baptist,1,0,0%
-Louisiana_Ascension,Louisiana,Ascension,1,0,0%
-Louisiana_Washington,Louisiana,Washington,1,0,0%
-Louisiana_East Baton Rouge,Louisiana,East Baton Rouge,1,0,0%
-Colorado_Denver,Colorado,Denver,38,0,0%
-Colorado_Eagle,Colorado,Eagle,34,0,0%
-Colorado_Arapahoe,Colorado,Arapahoe,15,0,0%
-Colorado_Jefferson,Colorado,Jefferson,13,0,0.00%
-Colorado_Pitkin,Colorado,Pitkin,11,0,0%
-Colorado_Boulder,Colorado,Boulder,11,0,0%
-Colorado_Douglas,Colorado,Douglas,8,0,0%
-Colorado_Gunnison,Colorado,Gunnison,8,0,0%
-Colorado_El Paso,Colorado,El Paso,6,1,17%
-Colorado_Adams,Colorado,Adams,6,0,0%
-Colorado_Weld,Colorado,Weld,6,1,17%
-Colorado_Summit,Colorado,Summit,5,0,0%
-Colorado_Larimer,Colorado,Larimer,3,0,0%
-Colorado_Pueblo,Colorado,Pueblo,1,0,0%
-Colorado_Routt,Colorado,Routt,1,0,0%
-Colorado_Mesa,Colorado,Mesa,1,0,0%
-Colorado_Garfield,Colorado,Garfield,1,0,0%
-Colorado_Clear Creek,Colorado,Clear Creek,1,0,0%
-Illinois_Cook,Illinois,Cook,107,1,1%
-Illinois_Dupage,Illinois,Dupage,26,0,0%
-Illinois_Lake,Illinois,Lake,7,0,0%
-Illinois_Sangamon,Illinois,Sangamon,4,0,0%
-Illinois_Kane,Illinois,Kane,3,0,0%
-Illinois_Mchenry,Illinois,Mchenry,2,0,0%
-Illinois_St. Clair,Illinois,St. Clair,2,0,0%
-Illinois_Clinton,Illinois,Clinton,2,0,0%
-Illinois_Will,Illinois,Will,2,0,0%
-Illinois_Woodford,Illinois,Woodford,1,0,0%
-Illinois_Cumberland,Illinois,Cumberland,1,0,0%
-Illinois_Champaign,Illinois,Champaign,1,0,0%
-Illinois_Winnebago,Illinois,Winnebago,1,0,0%
-Illinois_Whiteside,Illinois,Whiteside,1,0,0%
-Illinois_Peoria,Illinois,Peoria,1,0,0%
-Georgia_Fulton,Georgia,Fulton,33,0,0%
-Georgia_Cobb,Georgia,Cobb,25,1,4%
-Georgia_Dekalb,Georgia,Dekalb,15,0,0%
-Georgia_Bartow,Georgia,Bartow,10,0,0%
-Georgia_Gwinnett,Georgia,Gwinnett,7,0,0%
-Georgia_Cherokee,Georgia,Cherokee,7,0,0%
-Georgia_Floyd,Georgia,Floyd,6,0,0%
-Georgia_Dougherty,Georgia,Dougherty,6,0,0%
-Georgia_Fayette,Georgia,Fayette,5,0,0%
-Georgia_Lowndes,Georgia,Lowndes,4,0,0%
-Georgia_Clayton,Georgia,Clayton,4,0,0%
-Georgia_Coweta,Georgia,Coweta,3,0,0%
-Georgia_Clarke,Georgia,Clarke,3,0,0%
-Georgia_Richmond,Georgia,Richmond,3,0,0%
-Georgia_Lee,Georgia,Lee,2,0,0%
-Georgia_Gordon,Georgia,Gordon,2,0,0%
-Georgia_Henry,Georgia,Henry,2,0,0%
-Georgia_Troup,Georgia,Troup,2,0,0%
-Georgia_Polk,Georgia,Polk,1,0,0%
-Georgia_Charlton,Georgia,Charlton,1,0,0%
-Georgia_Newton,Georgia,Newton,1,0,0%
-Georgia_Forsyth,Georgia,Forsyth,1,0,0%
-Georgia_Hall,Georgia,Hall,1,0,0%
-Georgia_Paulding,Georgia,Paulding,1,0,0%
-Georgia_Spalding,Georgia,Spalding,1,0,0%
-Georgia_Whitfield,Georgia,Whitfield,1,0,0%
-Texas_Dallas,Texas,Dallas,28,0,0%
-Texas_Travis,Texas,Travis,17,0,0%
-Texas_Harris,Texas,Harris,16,0,0%
-Texas_Bexar,Texas,Bexar,11,0,0%
-Texas_Fort Bend,Texas,Fort Bend,10,0,0%
-Texas_Collin,Texas,Collin,8,0,0%
-Texas_Tarrant,Texas,Tarrant,6,1,17%
-Texas_Smith,Texas,Smith,5,0,0%
-Texas_Montgomery,Texas,Montgomery,4,0,0%
-Texas_El Paso,Texas,El Paso,3,0,0%
-Texas_Bell,Texas,Bell,3,0,0%
-Texas_Hays,Texas,Hays,3,0,0%
-Texas_Matagorda,Texas,Matagorda,3,1,33%
-Texas_Galveston,Texas,Galveston,2,0,0%
-Texas_Brazoria,Texas,Brazoria,2,0,0%
-Texas_Denton,Texas,Denton,2,0,0%
-Texas_Lubbock,Texas,Lubbock,2,0,0%
-Texas_Gregg,Texas,Gregg,1,0,0%
-Texas_Lavaca,Texas,Lavaca,1,0,0%
-Texas_Bowie,Texas,Bowie,1,0,0%
-Texas_Webb,Texas,Webb,1,0,0%
-Texas_Rusk,Texas,Rusk,1,0,0%
-Texas_Brazos,Texas,Brazos,1,0,0%
-Texas_Ellis,Texas,Ellis,1,0,0%
-Pennsylvania_Montgomery,Pennsylvania,Montgomery,34,0,0%
-Pennsylvania_Philadelphia,Pennsylvania,Philadelphia,19,0,0%
-Pennsylvania_Cumberland,Pennsylvania,Cumberland,10,0,0%
-Pennsylvania_Allegheny,Pennsylvania,Allegheny,10,0,0%
-Pennsylvania_Delaware,Pennsylvania,Delaware,9,0,0%
-Pennsylvania_Monroe,Pennsylvania,Monroe,8,0,0%
-Pennsylvania_Bucks,Pennsylvania,Bucks,8,0,0%
-Pennsylvania_Chester,Pennsylvania,Chester,6,0,0%
-Pennsylvania_Washington,Pennsylvania,Washington,2,0,0%
-Pennsylvania_Wayne,Pennsylvania,Wayne,1,0,0%
-Pennsylvania_Northampton,Pennsylvania,Northampton,1,0,0%
-Pennsylvania_Pike,Pennsylvania,Pike,1,0,0%
-Pennsylvania_Lehigh,Pennsylvania,Lehigh,1,0,0%
-Pennsylvania_Luzerne,Pennsylvania,Luzerne,1,0,0%
-Pennsylvania_Beaver,Pennsylvania,Beaver,1,0,0%
-Wisconsin_Milwaukee,Wisconsin,Milwaukee,40,0,0%
-Wisconsin_Dane,Wisconsin,Dane,19,0,0%
-Wisconsin_Fond Du Lac,Wisconsin,Fond Du Lac,12,0,0%
-Wisconsin_Waukesha,Wisconsin,Waukesha,4,0,0%
-Wisconsin_Kenosha,Wisconsin,Kenosha,4,0,0%
-Wisconsin_Sheboygan,Wisconsin,Sheboygan,3,0,0%
-Wisconsin_Winnebago,Wisconsin,Winnebago,3,0,0%
-Wisconsin_Pierce,Wisconsin,Pierce,1,0,0%
-Wisconsin_Racine,Wisconsin,Racine,1,0,0%
-Wisconsin_Wood,Wisconsin,Wood,1,0,0%
-Wisconsin_Outagamie,Wisconsin,Outagamie,1,0,0%
-Wisconsin_Washington,Wisconsin,Washington,1,0,0%
-Tennessee_Davidson,Tennessee,Davidson,46,0,0%
-Tennessee_Williamson,Tennessee,Williamson,21,0,0%
-Tennessee_Shelby,Tennessee,Shelby,3,0,0%
-Tennessee_Knox,Tennessee,Knox,2,0,0%
-Tennessee_Sullivan,Tennessee,Sullivan,1,0,0%
-Tennessee_Hamilton,Tennessee,Hamilton,1,0,0%
-Tennessee_Jefferson,Tennessee,Jefferson,1,0,0%
-Tennessee_Rutherford,Tennessee,Rutherford,1,0,0%
-Tennessee_Campbell,Tennessee,Campbell,1,0,0%
-Tennessee_Sevier,Tennessee,Sevier,1,0,0%
-North Carolina_Wake,North Carolina,Wake,17,0,0%
-North Carolina_Durham,North Carolina,Durham,16,0,0%
-North Carolina_Mecklenburg,North Carolina,Mecklenburg,14,0,0%
-North Carolina_Chatham,North Carolina,Chatham,3,0,0%
-North Carolina_Harnett,North Carolina,Harnett,3,0,0%
-North Carolina_Forsyth,North Carolina,Forsyth,2,0,0%
-North Carolina_Johnston,North Carolina,Johnston,2,0,0%
-North Carolina_Cabarrus,North Carolina,Cabarrus,1,0,0%
-North Carolina_Onslow,North Carolina,Onslow,1,0,0%
-North Carolina_Wayne,North Carolina,Wayne,1,0,0%
-North Carolina_Brunswick,North Carolina,Brunswick,1,0,0%
-North Carolina_Craven,North Carolina,Craven,1,0,0%
-North Carolina_Watauga,North Carolina,Watauga,1,0,0%
-North Carolina_Wilson,North Carolina,Wilson,1,0,0%
-North Carolina_Iredell,North Carolina,Iredell,1,0,0%
-North Carolina_Sampson,North Carolina,Sampson,1,0,0%
-North Carolina_Guilford,North Carolina,Guilford,1,0,0%
-North Carolina_Orange,North Carolina,Orange,1,0,0%
-North Carolina_Lincoln,North Carolina,Lincoln,1,0,0%
-Connecticut_Fairfield,Connecticut,Fairfield,48,0,0%
-Connecticut_New Haven,Connecticut,New Haven,8,0,0%
-Connecticut_Hartford,Connecticut,Hartford,7,0,0%
-Connecticut_Litchfield,Connecticut,Litchfield,5,0,0%
-Oregon_Washington,Oregon,Washington,21,0,0%
-Oregon_Linn,Oregon,Linn,15,0,0%
-Oregon_Deschutes,Oregon,Deschutes,6,0,0%
-Oregon_Clackamas,Oregon,Clackamas,6,0,0%
-Oregon_Marion,Oregon,Marion,4,0,0%
-Oregon_Multnomah,Oregon,Multnomah,3,1,33%
-Oregon_Jackson,Oregon,Jackson,2,0,0%
-Oregon_Umatilla,Oregon,Umatilla,2,0,0%
-Oregon_Polk,Oregon,Polk,2,0,0%
-Oregon_?Benton,Oregon,?Benton,2,0,0%
-Oregon_Klamath,Oregon,Klamath,1,0,0%
-Oregon_Douglas,Oregon,Douglas,1,0,0%
-Oregon_Yamhill,Oregon,Yamhill,1,0,0%
-Oregon_Lane,Oregon,Lane,1,1,100%
-Virginia_Arlington,Virginia,Arlington,13,0,0%
-Virginia_Fairfax,Virginia,Fairfax,12,0,0%
-Virginia_James City,Virginia,James City,12,1,8%
-Virginia_Loudoun,Virginia,Loudoun,5,0,0%
-Virginia_Virginia Beach,Virginia,Virginia Beach,4,0,0%
-Virginia_Prince William,Virginia,Prince William,4,0,0%
-Virginia_Chesterfield,Virginia,Chesterfield,4,0,0%
-Virginia_Alexandria,Virginia,Alexandria,2,0,0%
-Virginia_Henrico,Virginia,Henrico,2,0,0%
-Virginia_Spotsylvania,Virginia,Spotsylvania,1,0,0%
-Virginia_Hanover,Virginia,Hanover,1,0,0.00%
-Virginia_Prince Edward,Virginia,Prince Edward,1,0,0%
-Virginia_Harrisonburg,Virginia,Harrisonburg,1,0,0%
-Virginia_Charlottesville,Virginia,Charlottesville,1,0,0%
-Virginia_Stafford,Virginia,Stafford,1,0,0%
-Virginia_York,Virginia,York,1,1,100%
-Virginia_Williamsburg,Virginia,Williamsburg,1,0,0%
-Virginia_Goochland,Virginia,Goochland,1,0,0%
-Ohio_Cuyahoga,Ohio,Cuyahoga,31,0,0%
-Ohio_Butler,Ohio,Butler,6,0,0%
-Ohio_Summit,Ohio,Summit,4,0,0%
-Ohio_Franklin,Ohio,Franklin,4,0,0%
-Ohio_Lorain,Ohio,Lorain,4,0,0%
-Ohio_Stark,Ohio,Stark,3,0,0%
-Ohio_Medina,Ohio,Medina,3,0,0%
-Ohio_Trumbull,Ohio,Trumbull,2,0,0%
-Ohio_Belmont,Ohio,Belmont,2,0,0%
-Ohio_Coshocton,Ohio,Coshocton,2,0,0%
-Ohio_Lucas,Ohio,Lucas,1,0,0%
-Ohio_Tuscarawas,Ohio,Tuscarawas,1,0,0%
-Ohio_Geauga,Ohio,Geauga,1,0,0%
-Ohio_Lake,Ohio,Lake,1,0,0%
-Ohio_Mahoning,Ohio,Mahoning,1,0,0%
-Ohio_Darke,Ohio,Darke,1,0,0%
-Michigan_Wayne,Michigan,Wayne,17,0,0%
-Michigan_Oakland,Michigan,Oakland,16,0,0%
-Michigan_Macomb,Michigan,Macomb,8,0,0%
-Michigan_Washtenaw,Michigan,Washtenaw,7,0,0%
-Michigan_Kent,Michigan,Kent,5,0,0%
-Michigan_Ingham,Michigan,Ingham,3,0,0%
-Michigan_St. Clair,Michigan,St. Clair,2,0,0%
-Michigan_Montcalm,Michigan,Montcalm,1,0,0%
-Michigan_Bay,Michigan,Bay,1,0,0%
-Michigan_Charlevoix,Michigan,Charlevoix,1,0,0%
-Michigan_Monroe,Michigan,Monroe,1,0,0%
-Michigan_Ottawa,Michigan,Ottawa,1,0,0%
-Michigan_Leelanau,Michigan,Leelanau,1,0,0%
-Michigan_Otsego,Michigan,Otsego,1,0,0%
-Michigan_Jackson,Michigan,Jackson,1,0,0%
-Maryland_Montgomery,Maryland,Montgomery,24,0,0%
-Maryland_Prince George'S,Maryland,Prince George'S,14,0,0%
-Maryland_Baltimore,Maryland,Baltimore,6,0,0%
-Maryland_Howard,Maryland,Howard,4,0,0%
-Maryland_Anne Arundel,Maryland,Anne Arundel,3,0,0%
-Maryland_Harford,Maryland,Harford,2,0,0%
-Maryland_Carroll,Maryland,Carroll,2,0,0%
-Maryland_Charles,Maryland,Charles,1,0,0%
-Maryland_Talbot,Maryland,Talbot,1,0,0%
-Maryland_Frederick,Maryland,Frederick,1,0,0%
-Minnesota_Hennepin,Minnesota,Hennepin,24,0,0%
-Minnesota_Ramsey,Minnesota,Ramsey,11,0,0%
-Minnesota_Dakota,Minnesota,Dakota,6,0,0%
-Minnesota_Olmsted,Minnesota,Olmsted,5,0,0%
-Minnesota_Anoka,Minnesota,Anoka,3,0,0%
-Minnesota_Stearns,Minnesota,Stearns,3,0,0%
-Minnesota_Washington,Minnesota,Washington,2,0,0%
-Minnesota_Carver,Minnesota,Carver,1,0,0%
-Minnesota_Wright,Minnesota,Wright,1,0,0%
-Minnesota_Renville,Minnesota,Renville,1,0,0.00%
-Minnesota_Waseca,Minnesota,Waseca,1,0,0%
-Minnesota_Blue Earth,Minnesota,Blue Earth,1,0,0%
-Minnesota_Benton,Minnesota,Benton,1,0,0%
-Nevada_Clark,Nevada,Clark,42,1,2%
-Nevada_Washoe,Nevada,Washoe,12,0,0%
-Nevada_Carson City,Nevada,Carson City,2,0,0%
-Utah_Salt Lake,Utah,Salt Lake,20,0,0%
-Utah_Non-Utah Resident,Utah,Non-Utah Resident,10,0,0%
-Utah_Summit,Utah,Summit,8,0,0%
-Utah_Davis,Utah,Davis,4,0,0%
-Utah_Weber,Utah,Weber,4,0,0%
-Utah_Wasatch,Utah,Wasatch,2,0,0%
-Utah_Tooele,Utah,Tooele,1,0,0%
-Utah_Bear River,Utah,Bear River,1,0,0%
-South Carolina_Kershaw,South Carolina,Kershaw,22,0,0%
-South Carolina_Beaufort,South Carolina,Beaufort,4,0,0%
-South Carolina_Horry,South Carolina,Horry,4,0,0%
-South Carolina_Charleston,South Carolina,Charleston,3,0,0%
-South Carolina_Lexington,South Carolina,Lexington,3,1,33%
-South Carolina_Lancaster,South Carolina,Lancaster,2,0,0%
-South Carolina_Anderson,South Carolina,Anderson,2,0,0%
-South Carolina_Greenville,South Carolina,Greenville,2,0,0%
-South Carolina_Spartanburg,South Carolina,Spartanburg,1,0,0%
-South Carolina_Fairfield,South Carolina,Fairfield,1,0,0%
-South Carolina_Calhoun,South Carolina,Calhoun,1,0,0%
-South Carolina_Richland,South Carolina,Richland,1,0,0%
-South Carolina_York,South Carolina,York,1,0,0%
-Alabama_Jefferson,Alabama,Jefferson,21,0,0%
-Alabama_Shelby,Alabama,Shelby,4,0,0%
-Alabama_Tuscaloosa,Alabama,Tuscaloosa,3,0,0%
-Alabama_Lee,Alabama,Lee,3,0,0%
-Alabama_Montgomery,Alabama,Montgomery,2,0,0%
-Alabama_Elmore,Alabama,Elmore,2,0,0%
-Alabama_Limestone,Alabama,Limestone,1,0,0%
-Alabama_Baldwin,Alabama,Baldwin,1,0,0%
-Alabama_St. Clair,Alabama,St. Clair,1,0,0%
-Alabama_Madison,Alabama,Madison,1,0,0%
-Maine_Cumberland,Maine,Cumberland,20,0,0%
-Maine_Androscoggin,Maine,Androscoggin,3,0,0%
-Maine_Lincoln,Maine,Lincoln,2,0,0%
-Maine_Knox,Maine,Knox,1,0,0%
-Maine_Oxford,Maine,Oxford,1,0,0%
-Maine_York,Maine,York,1,0,0%
-Maine_Kennebec,Maine,Kennebec,1,0,0%
-"Washington, D.C._Washington, D.C.","Washington, D.C.","Washington, D.C.",31,0,0%
-Indiana_Marion,Indiana,Marion,9,1,11%
-Indiana_Hendricks,Indiana,Hendricks,3,0,0%
-Indiana_Johnson,Indiana,Johnson,3,1,33%
-Indiana_Howard,Indiana,Howard,2,0,0%
-Indiana_Franklin,Indiana,Franklin,2,0,0%
-Indiana_Lake,Indiana,Lake,2,0,0%
-Indiana_Noble,Indiana,Noble,1,0,0%
-Indiana_Adams,Indiana,Adams,1,0,0%
-Indiana_Boone,Indiana,Boone,1,0,0%
-Indiana_St. Joseph,Indiana,St. Joseph,1,0,0%
-Indiana_Wells,Indiana,Wells,1,0,0%
-Indiana_Laporte,Indiana,Laporte,1,0,0%
-Indiana_Hamilton,Indiana,Hamilton,1,0,0%
-Indiana_Floyd,Indiana,Floyd,1,0,0%
-Indiana_Bartholomew,Indiana,Bartholomew,1,0,0%
-Iowa_Johnson,Iowa,Johnson,18,0,0%
-Iowa_Dallas,Iowa,Dallas,3,0,0%
-Iowa_Allamakee,Iowa,Allamakee,2,0,0%
-Iowa_Pottawattamie,Iowa,Pottawattamie,1,0,0%
-Iowa_Carroll,Iowa,Carroll,1,0,0%
-Iowa_Harrison,Iowa,Harrison,1,0,0%
-Iowa_Polk,Iowa,Polk,1,0,0%
-Iowa_Adair,Iowa,Adair,1,0,0%
-Iowa_Black Hawk,Iowa,Black Hawk,1,0,0%
-Kentucky_Jefferson,Kentucky,Jefferson,8,0,0%
-Kentucky_Fayette,Kentucky,Fayette,7,0,0%
-Kentucky_Harrison,Kentucky,Harrison,6,0,0%
-Kentucky_Montgomery,Kentucky,Montgomery,2,0,0%
-Kentucky_Nelson,Kentucky,Nelson,1,0,0%
-Kentucky_Clark,Kentucky,Clark,1,0,0%
-Kentucky_Bourbon,Kentucky,Bourbon,1,1,100%
-Kentucky_Lyon,Kentucky,Lyon,1,0,0%
-New Hampshire_Rockingham,New Hampshire,Rockingham,14,0,0%
-New Hampshire_Grafton,New Hampshire,Grafton,7,0,0%
-New Hampshire_Hillsborough,New Hampshire,Hillsborough,4,0,0%
-New Hampshire_Carroll,New Hampshire,Carroll,1,0,0%
-Nebraska_Douglas,Nebraska,Douglas,19,0,0%
-Nebraska_Knox,Nebraska,Knox,2,0,0%
-Nebraska_Cass,Nebraska,Cass,1,0,0%
-Nebraska_Sarpy,Nebraska,Sarpy,1,0,0%
-Nebraska_Lincoln,Nebraska,Lincoln,1,0,0%
-Rhode Island_Providence,Rhode Island,Providence,23,0,0%
-New Mexico_Bernalillo,New Mexico,Bernalillo,14,0,0%
-New Mexico_Santa Fe,New Mexico,Santa Fe,4,0,0%
-New Mexico_Socorro,New Mexico,Socorro,2,0,0%
-New Mexico_Sandoval,New Mexico,Sandoval,2,0,0%
-New Mexico_Taos,New Mexico,Taos,1,0,0%
-Mississippi_Hinds,Mississippi,Hinds,6,0,0%
-Mississippi_Leflore,Mississippi,Leflore,4,0,0%
-Mississippi_Forrest,Mississippi,Forrest,3,0,0%
-Mississippi_Pearl River,Mississippi,Pearl River,2,0,0%
-Mississippi_Copiah,Mississippi,Copiah,2,0,0%
-Mississippi_Jackson,Mississippi,Jackson,2,0,0%
-Mississippi_Hancock,Mississippi,Hancock,1,0,0%
-Mississippi_Monroe,Mississippi,Monroe,1,0,0%
-Mississippi_Harrison,Mississippi,Harrison,1,0,0%
-Mississippi_Desoto,Mississippi,Desoto,1,0,0%
-Arkansas_Jefferson,Arkansas,Jefferson,3,0,0%
-Oklahoma_Oklahoma,Oklahoma,Oklahoma,6,0,0%
-Oklahoma_Tulsa,Oklahoma,Tulsa,3,0,0%
-Oklahoma_Cleveland,Oklahoma,Cleveland,2,0,0%
-Oklahoma_Kay,Oklahoma,Kay,2,0,0%
-Oklahoma_Out-Of-State,Oklahoma,Out-Of-State,2,0,0%
-Oklahoma_Jackson,Oklahoma,Jackson,1,0,0%
-Oklahoma_Payne,Oklahoma,Payne,1,0,0%
-Oklahoma_Canadian,Oklahoma,Canadian,1,0,0%
-Oklahoma_Pawnee,Oklahoma,Pawnee,1,0,0%
-Kansas_Johnson,Kansas,Johnson,10,0,0%
-Kansas_Wyandotte,Kansas,Wyandotte,4,1,25%
-Kansas_Butler,Kansas,Butler,1,0,0%
-Kansas_Franklin,Kansas,Franklin,1,0,0%
-Kansas_Ford,Kansas,Ford,1,0,0%
-Kansas_Douglas,Kansas,Douglas,1,0,0%
-Vermont_Chittenden,Vermont,Chittenden,4,0,0%
-Vermont_Bennington,Vermont,Bennington,3,0,0%
-Vermont_Windsor,Vermont,Windsor,3,0,0%
-Vermont_Washington,Vermont,Washington,1,0,0%
-Vermont_Orange,Vermont,Orange,1,0,0%
-Missouri_St. Louis,Missouri,St. Louis,4,0,0%
-Missouri_Greene,Missouri,Greene,4,0,0%
-Missouri_Cass,Missouri,Cass,2,0,0%
-Missouri_Jackson,Missouri,Jackson,2,0,0%
-Missouri_Henry,Missouri,Henry,1,0,0%
-Missouri_St. Louis,Missouri,St. Louis,1,0,0%
-Missouri_Cole,Missouri,Cole,1,0,0%
-Missouri_Boone,Missouri,Boone,1,0,0%
-Delaware_New Castle,Delaware,New Castle,15,0,0%
-Delaware_Sussex,Delaware,Sussex,1,0,0%
-Wyoming_Fremont,Wyoming,Fremont,8,0,0%
-Wyoming_Sheridan,Wyoming,Sheridan,4,0,0%
-Wyoming_Laramie,Wyoming,Laramie,2,0,0%
-Wyoming_Park,Wyoming,Park,1,0,0%
-Hawaii_Honolulu,Hawaii,Honolulu,8,0,0%
-Hawaii_Maui,Hawaii,Maui,3,0,0%
-Hawaii_Kauai,Hawaii,Kauai,2,0,0%
-Hawaii_Hawaii Island,Hawaii,Hawaii Island,1,0,0%
-South Dakota_Minnehaha,South Dakota,Minnehaha,5,0,0%
-South Dakota_Pennington,South Dakota,Pennington,1,1,100%
-South Dakota_Beadle,South Dakota,Beadle,1,0,0%
-South Dakota_Charles Mix,South Dakota,Charles Mix,1,0,0%
-South Dakota_Davison,South Dakota,Davison,1,0,0%
-South Dakota_Bon Homme,South Dakota,Bon Homme,1,0,0%
-South Dakota_Mccook,South Dakota,Mccook,1,0,0%
-Montana_Missoula,Montana,Missoula,3,0,0%
-Montana_Gallatin,Montana,Gallatin,2,0,0%
-Montana_Yellowstone,Montana,Yellowstone,2,0,0%
-Montana_Silver Bow,Montana,Silver Bow,1,0,0%
-Montana_Broadwater,Montana,Broadwater,1,0,0%
-Idaho_Blaine,Idaho,Blaine,4,0,0%
-Idaho_Ada,Idaho,Ada,3,0,0%
-Idaho_Teton,Idaho,Teton,1,0,0%
-Idaho_Madison,Idaho,Madison,1,0,0%
-Alaska_Fairbanks North Star,Alaska,Fairbanks North Star,3,0,0%
-Alaska_Anchorage,Alaska,Anchorage,2,0,0%
-Alaska_Ketchikan Gateway Borough,Alaska,Ketchikan Gateway Borough,1,0,0%
-North Dakota_Ward,North Dakota,Ward,2,0,0%
-North Dakota_Burleigh,North Dakota,Burleigh,2,0,0%
-North Dakota_Cass,North Dakota,Cass,1,0,0%
-Puerto Rico_Puerto Rico,Puerto Rico,Puerto Rico,5,0,0%
-West Virginia_Jefferson,West Virginia,Jefferson,1,0,0%
+State,County,Cases,Deaths
+New York,New York,1871,11
+New York,Westchester,538,0
+New York,Nassau,278,1
+New York,Suffolk,116,3
+New York,Albany,36,0
+New York,Orange,32,0
+New York,Rockland,31,1
+New York,Dutchess,20,0
+New York,Erie,20,0
+New York,Monroe,19,1
+New York,Saratoga,14,0
+New York,Schenectady,14,0
+New York,Ulster,9,0
+New York,Tompkins,6,0
+New York,Onondaga,6,0
+New York,Rensselaer,4,0
+New York,Putnam,2,0
+New York,Greene,2,0
+New York,Montgomery,2,0
+New York,Allegany,2,0
+New York,Oneida,2,0
+New York,Delaware,1,0
+New York,Herkimer,1,0
+New York,Broome,1,0
+New York,Tioga,1,0
+New York,Ontario,1,0
+New York,Clinton,1,0
+New York,Essex ,1,0
+New York,Sullivan,1,0
+New York,Wyoming,1,0
+New York,Genesee ,1,0
+New York,Warren,1,0
+New York,Washington,1,0
+New York,Hamilton,1,0
+New York,Chenango,1,0
+Washington,King,562,56
+Washington,Snohomish,310,6
+Washington,Pierce,56,1
+Washington,Island,16,0
+Washington,Skagit,14,0
+Washington,Kitsap,9,0
+Washington,Grant,8,1
+Washington,Whatcom,7,0
+Washington,Yakima,7,0
+Washington,Thurston,6,0
+Washington,Spokane,5,0
+Washington,Jefferson,4,0
+Washington,Clark,4,3
+Washington,Kittitas,4,0
+Washington,Chelan,2,0
+Washington,Grays Harbor,1,0
+Washington,Columbia,1,0
+Washington,Lincoln,1,0
+Washington,Cowlitz,1,0
+Washington,Lewis,1,0
+Washington,Klickitat,1,0
+Washington,Franklin,1,0
+Washington,Mason,1,0
+California,Los Angeles,190,1
+California,Santa Clara,175,6
+California,San Mateo,80,1
+California,San Diego,60,0
+California,San Francisco,51,0
+California,Sacramento,40,2
+California,Contra Costa,39,0
+California,Alameda,30,0
+California,Orange,29,0
+California,Riverside,16,3
+California,Marin,15,0
+California,San Joaquin,14,2
+California,Santa Cruz,13,0
+California,Ventura,10,0
+California,Placer,9,1
+California,Solano,8,0
+California,Sonoma,8,0
+California,San Luis Obispo,7,0
+California,Stanislaus,5,0
+California,Yolo,4,0
+California,Tulare,4,0
+California,San Benito,3,0
+California,San Bernardino,3,0
+California,Fresno,2,0
+California,Calaveras,2,0
+California,Imperial,2,0
+California,Santa Barbara,2,0
+California,Monterey,2,0
+California,Humboldt,1,0
+California,Madera,1,0
+California,Shasta,1,0
+California,Nevada,1,0
+California,Kern,1,0
+New Jersey,Bergen,114,2
+New Jersey,Essex,45,1
+New Jersey,Middlesex,40,0
+New Jersey,Hudson,34,1
+New Jersey,Monmouth,32,1
+New Jersey,Union,26,0
+New Jersey,Morris,19,0
+New Jersey,Passaic,18,0
+New Jersey,Somerset,16,0
+New Jersey,Mercer,15,0
+New Jersey,Burlington,10,0
+New Jersey,Camden,8,0
+New Jersey,Ocean,8,0
+New Jersey,Hunterdon,6,0
+New Jersey,Atlantic,3,0
+New Jersey,Gloucester ,2,0
+New Jersey,Warren,1,0
+Florida,Miami-Dade,76,0
+Florida,Broward,72,1
+Florida,Palm Beach,19,0
+Florida,Hillsborough,14,0
+Florida,Collier,13,0
+Florida,Duval,13,0
+Florida,Lee,10,1
+Florida,Pinellas,10,0
+Florida,Volusia,9,0
+Florida,Orange,9,1
+Florida,Manatee,8,1
+Florida,Osceola,8,0
+Florida,Alachua,7,0
+Florida,Seminole,7,0
+Florida,Sarasota,5,0
+Florida,Clay,4,2
+Florida,St. Johns,4,0
+Florida,Okaloosa,3,0
+Florida,Pasco,3,0
+Florida,Citrus,3,0
+Florida,Lake,2,0
+Florida,Brevard,2,0
+Florida,Charlotte,1,0
+Florida,Nassau,1,0
+Florida,Escambia,1,0
+Florida,Polk,1,0
+Florida,Walton County,1,0
+Florida,Sumter,1,0
+Florida,Santa Rosa,0,1
+Illinois,Cook,178,1
+Illinois,DuPage,45,0
+Illinois,Lake,18,0
+Illinois,Kane,4,0
+Illinois,McHenry,4,0
+Illinois,St. Clair ,3,0
+Illinois,Sangamon,3,0
+Illinois,Clinton,3,0
+Illinois,Will,3,0
+Illinois,Peoria,3,0
+Illinois,Kendall,2,0
+Illinois,Woodford,1,0
+Illinois,Cumberland,1,0
+Illinois,Champaign,1,0
+Illinois,Winnebago,1,0
+Illinois,Whiteside,1,0
+Illinois,Madison,1,0
+Louisiana,Orleans,187,6
+Louisiana,Jefferson,40,0
+Louisiana,St. Tammany,8,0
+Louisiana,Caddo,5,0
+Louisiana,Lafourche,3,0
+Louisiana,St. Charles,3,0
+Louisiana,Terrebonne,3,0
+Louisiana,St. Bernard,2,0
+Louisiana,East Baton Rouge,2,0
+Louisiana,Bossier,1,0
+Louisiana,St. John the Baptist,1,0
+Louisiana,Ascension,1,0
+Louisiana,Washington,1,0
+Louisiana,Jefferson Parish,0,1
+Massachusetts,Middlesex,100,0
+Massachusetts,Suffolk,51,0
+Massachusetts,Norfolk,45,0
+Massachusetts,Berkshire,17,0
+Massachusetts,Essex,14,0
+Massachusetts,Worcester,10,0
+Massachusetts,Bristol,5,0
+Massachusetts,Plymouth,5,0
+Massachusetts,Barnstable,2,0
+Massachusetts,Hampden,2,0
+Massachusetts,Franklin,1,0
+Colorado ,Denver,43,0
+Colorado ,Eagle,39,0
+Colorado ,Jefferson,25,0
+Colorado ,Arapahoe,22,0
+Colorado ,Douglas,11,0
+Colorado ,Pitkin,11,0
+Colorado ,Gunnison,11,0
+Colorado ,Boulder,11,0
+Colorado ,Adams,10,0
+Colorado ,Weld,9,1
+Colorado ,El Paso,8,1
+Colorado ,Summit,5,0
+Colorado ,Larimer,4,0
+Colorado ,Unassign,3,0
+Colorado ,Routt,2,0
+Colorado ,Garfield,2,0
+Colorado ,Clear Creek,2,0
+Colorado ,Pueblo,1,0
+Colorado ,Mesa ,1,0
+Colorado ,Grand,1,0
+Georgia,Fulton,49,0
+Georgia,Cobb,28,1
+Georgia,Bartow,19,0
+Georgia,DeKalb,18,0
+Georgia,Cherokee,9,0
+Georgia,Fayette,8,0
+Georgia,Gwinnett,7,0
+Georgia,Dougherty,7,2
+Georgia,Floyd,6,0
+Georgia,Clayton,6,0
+Georgia,Lowndes,5,0
+Georgia,Clarke,5,0
+Georgia,Gordon,3,0
+Georgia,Coweta,3,0
+Georgia,Newton,3,0
+Georgia,Hall,3,0
+Georgia,Paulding,3,0
+Georgia,Lee,2,0
+Georgia,Henry,2,0
+Georgia,Troup ,2,0
+Georgia,Forsyth,2,0
+Georgia,Polk,1,0
+Georgia,Charlton,1,0
+Georgia,Richmond,1,0
+Georgia,Columbia,1,0
+Georgia,Houston,1,0
+Georgia,Whitfield,1,0
+Georgia,Barrow,1,0
+Texas,Dallas,39,0
+Texas,Harris,23,0
+Texas,Travis,23,0
+Texas,Fort Bend,12,0
+Texas,Collin,11,1
+Texas,Bexar,11,0
+Texas,Tarrant,8,1
+Texas,Montgomery,7,0
+Texas,Smith,5,0
+Texas,Hays,5,0
+Texas,Denton,5,0
+Texas,Mclennan,5,0
+Texas,Galveston,4,0
+Texas,Williamson,4,0
+Texas,El Paso,3,0
+Texas,Bell,3,0
+Texas,Brazoria,3,0
+Texas,Matagorda,3,1
+Texas,Brazos,3,0
+Texas,Lubbock,3,0
+Texas,Cameron,2,0
+Texas,Gregg,1,0
+Texas,Lavaca,1,0
+Texas,Bowie,1,0
+Texas,Webb,1,0
+Texas,Rusk,1,0
+Texas,Ellis,1,0
+Texas,Wichita,1,0
+Texas,Johnson,1,0
+Texas,Comal,1,0
+Texas,Grimes,1,0
+Texas,Fannin,1,0
+Texas,Jefferson,1,0
+Texas,Dewitt,1,0
+Texas,Brown,1,0
+Pennsylvania,Montgomery,42,0
+Pennsylvania,Philadelphia,34,0
+Pennsylvania,Delaware,14,0
+Pennsylvania,Allegheny,13,0
+Pennsylvania,Cumberland,10,0
+Pennsylvania,Bucks,9,0
+Pennsylvania,Chester,9,0
+Pennsylvania,Monroe,8,0
+Pennsylvania,Pike,2,0
+Pennsylvania,Washington,2,0
+Pennsylvania,Beaver,2,0
+Pennsylvania,York,2,0
+Pennsylvania,Wayne,1,0
+Pennsylvania,Northampton,1,1
+Pennsylvania,Lehigh ,1,0
+Pennsylvania,Luzerne ,1,0
+Pennsylvania,Lancaster,1,0
+Pennsylvania,Lackawanna,1,0
+Pennsylvania,Berks,1,0
+Pennsylvania,Erie,1,0
+Michigan,Oakland,59,0
+Michigan,Wayne,23,1
+Michigan,Macomb,10,0
+Michigan,Washtenaw,7,0
+Michigan,Ingham,5,0
+Michigan,Kent,5,0
+Michigan,St. Clair,2,0
+Michigan,Montcalm,1,0
+Michigan,Bay ,1,0
+Michigan,Charlevoix ,1,0
+Michigan,Monroe,1,0
+Michigan,Ottawa,1,0
+Michigan,Leelanau,1,0
+Michigan,Otsego,1,0
+Michigan,Jackson,1,0
+Wisconsin,Milwaukee,47,0
+Wisconsin,Dane,23,0
+Wisconsin,Fond du Lac,13,0
+Wisconsin,Waukesha,5,0
+Wisconsin,Winnebago,5,0
+Wisconsin,Sheboygan,4,0
+Wisconsin,Kenosha,4,0
+Wisconsin,Washington,2,0
+Wisconsin,La Crosse,2,0
+Wisconsin,Pierce,1,0
+Wisconsin,Racine,1,0
+Wisconsin,Wood,1,0
+Wisconsin,Outagamie,1,0
+Wisconsin,Brown,1,0
+Wisconsin,Walworth,1,0
+Tennessee,Davidson,58,0
+Tennessee,Williamson,24,0
+Tennessee,Shelby,4,0
+Tennessee,Hamilton,3,0
+Tennessee,Knox,2,0
+Tennessee,Sumner,2,0
+Tennessee,Sullivan,1,0
+Tennessee,Jefferson,1,0
+Tennessee,Rutherford,1,0
+Tennessee,Campbell,1,0
+Tennessee,Sevier,1,0
+Tennessee,Cheatham,1,0
+Tennessee,Robertson,1,0
+Connecticut,Fairfield,69,1
+Connecticut,Hartford,11,0
+Connecticut,New Haven,10,0
+Connecticut,Litchfield,5,0
+Connecticut,Middlesex,1,0
+North Carolina,Durham,27,0
+North Carolina,Wake,22,0
+North Carolina,Mecklenburg,14,0
+North Carolina,Chatham,3,0
+North Carolina,Harnett,3,0
+North Carolina,Watauga,3,0
+North Carolina,Forsyth,2,0
+North Carolina,Johnston,2,0
+North Carolina,Cabarrus,1,0
+North Carolina,Onslow,1,0
+North Carolina,Wayne,1,0
+North Carolina,Brunswick,1,0
+North Carolina,Craven,1,0
+North Carolina,Wilson,1,0
+North Carolina,Iredell,1,0
+North Carolina,Sampson,1,0
+North Carolina,Guilford,1,0
+North Carolina,Lincoln,1,0
+North Carolina,Gaston,1,0
+North Carolina,New Hanover,1,0
+North Carolina,Union,1,0
+North Carolina,Moore,1,0
+North Carolina,Buncombe,1,0
+North Carolina,Hoke,1,0
+Ohio,Cuyahoga,38,0
+Ohio,Butler,8,0
+Ohio,Franklin,7,0
+Ohio,Lorain,6,0
+Ohio,Summit,4,0
+Ohio,Medina,4,0
+Ohio,Stark,3,0
+Ohio,Mahoning,3,0
+Ohio,Trumbull,2,0
+Ohio,Belmont,2,0
+Ohio,Lake,2,0
+Ohio,Coshocton,2,0
+Ohio,Lucas ,1,0
+Ohio,Tuscarawas,1,0
+Ohio,Geauga,1,0
+Ohio,Darke,1,0
+Ohio,Huron,1,0
+Ohio,Ashland,1,0
+Ohio,Delaware,1,0
+Ohio,Montgomery,1,0
+Maryland,Montgomery,31,0
+Maryland,Prince George's,20,0
+Maryland,Baltimore,10,0
+Maryland,Howard,8,0
+Maryland,Anne Arundel,4,0
+Maryland,Harford,3,0
+Maryland,Charles,2,0
+Maryland,Carroll,1,0
+Maryland,Talbot,1,0
+Maryland,Frederick,1,0
+Virginia,Fairfax,14,0
+Virginia,Arlington,14,0
+Virginia,James City,13,1
+Virginia,Loudoun,5,0
+Virginia,Chesterfield,5,0
+Virginia,Virginia Beach,4,0
+Virginia,Prince William,4,0
+Virginia,Richmond City,3,0
+Virginia,Alexandria,2,0
+Virginia,Stafford,2,0
+Virginia,Henrico,2,0
+Virginia,Spotsylvania,1,0
+Virginia,Hanover,1,0
+Virginia,Prince Edward,1,0
+Virginia,Harrisonburg,1,0
+Virginia,Charlottesville,1,0
+Virginia,York,1,1
+Virginia,Williamsburg,1,0
+Virginia,Goochland,1,0
+Virginia,Charles City,1,0
+Virginia,Lynchburg,1,0
+Virginia,Norfolk,1,0
+Minnesota,Hennepin,28,0
+Minnesota,Ramsey,12,0
+Minnesota,Dakota,8,0
+Minnesota,Olmsted,6,0
+Minnesota,Anoka,3,0
+Minnesota,Stearns,3,0
+Minnesota,Washington,3,0
+Minnesota,Carver,2,0
+Minnesota,Wright,2,0
+Minnesota,Blue Earth,2,0
+Minnesota,Martin,2,0
+Minnesota,Nicollet,2,0
+Minnesota,Renville,1,0
+Minnesota,Waseca,1,0
+Minnesota,Benton,1,0
+Minnesota,Scott,1,0
+Oregon,Washington,23,1
+Oregon,Linn,15,0
+Oregon,Marion,8,0
+Oregon,Deschutes,6,0
+Oregon,Clackamas,6,0
+Oregon,Multnomah,3,1
+Oregon,​Benton,3,0
+Oregon,Jackson,2,0
+Oregon,Umatilla,2,0
+Oregon,Yamhill,2,0
+Oregon,Lane,2,1
+Oregon,Klamath,1,0
+Oregon,Douglas,1,0
+Oregon,Polk,1,0
+Utah,Salt Lake,22,0
+Utah,Summit,15,0
+Utah,Davis,6,0
+Utah,Weber,4,0
+Utah,Wasatch,2,0
+Utah,Tooele,1,0
+Utah,Box Elder,1,0
+Utah,Utah,1,0
+South Carolina,Kershaw,25,0
+South Carolina,Beaufort,6,0
+South Carolina,Horry,5,0
+South Carolina,Charleston,4,0
+South Carolina,Lexington,4,1
+South Carolina,Richland,4,0
+South Carolina,Greenville,3,0
+South Carolina,Lancaster,2,0
+South Carolina,Anderson ,2,0
+South Carolina,Spartanburg ,1,0
+South Carolina,Fairfield,1,0
+South Carolina,Calhoun,1,0
+South Carolina,York,1,0
+South Carolina,Lee,1,0
+Nevada,Clark,42,1
+Nevada,Washoe,12,0
+Nevada,Carson City,1,0
+Alabama,Jefferson,25,0
+Alabama,Lee,8,0
+Alabama,Elmore,4,0
+Alabama,Shelby,4,0
+Alabama,Tuscaloosa,3,0
+Alabama,Montgomery,2,0
+Alabama,Limestone,1,0
+Alabama,Baldwin,1,0
+Alabama,St. Clair,1,0
+Alabama,Madison,1,0
+Alabama,Calhoun,1,0
+Alabama,Dothan,1,0
+Diamond Princess,San Diego,1,0
+Maine,Cumberland,24,0
+Maine,Androscoggin,3,0
+Maine,Lincoln,3,0
+Maine,York,2,0
+Maine,Oxford,1,0
+Maine,Kennebec,1,0
+Maine,Penobscot,1,0
+New Hampshire,Rockingham,17,0
+New Hampshire,Hillsborough,8,0
+New Hampshire,Grafton,7,0
+New Hampshire,Carroll,4,0
+New Hampshire,Berknap,2,0
+New Hampshire,Merrimack,1,0
+Indiana,Marion,11,1
+Indiana,Hendricks,4,0
+Indiana,Johnson,3,1
+Indiana,Lake,3,0
+Indiana,Howard,2,0
+Indiana,Hamilton,2,0
+Indiana,Franklin,2,0
+Indiana,Noble,1,0
+Indiana,Adams,1,0
+Indiana,Boone,1,0
+Indiana,St. Joseph,1,0
+Indiana,Wells,1,0
+Indiana,LaPorte,1,0
+Indiana,Floyd,1,0
+Indiana,Bartholomew,1,0
+Indiana,Clark,1,0
+Indiana,Fayette,1,0
+Indiana,Jennings,1,0
+Iowa,Johnson,21,0
+Iowa,Dallas,5,0
+Iowa,Polk,3,0
+Iowa,Allamakee,2,0
+Iowa,Pottawattamie,1,0
+Iowa,Carroll,1,0
+Iowa,Harrison,1,0
+Iowa,Adair,1,0
+Iowa,Black Hawk,1,0
+Iowa,Washington,1,0
+Iowa,Winneshiek,1,0
+Kentucky,Fayette,8,0
+Kentucky,Jefferson,8,0
+Kentucky,Harrison,6,0
+Kentucky,Montgomery,2,0
+Kentucky,Nelson,1,0
+Kentucky,Clark,1,0
+Kentucky,Bourbon,1,1
+Kentucky,Lyon,1,0
+Mississippi,Hinds,6,0
+Mississippi,Leflore,4,0
+Mississippi,Pearl River,4,0
+Mississippi,Forrest,3,0
+Mississippi,Harrison,3,0
+Mississippi,Copiah ,2,0
+Mississippi,Hancock,2,0
+Mississippi,Jackson,2,0
+Mississippi,DeSoto,2,0
+Mississippi,Bolivar,2,0
+Mississippi,Coahoma,2,0
+Mississippi,Monroe,1,0
+Mississippi,Perry,1,0
+Rhode Island,Providence,33,0
+Arkansas,Jefferson,3,0
+Arkansas,Washington,1,0
+Oklahoma,Oklahoma,6,0
+Oklahoma,Tulsa,3,0
+Oklahoma,Cleveland,2,0
+Oklahoma,Kay,2,0
+Oklahoma,Out-Of-State,2,0
+Oklahoma,Jackson,1,0
+Oklahoma,Payne,1,0
+Oklahoma,Canadian,1,0
+Oklahoma,Pawnee,1,0
+"Washington, D.C.","Washington, D.C.",31,0
+New Mexico,Bernalillo,16,0
+New Mexico,Santa Fe,5,0
+New Mexico,Sandoval,4,0
+New Mexico,Socorro,2,0
+New Mexico,Taos,1,0
+Arizona,Maricopa,11,0
+Arizona,Pinal,8,0
+Arizona,Pima,5,0
+Arizona,Navajo,2,0
+Arizona,Graham,1,0
+Delaware,New Castle,17,0
+Delaware,Sussex,1,0
+Delaware,Kent,1,0
+Nebraska,Douglas,19,0
+Nebraska,Knox,2,0
+Nebraska,Cass,1,0
+Nebraska,Sarpy ,1,0
+Nebraska,Lincoln,1,0
+Kansas,Johnson,12,0
+Kansas,Wyandotte,4,1
+Kansas,Leavenworth,2,0
+Kansas,Butler,1,0
+Kansas,Franklin,1,0
+Kansas,Ford,1,0
+Kansas,Douglas,1,0
+Grand Princess,Sonoma,1,0
+Grand Princess,San Diego,1,0
+Missouri,St. Louis,4,0
+Missouri,Greene,4,0
+Missouri,Jackson,3,0
+Missouri,St. Louis City,2,0
+Missouri,Cass,2,0
+Missouri,Kansas City,2,0
+Missouri,Henry,1,0
+Missouri,Cole,1,0
+Missouri,Boone,1,1
+Vermont,Chittenden,4,0
+Vermont,Bennington,3,0
+Vermont,Windsor,3,0
+Vermont,Washington,1,0
+Vermont,Orange,1,0
+Vermont,Addison,1,0
+Hawaii,Honolulu,10,0
+Hawaii,Maui,3,0
+Hawaii,Kauai,2,0
+Hawaii,Hawaii,1,0
+Wyoming,Fremont,8,0
+Wyoming,Sheridan,4,0
+Wyoming,Laramie,3,0
+Wyoming,Park,1,0
+South Dakota,Minnehaha,5,0
+South Dakota,Pennington,1,1
+South Dakota,Beadle,1,0
+South Dakota,Charles Mix,1,0
+South Dakota,Davison,1,0
+South Dakota,Bon Homme,1,0
+South Dakota,McCook,1,0
+Montana,Gallatin,3,0
+Montana,Missoula,3,0
+Montana,Yellowstone,2,0
+Montana,Silver Bow,1,0
+Montana,Broadwater,1,0
+Idaho,Blaine ,4,0
+Idaho,Ada,3,0
+Idaho,Teton,1,0
+Idaho,Madison,1,0
+North Dakota,Ward,2,0
+North Dakota,Burleigh,2,0
+North Dakota,Cass,1,0
+North Dakota,Morton,1,0
+Alaska,Fairbanks North Star,3,0
+Alaska,Anchorage,2,0
+Alaska,Ketchikan Gateway,1,0
+Puerto Rico,Puerto Rico,5,0
+Guam,Guam,5,0
+West Virginia,Jefferson,1,0

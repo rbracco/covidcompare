@@ -20,7 +20,6 @@ __pycache__/
 data/unused
 .Python
 env/
-build/
 conda-dist
 develop-eggs/
 dist/
@@ -36,6 +35,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+js/plugins/leaflet-sidebar-v2/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
