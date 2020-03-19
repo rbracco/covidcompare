@@ -136,7 +136,7 @@ info.updateState = function (props) {
     let title = props ? `<h3>${props.name}</h3>`:`<h3>Hover over a state</h3>`
     let body = props ? 
         `<b>Covid19 Cases</b><br/>
-        ${props.active} active cases<br/>
+        ${props.confirmed} total cases (${props.active} active)<br/>
         ${props.recovered} recovered<br/>
         ${props.deaths || 0} deaths<br/>
         <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
@@ -178,8 +178,11 @@ info.updateCounty = function (props) {
         `<b>Covid19 Cases</b><br/>
         ${cases} cases<br/>
         ${props.deaths || 0} deaths<br/>
-        ${props.population} people<br/>
+        <hr>
+        <b>Population</b><br/>
+        ${numberWithCommas(props.population)} people<br/>
         ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
+        <hr>
         <b>Relative Risk<br/></b>
         Local Risk: ${(100000*props.risk_local).toFixed(3)}<br/>
         Nearby Risk: ${(100000*props.risk_nearby).toFixed(3)}<br/>

@@ -22,13 +22,15 @@ function onEachState(feature, layer) {
 }
 
 function zoomToCounties(e){
+    let menuSelect = document.querySelector('#metricSelect')
+    let curMetric = menuSelect.options[menuSelect.selectedIndex].value
+    console.log("MET", curMetric)
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
     zoomToFeature(e, padding=[100,100])
     let stateName = e.target.feature.properties.name
     let filt = filterByProp("statename", stateName)
-    let headerText = `Total Cases in ${stateName}:`
-    updateSidebar("Counties", filt, headerText)
+    updateSidebar("Counties", curMetric, filt, stateName)
 }
 
 function highlightState(e) {
