@@ -83,13 +83,9 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0.0, 0.1, 0.3, 1.0, 3.0, 10],
         grades = [10.0, 3.0, 1.0, 0.3, 0.1, 0.0]
         labels = [];
-    for(let grade of grades){
-        console.log(grade)
-        console.log("Color", getColor(grade))
-    }
+
     div.innerHTML += `<h3>Total Risk</h3>`
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
@@ -98,7 +94,6 @@ legend.onAdd = function (map) {
             (grades[i-1] ? grades[i] + '&ndash;' + grades[i-1] + '<br>' : grades[i]+'+<br>');
         
     }
-    console.log(div.innerHTML)
 
     return div;
 };
@@ -133,10 +128,10 @@ function numberWithCommas(x) {
 }
 // method that we will use to update the control based on feature properties passed
 info.updateState = function (props) {
-    let title = props ? `<h3>${props.name}</h3>`:`<h3>Hover over a state</h3>`
+    let title = props ? `<h3>${props.statename}</h3>`:`<h3>Hover over a state</h3>`
     let body = props ? 
         `<b>Covid19 Cases</b><br/>
-        ${props.active} active cases<br/>
+        ${props.cases} total cases (${props.active} active)<br/>
         ${props.recovered} recovered<br/>
         ${props.deaths || 0} deaths<br/>
         <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
@@ -178,8 +173,11 @@ info.updateCounty = function (props) {
         `<b>Covid19 Cases</b><br/>
         ${cases} cases<br/>
         ${props.deaths || 0} deaths<br/>
-        ${props.population} people<br/>
+        <hr>
+        <b>Population</b><br/>
+        ${numberWithCommas(props.population)} people<br/>
         ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
+        <hr>
         <b>Relative Risk<br/></b>
         Local Risk: ${(100000*props.risk_local).toFixed(3)}<br/>
         Nearby Risk: ${(100000*props.risk_nearby).toFixed(3)}<br/>
