@@ -1,5 +1,5 @@
 State,County,Cases,Deaths
-New York,New York,1871,11
+﻿New York,New York,1871,11
 New York,Westchester,538,0
 New York,Nassau,278,1
 New York,Suffolk,116,3
@@ -49,13 +49,13 @@ Washington,Jefferson,4,0
 Washington,Clark,4,3
 Washington,Kittitas,4,0
 Washington,Chelan,2,0
+Washington,Benton-Franklin,2,1
 Washington,Grays Harbor,1,0
 Washington,Columbia,1,0
 Washington,Lincoln,1,0
 Washington,Cowlitz,1,0
 Washington,Lewis,1,0
 Washington,Klickitat,1,0
-Washington,Franklin,1,0
 Washington,Mason,1,0
 California,Los Angeles,190,1
 California,Santa Clara,175,6
@@ -107,8 +107,8 @@ New Jersey,Hunterdon,6,0
 New Jersey,Atlantic,3,0
 New Jersey,Gloucester ,2,0
 New Jersey,Warren,1,0
-Florida,Miami-Dade,76,0
-Florida,Broward,72,1
+Florida,Broward,80,1
+Florida,Miami-Dade,61,0
 Florida,Palm Beach,19,0
 Florida,Hillsborough,14,0
 Florida,Collier,13,0
@@ -198,6 +198,41 @@ Colorado ,Clear Creek,2,0
 Colorado ,Pueblo,1,0
 Colorado ,Mesa ,1,0
 Colorado ,Grand,1,0
+Texas,Dallas,39,0
+Texas,Harris,23,0
+Texas,Travis,23,0
+Texas,Fort Bend,12,0
+Texas,Collin,11,1
+Texas,Bexar,11,0
+Texas,Tarrant,8,1
+Texas,Montgomery,7,0
+Texas,Smith,5,0
+Texas,Bell,5,0
+Texas,Hays,5,0
+Texas,Denton,5,0
+Texas,Mclennan,5,0
+Texas,Galveston,4,0
+Texas,Williamson,4,0
+Texas,El Paso,3,0
+Texas,Brazoria,3,0
+Texas,Matagorda,3,1
+Texas,Brazos,3,0
+Texas,Lubbock,3,0
+Texas,Cameron,2,0
+Texas,Gregg,1,0
+Texas,Lavaca,1,0
+Texas,Bowie,1,0
+Texas,Webb,1,0
+Texas,Rusk,1,0
+Texas,Ellis,1,0
+Texas,Wichita,1,0
+Texas,Johnson,1,0
+Texas,Comal,1,0
+Texas,Grimes,1,0
+Texas,Fannin,1,0
+Texas,Jefferson,1,0
+Texas,Dewitt,1,0
+Texas,Brown,1,0
 Georgia,Fulton,49,0
 Georgia,Cobb,28,1
 Georgia,Bartow,19,0
@@ -226,41 +261,6 @@ Georgia,Columbia,1,0
 Georgia,Houston,1,0
 Georgia,Whitfield,1,0
 Georgia,Barrow,1,0
-Texas,Dallas,39,0
-Texas,Harris,23,0
-Texas,Travis,23,0
-Texas,Fort Bend,12,0
-Texas,Collin,11,1
-Texas,Bexar,11,0
-Texas,Tarrant,8,1
-Texas,Montgomery,7,0
-Texas,Smith,5,0
-Texas,Hays,5,0
-Texas,Denton,5,0
-Texas,Mclennan,5,0
-Texas,Galveston,4,0
-Texas,Williamson,4,0
-Texas,El Paso,3,0
-Texas,Bell,3,0
-Texas,Brazoria,3,0
-Texas,Matagorda,3,1
-Texas,Brazos,3,0
-Texas,Lubbock,3,0
-Texas,Cameron,2,0
-Texas,Gregg,1,0
-Texas,Lavaca,1,0
-Texas,Bowie,1,0
-Texas,Webb,1,0
-Texas,Rusk,1,0
-Texas,Ellis,1,0
-Texas,Wichita,1,0
-Texas,Johnson,1,0
-Texas,Comal,1,0
-Texas,Grimes,1,0
-Texas,Fannin,1,0
-Texas,Jefferson,1,0
-Texas,Dewitt,1,0
-Texas,Brown,1,0
 Pennsylvania,Montgomery,42,0
 Pennsylvania,Philadelphia,34,0
 Pennsylvania,Delaware,14,0
@@ -523,6 +523,7 @@ Kentucky,Nelson,1,0
 Kentucky,Clark,1,0
 Kentucky,Bourbon,1,1
 Kentucky,Lyon,1,0
+Kentucky,Kenton,1,0
 Mississippi,Hinds,6,0
 Mississippi,Leflore,4,0
 Mississippi,Pearl River,4,0
@@ -548,7 +549,6 @@ Oklahoma,Jackson,1,0
 Oklahoma,Payne,1,0
 Oklahoma,Canadian,1,0
 Oklahoma,Pawnee,1,0
-"Washington, D.C.","Washington, D.C.",31,0
 New Mexico,Bernalillo,16,0
 New Mexico,Santa Fe,5,0
 New Mexico,Sandoval,4,0
@@ -591,14 +591,14 @@ Vermont,Windsor,3,0
 Vermont,Washington,1,0
 Vermont,Orange,1,0
 Vermont,Addison,1,0
+Wyoming,Fremont,8,0
+Wyoming,Sheridan,4,0
+Wyoming,Laramie,4,0
+Wyoming,Park,1,0
 Hawaii,Honolulu,10,0
 Hawaii,Maui,3,0
 Hawaii,Kauai,2,0
 Hawaii,Hawaii,1,0
-Wyoming,Fremont,8,0
-Wyoming,Sheridan,4,0
-Wyoming,Laramie,3,0
-Wyoming,Park,1,0
 South Dakota,Minnehaha,5,0
 South Dakota,Pennington,1,1
 South Dakota,Beadle,1,0
@@ -617,8 +617,8 @@ Idaho,Teton,1,0
 Idaho,Madison,1,0
 North Dakota,Ward,2,0
 North Dakota,Burleigh,2,0
+North Dakota,Morton,2,0
 North Dakota,Cass,1,0
-North Dakota,Morton,1,0
 Alaska,Fairbanks North Star,3,0
 Alaska,Anchorage,2,0
 Alaska,Ketchikan Gateway,1,0
