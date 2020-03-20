@@ -21,19 +21,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: API_KEY_MAPBOX,
 }).addTo(map);
 
-
-
-function countyStyle(feature) {
-    return {
-        fillColor: getColor(feature.properties["risk_total"]),
-        weight: 1,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7,
-    };
-}
-
 let outlinePane = map.createPane('outlines');
 outlinePane.style.pointerEvents = 'none';
 outlinePane.style.zIndex = 600;
@@ -65,6 +52,15 @@ var stateLayer  = L.geoJson(stateData,
 var overlayMaps = {
     "Counties": countyLayer,
     "States": stateLayer,
+}
+
+function updateMapStyle(){
+    if(window.curLayer === "States"){
+        stateLayer.eachLayer((layer) => stateLayer.resetStyle(layer))
+    }
+    if(window.curLayer === "Counties"){
+        countyLayer.eachLayer((layer) => countyLayer.resetStyle(layer))
+    }
 }
 
 /*-------------------------------LEGEND CONTROL ------------------------------ */
@@ -100,22 +96,8 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 
-/*---------------------------------------------------------------------------------------------------- */
+/*------------------------------INITIALIZE INFO DISPLAY BLOCK---------------------------------- */
 var info = L.control();
-function highlightCounty(e) {
-    var layer = e.target;
-    layer.setStyle({
-        weight: 5,
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
-    info.updateCounty(layer.feature.properties);
-}
-
 info.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
     this.updateState();
@@ -123,9 +105,7 @@ info.onAdd = function (map) {
 };
 
 /*-------------------------------DISPLAY STATE INFO ON HOVER ------------------------------ */
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+
 // method that we will use to update the control based on feature properties passed
 info.updateState = function (props) {
     let title = props ? `<h3>${props.statename}</h3>`:`<h3>Hover over a state</h3>`

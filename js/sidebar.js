@@ -31,22 +31,6 @@ function getResetButton() {
     return resetButton
 }
 
-function getSelectedMetric(){
-    let base = {value:"cases", text:"Total Cases"};
-    let e = document.querySelector('#metricSelect')
-    if(!e){
-        return base
-    }
-    if(e.selectedIndex === -1){
-        e.selectedIndex = 1
-        return base
-    }
-    return {
-        value:e.options[e.selectedIndex].value,
-        text:e.options[e.selectedIndex].text
-    }
-}
-
 function getAllOptions(sections){
     option_list = []
     for(let section of sections){
@@ -125,7 +109,10 @@ function getSelectMenu(){
         selectMenu.text = "Total Cases"
         selectMenu.value = "cases"
     }
-    selectMenu.addEventListener("change", ()=> updateSidebar())
+    selectMenu.addEventListener("change", ()=> {
+        updateSidebar()
+        updateMapStyle()
+    })
     return selectMenu
 }
 
@@ -226,6 +213,7 @@ function sortByProp(prop, descending=true){
            ((a, b) => a["properties"][prop] > b["properties"][prop] ? -1 : 1)
            :((a, b) => a["properties"][prop] > b["properties"][prop] ? 1 : -1)
 }
+
 
 function filterByProp(prop, value){
     return (item) => item["properties"][prop] == value

@@ -6,8 +6,32 @@ function getCountyCentroids(){
     return centroids
 }
 
-function getColor(risk_total){
-    risk_total *= 100000
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function getSelectedMetric(){
+    let base = {value:"cases", text:"Total Cases"};
+    let e = document.querySelector('#metricSelect')
+    if(!e){
+        return base
+    }
+    if(e.selectedIndex === -1){
+        e.selectedIndex = 1
+        return base
+    }
+    return {
+        value:e.options[e.selectedIndex].value,
+        text:e.options[e.selectedIndex].text
+    }
+}
+
+function getColor(props){
+    let {value:metricValue, text:metricText} = getSelectedMetric()
+    //let risk_total = 100000*props["risk_total"]
+    let risk_total = props[metricValue]
+    console.log(metricValue, metricText)
+    console.log("risk_total", risk_total)
     let color =  risk_total > 10 ? '#a50f15':
            risk_total > 3  ? '#de2d26':
            risk_total > 1   ? '#fb6a4a':
