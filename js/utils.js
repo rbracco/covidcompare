@@ -28,16 +28,13 @@ function getSelectedMetric(){
 
 function getColor(props){
     let {value:metricValue, text:metricText} = getSelectedMetric()
-    //let risk_total = 100000*props["risk_total"]
-    let risk_total = props[metricValue]
-    console.log(metricValue, metricText)
-    console.log("risk_total", risk_total)
-    let color =  risk_total > 10 ? '#a50f15':
-           risk_total > 3  ? '#de2d26':
-           risk_total > 1   ? '#fb6a4a':
-           risk_total > 0.3    ? '#fc9272':
-           risk_total > 0.1    ? '#fcbba1':
-           isNaN(risk_total)    ? '#ffffff':
+    let val = props[metricValue]
+    let color =  val > 10 ? '#a50f15':
+           val > 3  ? '#de2d26':
+           val > 1   ? '#fb6a4a':
+           val > 0.3    ? '#fc9272':
+           val > 0.1    ? '#fcbba1':
+           isNaN(val)    ? '#ffffff':
                          '#bbbbbb';
     return color
 }

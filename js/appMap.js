@@ -126,9 +126,9 @@ info.updateState = function (props) {
         ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
         <hr>
         <b>Relative Risk<br/></b>
-        Local Risk: ${(100000*props.risk_local).toFixed(3)}<br/>
-        Nearby Risk: ${(100000*props.risk_nearby).toFixed(3)}<br/>
-        Total Risk: ${(100000*props.risk_total).toFixed(3)}<br/>
+        Local Risk: ${(props.risk_local).toFixed(3)}<br/>
+        Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
+        Total Risk: ${(props.risk_total).toFixed(3)}<br/>
         <hr>
         <b>Testing Data<br/></b>
         Total Tested: ${(props.test_total)}<br/>
@@ -159,9 +159,9 @@ info.updateCounty = function (props) {
         ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
         <hr>
         <b>Relative Risk<br/></b>
-        Local Risk: ${(100000*props.risk_local).toFixed(3)}<br/>
-        Nearby Risk: ${(100000*props.risk_nearby).toFixed(3)}<br/>
-        Total Risk: ${(100000*props.risk_total).toFixed(3)}<br/>
+        Local Risk: ${(props.risk_local).toFixed(3)}<br/>
+        Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
+        Total Risk: ${(props.risk_total).toFixed(3)}<br/>
         <br>
         `
         : "<br/>"

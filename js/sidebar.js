@@ -141,7 +141,7 @@ function populateSidebarState(dataDiv){
         let curMetric = state["properties"][metric]
         totalCases += curMetric
         if(["risk_total", "risk_local", "risk_nearby"].includes(metric)){
-            curMetric = (curMetric*100000).toFixed(3)
+            curMetric = curMetric.toFixed(3)
             totalCases = ""
         }
         newLI.innerHTML = `<a>${state["properties"]["statename"]}</a> - ${curMetric} ${metricText}`
@@ -175,7 +175,7 @@ function populateSidebarCounty(dataDiv){
         }
         totalCases += curMetric
         if(["risk_total", "risk_local", "risk_nearby"].includes(metric)){
-            curMetric = (curMetric*100000).toFixed(3)
+            curMetric = curMetric.toFixed(3)
             totalCases = ""
         }
         newLI.innerHTML = `<a>${name}, ${statename}</a> ${curMetric}  ${metricText}`
