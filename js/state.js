@@ -4,7 +4,7 @@ function getState(stateID){
 
 function stateStyle(feature) {
     return {
-        fillColor: getColor(feature.properties["risk_total"]),
+        fillColor: getColor(feature.properties),
         weight: 1,
         opacity: 1,
         color: 'black',

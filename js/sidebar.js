@@ -31,22 +31,6 @@ function getResetButton() {
     return resetButton
 }
 
-function getSelectedMetric(){
-    let base = {value:"cases", text:"Total Cases"};
-    let e = document.querySelector('#metricSelect')
-    if(!e){
-        return base
-    }
-    if(e.selectedIndex === -1){
-        e.selectedIndex = 1
-        return base
-    }
-    return {
-        value:e.options[e.selectedIndex].value,
-        text:e.options[e.selectedIndex].text
-    }
-}
-
 function getAllOptions(sections){
     option_list = []
     for(let section of sections){
@@ -125,7 +109,11 @@ function getSelectMenu(){
         selectMenu.text = "Total Cases"
         selectMenu.value = "cases"
     }
-    selectMenu.addEventListener("change", ()=> updateSidebar())
+    selectMenu.addEventListener("change", ()=> {
+        updateSidebar()
+        updateMapStyle()
+        updateLegend()
+    })
     return selectMenu
 }
 
@@ -154,7 +142,7 @@ function populateSidebarState(dataDiv){
         let curMetric = state["properties"][metric]
         totalCases += curMetric
         if(["risk_total", "risk_local", "risk_nearby"].includes(metric)){
-            curMetric = (curMetric*100000).toFixed(3)
+            curMetric = curMetric.toFixed(3)
             totalCases = ""
         }
         newLI.innerHTML = `<a>${state["properties"]["statename"]}</a> - ${curMetric} ${metricText}`
@@ -188,7 +176,7 @@ function populateSidebarCounty(dataDiv){
         }
         totalCases += curMetric
         if(["risk_total", "risk_local", "risk_nearby"].includes(metric)){
-            curMetric = (curMetric*100000).toFixed(3)
+            curMetric = curMetric.toFixed(3)
             totalCases = ""
         }
         newLI.innerHTML = `<a>${name}, ${statename}</a> ${curMetric}  ${metricText}`
@@ -227,6 +215,7 @@ function sortByProp(prop, descending=true){
            :((a, b) => a["properties"][prop] > b["properties"][prop] ? 1 : -1)
 }
 
+
 function filterByProp(prop, value){
     return (item) => item["properties"][prop] == value
 }
@@ -241,5 +230,7 @@ map.on('baselayerchange', function (e) {
     window.curLayer = e.name
     initSidebarControls()
     updateSidebar()
+    updateMapStyle()
+    updateLegend()
 });
 

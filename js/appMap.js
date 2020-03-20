@@ -21,19 +21,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: API_KEY_MAPBOX,
 }).addTo(map);
 
-
-
-function countyStyle(feature) {
-    return {
-        fillColor: getColor(feature.properties["risk_total"]),
-        weight: 1,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7,
-    };
-}
-
 let outlinePane = map.createPane('outlines');
 outlinePane.style.pointerEvents = 'none';
 outlinePane.style.zIndex = 600;
@@ -67,6 +54,18 @@ var overlayMaps = {
     "States": stateLayer,
 }
 
+var layerControl = L.control.layers(overlayMaps).addTo(map);
+layerControl.expand()
+
+function updateMapStyle(){
+    if(window.curLayer === "States"){
+        stateLayer.eachLayer((layer) => stateLayer.resetStyle(layer))
+    }
+    if(window.curLayer === "Counties"){
+        countyLayer.eachLayer((layer) => countyLayer.resetStyle(layer))
+    }
+}
+
 /*-------------------------------LEGEND CONTROL ------------------------------ */
 
 // return risk > 0.0001 ? '#a50f15':
@@ -75,47 +74,43 @@ var overlayMaps = {
 //            risk > 0.000003    ? '#fc9272':
 //            risk > 0.000001    ? '#fcbba1':
 
-var layerControl = L.control.layers(overlayMaps).addTo(map);
-layerControl.expand()
+L.legend = L.control({position: 'bottomright'});
 
-var legend = L.control({position: 'bottomright'});
+function updateLegend(){
+    
+    let {value:metricValue, text:metricText} = getSelectedMetric()
+    console.log("M", metricValue)
+    let {grades, colors} = getColorsForMetric(metricValue)
+    console.log(grades, colors)
 
-legend.onAdd = function (map) {
+    L.legend.onAdd = function (map) {
+    
+        var div = L.DomUtil.create('div', 'info legend'),
+            
+            labels = [];
+    
+        div.innerHTML += `<h3>${metricText}</h3>`
+        // loop through our density intervals and generate a label with a colored square for each interval
 
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [10.0, 3.0, 1.0, 0.3, 0.1, 0.0]
-        labels = [];
-
-    div.innerHTML += `<h3>Total Risk</h3>`
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColor((grades[i]+0.01)/100000) + '"></i> ' +
-            (grades[i-1] ? grades[i] + '&ndash;' + grades[i-1] + '<br>' : grades[i]+'+<br>');
-        
-    }
-
-    return div;
-};
-
-legend.addTo(map);
-
-/*---------------------------------------------------------------------------------------------------- */
-var info = L.control();
-function highlightCounty(e) {
-    var layer = e.target;
-    layer.setStyle({
-        weight: 5,
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
-    info.updateCounty(layer.feature.properties);
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + colors[i]+ '"></i> ' +
+                (grades[i-1] ? grades[i] + '&ndash;' + grades[i-1] + '<br>' : grades[i]+'+<br>');
+            
+        }
+    
+        return div;
+    };
+    L.legend.addTo(map);
 }
 
+updateLegend()
+
+
+
+
+/*------------------------------INITIALIZE INFO DISPLAY BLOCK---------------------------------- */
+var info = L.control();
 info.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
     this.updateState();
@@ -123,9 +118,7 @@ info.onAdd = function (map) {
 };
 
 /*-------------------------------DISPLAY STATE INFO ON HOVER ------------------------------ */
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+
 // method that we will use to update the control based on feature properties passed
 info.updateState = function (props) {
     let title = props ? `<h3>${props.statename}</h3>`:`<h3>Hover over a state</h3>`
@@ -146,9 +139,9 @@ info.updateState = function (props) {
         ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
         <hr>
         <b>Relative Risk<br/></b>
-        Local Risk: ${(100000*props.risk_local).toFixed(3)}<br/>
-        Nearby Risk: ${(100000*props.risk_nearby).toFixed(3)}<br/>
-        Total Risk: ${(100000*props.risk_total).toFixed(3)}<br/>
+        Local Risk: ${(props.risk_local).toFixed(3)}<br/>
+        Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
+        Total Risk: ${(props.risk_total).toFixed(3)}<br/>
         <hr>
         <b>Testing Data<br/></b>
         Total Tested: ${(props.test_total)}<br/>
@@ -179,9 +172,9 @@ info.updateCounty = function (props) {
         ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
         <hr>
         <b>Relative Risk<br/></b>
-        Local Risk: ${(100000*props.risk_local).toFixed(3)}<br/>
-        Nearby Risk: ${(100000*props.risk_nearby).toFixed(3)}<br/>
-        Total Risk: ${(100000*props.risk_total).toFixed(3)}<br/>
+        Local Risk: ${(props.risk_local).toFixed(3)}<br/>
+        Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
+        Total Risk: ${(props.risk_total).toFixed(3)}<br/>
         <br>
         `
         : "<br/>"
