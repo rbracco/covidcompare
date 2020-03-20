@@ -54,6 +54,9 @@ var overlayMaps = {
     "States": stateLayer,
 }
 
+var layerControl = L.control.layers(overlayMaps).addTo(map);
+layerControl.expand()
+
 function updateMapStyle(){
     if(window.curLayer === "States"){
         stateLayer.eachLayer((layer) => stateLayer.resetStyle(layer))
@@ -71,30 +74,40 @@ function updateMapStyle(){
 //            risk > 0.000003    ? '#fc9272':
 //            risk > 0.000001    ? '#fcbba1':
 
-var layerControl = L.control.layers(overlayMaps).addTo(map);
-layerControl.expand()
+L.legend = L.control({position: 'bottomright'});
 
-var legend = L.control({position: 'bottomright'});
+function updateLegend(){
+    
+    let {value:metricValue, text:metricText} = getSelectedMetric()
+    console.log("M", metricValue)
+    let {grades, colors} = getColorsForMetric(metricValue)
+    console.log(grades, colors)
 
-legend.onAdd = function (map) {
+    L.legend.onAdd = function (map) {
+    
+        var div = L.DomUtil.create('div', 'info legend'),
+            
+            labels = [];
+    
+        div.innerHTML += `<h3>${metricText}</h3>`
+        // loop through our density intervals and generate a label with a colored square for each interval
 
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [10.0, 3.0, 1.0, 0.3, 0.1, 0.0]
-        labels = [];
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + colors[i]+ '"></i> ' +
+                (grades[i-1] ? grades[i] + '&ndash;' + grades[i-1] + '<br>' : grades[i]+'+<br>');
+            
+        }
+    
+        return div;
+    };
+    L.legend.addTo(map);
+}
 
-    div.innerHTML += `<h3>Total Risk</h3>`
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColor((grades[i]+0.01)/100000) + '"></i> ' +
-            (grades[i-1] ? grades[i] + '&ndash;' + grades[i-1] + '<br>' : grades[i]+'+<br>');
-        
-    }
+updateLegend()
 
-    return div;
-};
 
-legend.addTo(map);
+
 
 /*------------------------------INITIALIZE INFO DISPLAY BLOCK---------------------------------- */
 var info = L.control();

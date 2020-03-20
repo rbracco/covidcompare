@@ -112,6 +112,7 @@ function getSelectMenu(){
     selectMenu.addEventListener("change", ()=> {
         updateSidebar()
         updateMapStyle()
+        updateLegend()
     })
     return selectMenu
 }
@@ -229,5 +230,7 @@ map.on('baselayerchange', function (e) {
     window.curLayer = e.name
     initSidebarControls()
     updateSidebar()
+    updateMapStyle()
+    updateLegend()
 });
 
