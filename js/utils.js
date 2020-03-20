@@ -58,7 +58,6 @@ function zoomToFeature(e, padding) {
 }
 
 function getColorsForMetric(metricValue){
-    console.log(metricValue)
     let greenScale = ['#006d2c','#31a354','#74c476','#a1d99b','#c7e9c0','#eeeeee']
     let redScale =   ['#a50f15','#de2d26','#fb6a4a','#fc9272','#fcbba1','#bbbbbb',]
     let blueScale = ['#08519c','#3182bd','#6baed6','#9ecae1','#c6dbef','#eff3ff']

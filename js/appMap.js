@@ -79,9 +79,7 @@ L.legend = L.control({position: 'bottomright'});
 function updateLegend(){
     
     let {value:metricValue, text:metricText} = getSelectedMetric()
-    console.log("M", metricValue)
     let {grades, colors} = getColorsForMetric(metricValue)
-    console.log(grades, colors)
 
     L.legend.onAdd = function (map) {
     
