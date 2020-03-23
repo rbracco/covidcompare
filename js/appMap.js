@@ -168,6 +168,7 @@ info.updateState = function (props) {
 info.updateCounty = function (props) {
     let cases = props.cases || 0
     let title = props ? `<h3>${props.name} County</h3>`:`<h3>Hover over a county</h3>`
+    let note =  props.notes? `<span class="timestamp">${props.notes}</span><br/>`:``
     let body = props ? 
         `<b>Covid19 Cases</b><br/>
         ${cases} cases<br/>
@@ -181,7 +182,7 @@ info.updateCounty = function (props) {
         Local Risk: ${(props.risk_local).toFixed(3)}<br/>
         Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
         Total Risk: ${(props.risk_total).toFixed(3)}<br/>
-        <br>
+        ${note}
         `
         : "<br/>"
         
