@@ -49,17 +49,16 @@ function getSelectMenu(){
                         "Case Data":
                         {
                             "Total Cases":"cases", 
-                            "Active":"active", 
+                            //"Active":"active", 
                             "Recovered":"recovered", 
                             "Deaths":"deaths",
                         },
-                        // "Per Capita":
-                        // {
-                        //     "Cases/100k":null, 
-                        //     "Active/100k":null, 
-                        //     "Recovered/100k":null, 
-                        //     "Deaths/100k":null,
-                        // },
+                        "Per Capita":
+                        {
+                            "Cases per 100,000":"pc_cases", 
+                            //"Active per 100,000":"pc_active", 
+                            "Deaths per 100,000":"pc_deaths",
+                        },
                         "Risk Data":
                         {
                             "Total Risk":"risk_total", 
@@ -69,7 +68,7 @@ function getSelectMenu(){
                         "Testing Data":
                         {
                             "Total Tests":"test_total", 
-                            //"Tests/100k":null,
+                            "Tests per 100,000":"pc_tests",
                         },
                     }
                     :
@@ -78,7 +77,8 @@ function getSelectMenu(){
                         {
                             "Total Cases":"cases", 
                             "Deaths":"deaths", 
-                            //"Cases/100k":null,
+                            "Cases per 100,000":"pc_cases",
+                            "Deaths per 100,000":"pc_deaths",
                         },
                         "Risk Data":
                         {
@@ -141,7 +141,7 @@ function populateSidebarState(dataDiv){
         let {statename, cases, lat, long} = state["properties"]
         let curMetric = state["properties"][metric]
         totalCases += curMetric
-        if(["risk_total", "risk_local", "risk_nearby"].includes(metric)){
+        if(["risk_total", "risk_local", "risk_nearby", "pc_cases", "pc_tests", "pc_active", "pc_deaths"].includes(metric)){
             curMetric = curMetric.toFixed(3)
             totalCases = ""
         }
@@ -175,7 +175,7 @@ function populateSidebarCounty(dataDiv){
             break
         }
         totalCases += curMetric
-        if(["risk_total", "risk_local", "risk_nearby"].includes(metric)){
+        if(["risk_total", "risk_local", "risk_nearby", "pc_cases", "pc_deaths"].includes(metric)){
             curMetric = curMetric.toFixed(3)
             totalCases = ""
         }

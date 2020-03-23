@@ -79,9 +79,22 @@ function getColorsForMetric(metricValue){
             colors : redScale
         },
         "test_total":{
-            grades : [10000, 5000, 2500, 1000, 500, 0],
+            grades : [25000, 10000, 5000, 2500, 1000, 0],
             colors : blueScale
         },
+        "pc_tests":{
+            grades : [1000, 500, 250, 100, 50, 0],
+            colors : blueScale
+        },
+        "pc_cases":{
+            grades : [50, 25, 10, 5, 2, 0],
+            colors : redScale
+        },
+        "pc_deaths":{
+            grades : [1, 0.5, 0.25, 0.1, 0.05, 0],
+            colors : redScale
+        },
+        
     }
     //Add additional identical scales
     statesScales["active"] = statesScales["cases"]
@@ -103,6 +116,14 @@ function getColorsForMetric(metricValue){
         },
         "risk_nearby":{
             grades : [10, 3, 1, 0.3, 0.1, 0],
+            colors : redScale
+        },
+        "pc_cases":{
+            grades : [50, 25, 10, 5, 2, 0],
+            colors : redScale
+        },
+        "pc_deaths":{
+            grades : [1, 0.5, 0.25, 0.1, 0.05, 0],
             colors : redScale
         },
     }
