@@ -55,9 +55,19 @@ html, body, #map {
     color: blue;
 }
 
+.discrepancy {
+    font-size: 12px;
+    color: red;
+}
+
 /* #sidebar {
     width:400px;
 } */
+
+.data{
+    padding:0px;
+    margin:0px;
+}
 
 .about {
     padding:15px;

@@ -185,7 +185,10 @@ function populateSidebarCounty(dataDiv){
     }
     header = document.createElement('h3')
     header.innerText = `${metricText} in ${region}: ${totalCases}`
-    dataDiv.append(header,  newOL)
+    note = document.createElement('span')
+    note.innerText  = `Note: States sometimes report cases with county "unassigned", thus county totals for cases and deaths may be lower. For accurate totals, please view data by state, not county.`
+    note.classList.add('discrepancy')
+    dataDiv.append(header, note, newOL)
 
 }
 
