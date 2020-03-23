@@ -21,6 +21,7 @@
             <!-- top aligned tabs -->
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+                <li><a href="#method" role="tab"><i class="fas fa-flask"></i></a></li>
                 <li><a href="#about" role="tab"><i class="fa fa-info-circle"></i></a></li>
             </ul>
 
@@ -53,7 +54,9 @@
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
                 <div class="about">
-                    <h2> Why this map?</h2>
+                    <h2>Disclaimer:</h2><p class="disclaimer">This project is under development and changing rapidly. The risk values shown are currently arbitrary calculations and, while they do represent the relative risk between counties and states, they are not ready to be relied on for any form of decision making.</p>
+
+                    <h2>Why this map?</h2>
                     <p>Most Covid19 maps we've seen show the absolute number of cases in a location, but that's not the most important metric. 50 cases in Kentucky isn't the same as 50 cases in NYC.</p>
                     <p>We pull in data on population, hospital beds, and neighboring counties/states to allow users to compare the risk level to better understand what their community is up against.</p>
                     
@@ -62,12 +65,38 @@
                     <p>We think county level infection data and state level testing data should be made widely available. Our work is open source and you may use any of the code or data for your own projects. </p>
                     <p>See our <a href="https://github.com/rbracco/covidcompare">GitHub Page</a> for more details</a></p>
                     
-                    <h2>Disclaimer:</h2><p class="disclaimer">This project is under development and changing rapidly. The risk values shown are currently arbitrary calculations and, while they do represent the relative risk between counties and states, they are not ready to be relied on for any form of decision making.</p>
-                    
-                    
                 </div>
+            </div>
+            <div class="leaflet-sidebar-pane" id="method">
+                <h1 class="leaflet-sidebar-header">
+                    Methodology and Details
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div class="about">
+                    <h2>Disclaimer:</h2><p class="disclaimer">This project is under development and changing rapidly. The risk values shown are currently arbitrary calculations and, while they do represent the relative risk between counties and states, they are not ready to be relied on for any form of decision making.</p>
 
-                
+                    <h2>How we calculate risk:</h2>
+                    <p>Eventually we will use factors like population density, ICU capacity, comorbidity data, and more to assess the risk level in each county and state in America.</p> 
+                    <p>For now we use a simple but effective methodology for risk assessment:</p>
+                    <p><strong>Local Risk</strong> is simply cases of Covid19 per 100,000.</p>
+                    <p><strong>Nearby Risk</strong> is calculated by adding up the local risk of nearby counties and states as a factor of how distant they are. We only consider risk that is within a 150 mile radius</p>
+                    <p><strong>Total Risk</strong> is the sum of Local Risk and Nearby Risk</p>
+                    
+                    <h2>Testing Data</h2>
+                    <p>Our testing data comes from the <a href="https://covidtracking.com/" target="_blank">Covid Tracking Project</a>. States disclose data in varying ways, and the CTP issue <a href="https://mobile.twitter.com/COVID19Tracking/status/1240409388176666624" target="_blank">grades for each state</a> to show how reliable the testing data is. If the grade is C or below, you cannot infer the percentage of positive tests, because negative tests are not accurately reported.</p> 
+
+                    <h2>Data Sources:</h2>
+                    <h4>Covid Data</h4>
+                    <ol>
+                    <li><a href="https://covid19.mathdro.id/api/" target="_blank">State Data</a></li>
+                    <li><a href="https://coronavirus.1point3acres.com/" target="_blank">County Data</a></li>
+                    <li><a href="https://covidtracking.com/api/" target="_blank">Testing Data</a></li>
+                    </ol>
+                    <h4>Health Data</h4>
+                    <ol>
+                        <li><a href="https://catalog.data.gov/dataset/hospitals-dcdfc">Hospital Data</a></li>
+                    </ol>
+                </div>
             </div>
 
         </div>

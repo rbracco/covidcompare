@@ -143,7 +143,7 @@ info.updateState = function (props) {
         ${props.beds} hospital beds<br/>
         ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
         <hr>
-        <b>Relative Risk<br/></b>
+        <b>Comparative Risk<br/></b>
         Local Risk: ${(props.risk_local).toFixed(3)}<br/>
         Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
         Total Risk: ${(props.risk_total).toFixed(3)}<br/>
@@ -153,6 +153,7 @@ info.updateState = function (props) {
         Tested Positive: ${(props.test_positive)}<br/>
         Tested Negative: ${(props.test_negative)}<br/>
         ${(props.test_total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
+        Disclosure Grade: ${props.test_grade}<br/>
         <span class="timestamp">Updated: ${props.time_tests_updated}</span><br/>
         <br>
         `
@@ -176,7 +177,7 @@ info.updateCounty = function (props) {
         ${numberWithCommas(props.population)} people<br/>
         ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
         <hr>
-        <b>Relative Risk<br/></b>
+        <b>Comparative Risk<br/></b>
         Local Risk: ${(props.risk_local).toFixed(3)}<br/>
         Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
         Total Risk: ${(props.risk_total).toFixed(3)}<br/>
