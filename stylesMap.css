@@ -60,9 +60,8 @@ html, body, #map {
 } */
 
 .about {
-    width: 300px;
     padding:15px;
-    font-size:16px;
+    font-size:14px;
 }
 
 .disclaimer {

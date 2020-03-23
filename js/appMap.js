@@ -8,9 +8,14 @@ let map = L.map('map').setView([lat, long], zoomLevel);
 //dump countyData to file
 //dump stateData to file
 let mapAttribution = `<a href="https://github.com/rbracco/covidcompare" target="_blank">Github</a> |
-                    'Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, 
-                    <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>, Imagery © 
-                    <a href="https://www.mapbox.com/" target="_blank">Mapbox</a>'`
+                    Covid Data: 
+                    <a href="https://covidtracking.com/api/" target="_blank">Testing</a> |
+                    <a href="https://covid19.mathdro.id/api/" target="_blank">State</a> |
+                    <a href="https://coronavirus.1point3acres.com/" target="_blank">County</a> 
+                    Map data: 
+                    <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> |
+                    <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a> |
+                    <a href="https://www.mapbox.com/" target="_blank">Imagery:Mapbox</a>`
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: mapAttribution,
@@ -120,23 +125,25 @@ info.onAdd = function (map) {
 // method that we will use to update the control based on feature properties passed
 info.updateState = function (props) {
     let title = props ? `<h3>${props.statename}</h3>`:`<h3>Hover over a state</h3>`
+    // Add this back when active is working again(${props.active} active)
+    // And also change cases per 100,000 to use the active metric again
     let body = props ? 
         `<b>Covid19 Cases</b><br/>
-        ${props.cases} total cases (${props.active} active)<br/>
+        ${props.cases} total cases <br/>
         ${props.recovered} recovered<br/>
         ${props.deaths || 0} deaths<br/>
         <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
         <hr>
         <b>Population</b><br/>
         ${numberWithCommas(props.population)} people<br/>
-        ${(props.active/(props.population/100000)).toFixed(2)} cases per 100000<br/>
+        ${(props.pc_cases).toFixed(2)} cases per 100000<br/>
         <hr>
         
         <b>Hospital Access</b><br>
         ${props.beds} hospital beds<br/>
         ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
         <hr>
-        <b>Relative Risk<br/></b>
+        <b>Comparative Risk<br/></b>
         Local Risk: ${(props.risk_local).toFixed(3)}<br/>
         Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
         Total Risk: ${(props.risk_total).toFixed(3)}<br/>
@@ -146,6 +153,7 @@ info.updateState = function (props) {
         Tested Positive: ${(props.test_positive)}<br/>
         Tested Negative: ${(props.test_negative)}<br/>
         ${(props.test_total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
+        Disclosure Grade: ${props.test_grade}<br/>
         <span class="timestamp">Updated: ${props.time_tests_updated}</span><br/>
         <br>
         `
@@ -169,7 +177,7 @@ info.updateCounty = function (props) {
         ${numberWithCommas(props.population)} people<br/>
         ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
         <hr>
-        <b>Relative Risk<br/></b>
+        <b>Comparative Risk<br/></b>
         Local Risk: ${(props.risk_local).toFixed(3)}<br/>
         Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
         Total Risk: ${(props.risk_total).toFixed(3)}<br/>
