@@ -2,17 +2,6 @@ var sidebar = L.control.sidebar({container:'sidebar'})
             .addTo(map)
             .open('home');
 
-        // be notified when a panel is opened
-        sidebar.on('content', function (ev) {
-            switch (ev.id) {
-                case 'autopan':
-                sidebar.options.autopan = true;
-                break;
-                default:
-                sidebar.options.autopan = false;
-            }
-        });
-
 let resetMap = () => {
     window.curState = null
     map.setView([42, -104], 5);
