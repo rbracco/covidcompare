@@ -1,3 +1,9 @@
+#My Adds
+data/unused
+data/experiments
+build
+
+
 .bundle/
 *.bak
 *.log
@@ -17,7 +23,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-data/unused
+
 .Python
 env/
 conda-dist
