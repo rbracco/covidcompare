@@ -223,17 +223,8 @@ function filterByProp(prop, value){
     return (item) => item["properties"][prop] == value
 }
 
-//On page load
-window.curLayer = "States"
-window.curState = null
+
 initSidebarControls()
 updateSidebar()
-//On layer change
-map.on('baselayerchange', function (e) {
-    window.curLayer = e.name
-    initSidebarControls()
-    updateSidebar()
-    updateMapStyle()
-    updateLegend()
-});
+
 

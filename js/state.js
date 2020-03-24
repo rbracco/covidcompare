@@ -1,4 +1,4 @@
-function getState(stateID){
+function getState(stateID) {
     return statesData["features"].find(element => element["id"] == stateID)
 }
 
@@ -27,8 +27,7 @@ function zoomToCounties(e){
     let curMetric = getSelectedMetric().value
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
-    zoomToFeature(e, padding=[100,100])
-    
+    zoomToFeature(e, padding=[100,100])   
 }
 
 function highlightState(e) {
@@ -51,3 +50,4 @@ function resetHighlightState(e) {
     stateLayer.resetStyle(e.target);
     info.updateState();
 }
+

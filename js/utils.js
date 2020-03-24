@@ -1,13 +1,5 @@
 window.curLayer = "States"
 
-function getCountyCentroids(){
-    let centroids = {}
-    for(let feat of countyCentroids["features"]){
-        centroids[feat["properties"]["GEO_ID"]] = feat["geometry"]["coordinates"]
-    }
-    return centroids
-}
-
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -41,10 +33,7 @@ function getColor(props){
         }
     }
     return colors.slice(-1)
-   
 }
-
-
 
 //get the distance in kilometers between two centroids
 function getDistance(c0, c1){
@@ -127,6 +116,7 @@ function getColorsForMetric(metricValue){
             colors : redScale
         },
     }
+    //Add additional identical scales
     countyScales["risk_local"] = countyScales["risk_total"]
     return window.curLayer === "States" ? statesScales[metricValue]:countyScales[metricValue]
 }
