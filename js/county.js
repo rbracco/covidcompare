@@ -2,6 +2,11 @@ function getCounty(countyID){
     return countyData["features"].find(element => element["properties"]["geo_id"] == countyID)
 }
 
+function convertCountyIDToLayer(countyID){
+    let layer_id = countyIDToLayer[countyID]
+    return countyLayer._layers[layer_id]
+}
+
 function countyStyle(feature) {
     return {
         fillColor: getColor(feature.properties),
@@ -15,14 +20,13 @@ function countyStyle(feature) {
 
 function onEachCounty(feature, layer){
     layer.on({
-        mouseover: highlightCounty,
-        mouseout: resetHighlightCounty,
-        click: zoomToFeature
+        mouseover: () => highlightCounty(layer),
+        mouseout: () => resetHighlightCounty(layer),
+        click: () => zoomToFeature(layer, padding=[100,100])
     });
 }
 
-function highlightCounty(e) {
-    var layer = e.target;
+function highlightCounty(layer) {
     layer.setStyle({
         weight: 5,
         dashArray: '',
@@ -35,8 +39,7 @@ function highlightCounty(e) {
     info.updateCounty(layer.feature.properties);
 }
 
-function resetHighlightCounty(e) {
-    var layer = e.target;
+function resetHighlightCounty(layer) {
     layer.setStyle({
         weight: 1,
         opacity: 1,

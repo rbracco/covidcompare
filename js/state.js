@@ -2,8 +2,8 @@ function getState(stateID) {
     return statesData["features"].find(element => element["id"] == stateID)
 }
 
-function stateIDToLayer(stateID){
-    let layer_id = idToLayer[stateID]
+function convertStateIDToLayer(stateID){
+    let layer_id = stateIDToLayer[stateID]
     return stateLayer._layers[layer_id]
 }
 

@@ -138,7 +138,7 @@ function populateSidebarState(dataDiv){
             totalCases = ""
         }
         newLI.innerHTML = `<a>${state["properties"]["statename"]}</a> - ${curMetric} ${metricText}`
-        let curLayer = stateIDToLayer([state["id"]])
+        let curLayer = convertStateIDToLayer([state["id"]])
         newLI.addEventListener("mouseover", (e) => highlightState(curLayer))
         newLI.addEventListener("mouseout", (e) => resetHighlightState(curLayer))
         newLI.addEventListener("click", (e) => zoomToCounties(curLayer))
@@ -158,7 +158,7 @@ function populateSidebarCounty(dataDiv){
     let newOL = document.createElement('ol')
     for(let county of data.sort(sortByProp(metric))){
         let newLI = document.createElement('li')
-        let {name, statename, cases} = county["properties"]
+        let {name, statename, cases, geo_id:countyID} = county["properties"]
         let curMetric = county["properties"][metric]
         if(curMetric <= 0){
             break
@@ -168,8 +168,12 @@ function populateSidebarCounty(dataDiv){
             curMetric = curMetric.toFixed(3)
             totalCases = ""
         }
+        let curLayer = convertCountyIDToLayer(countyID)
         newLI.innerHTML = `<a>${name}, ${statename}</a> ${curMetric}  ${metricText}`
-        newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
+        newLI.addEventListener("mouseover", (e) => highlightCounty(curLayer))
+        newLI.addEventListener("mouseout", (e) => resetHighlightCounty(curLayer))
+        newLI.addEventListener("click", (e) => zoomToFeature(curLayer, padding=[100,100]))
+        //newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
         newOL.appendChild(newLI)
     }
     if(["cases", "deaths"].includes(metric)){
