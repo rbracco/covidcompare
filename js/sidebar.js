@@ -34,6 +34,7 @@ function getSelectMenu(){
     let layerName = window.curLayer
     let oldValue =  getSelectedMetric().value
     let options = layerName === 'States'?
+                    //Menu Options for States
                     {
                         "Case Data":
                         {
@@ -61,6 +62,7 @@ function getSelectMenu(){
                         },
                     }
                     :
+                    //Menu Options for Counties
                     {
                         "Case Data":
                         {
@@ -150,10 +152,13 @@ function populateSidebarState(dataDiv){
     dataDiv.append(header,  newOL)
 }
 
+
+
 function populateSidebarCounty(dataDiv){
     let totalCases = 0
     let data = getSidebarData()
-    let region = window.curState ? window.curState:"United States"
+    let curState = window.curState
+    let region = curState ? curState:"United States"
     let {text:metricText, value:metric} = getSelectedMetric()
     let newOL = document.createElement('ol')
     for(let county of data.sort(sortByProp(metric))){
@@ -172,13 +177,29 @@ function populateSidebarCounty(dataDiv){
         newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
         newOL.appendChild(newLI)
     }
+    if(["cases", "deaths"].includes(metric)){
+        let curMetric = getUnassigned(curState, metric)
+        if(curMetric){
+            let newLI = document.createElement('li')
+            newLI.innerHTML = `<strong>Unassigned</strong>, ${curState} ${curMetric} ${metricText}`
+            newOL.appendChild(newLI)
+            totalCases += curMetric
+        }
+    }
+    let unassigned = getUnassigned(curState, metric, metricText)
     header = document.createElement('h3')
     header.innerText = `${metricText} in ${region}: ${totalCases}`
     note = document.createElement('span')
     note.innerText  = `Note: States sometimes report cases with county "unassigned", thus county totals for cases and deaths may be lower. For accurate totals, please view data by state, not county.`
     note.classList.add('discrepancy')
     dataDiv.append(header, note, newOL)
+}
 
+function getUnassigned(stateName, metric){
+    let filt = filterByProp("statename", stateName)
+    let state = stateData["features"].filter(filt)[0]
+    let value = metric === "cases"? state["properties"]["unassigned_cases"]:state["properties"]["unassigned_deaths"]
+    return value
 }
 
 function getSidebarData(){
@@ -192,6 +213,8 @@ function getSidebarData(){
     }
     return allData
 }
+
+
 
 function updateSidebar(){
     let dataDiv = document.querySelector(".data")
