@@ -1,5 +1,10 @@
-function getState(stateID){
+function getState(stateID) {
     return statesData["features"].find(element => element["id"] == stateID)
+}
+
+function convertStateIDToLayer(stateID){
+    let layer_id = stateIDToLayer[stateID]
+    return stateLayer._layers[layer_id]
 }
 
 function stateStyle(feature) {
@@ -15,39 +20,37 @@ function stateStyle(feature) {
 
 function onEachState(feature, layer) {
     layer.on({
-        mouseover: highlightState,
-        mouseout: resetHighlightState,
-        click: zoomToCounties,
+        mouseover: () => highlightState(layer),
+        mouseout: () => resetHighlightState(layer),
+        click: () => zoomToCounties(layer)
+    //click: zoomToCounties,
     });
 }
 
-function zoomToCounties(e){
-    window.curState = e.target.feature.properties.statename
+function zoomToCounties(layer){
+    window.curState = layer.feature.properties.statename
     let menuSelect = document.querySelector('#metricSelect')
     let curMetric = getSelectedMetric().value
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
-    zoomToFeature(e, padding=[100,100])
-    
+    zoomToFeature(layer, padding=[100,100])   
 }
 
-function highlightState(e) {
-    var layer = e.target;
+function resetHighlightState(layer) {
+    stateLayer.resetStyle(layer);
+    info.updateState();
+}
+
+function highlightState(layer) {
     layer.setStyle({
         weight: 5,
-        color: '#666',
+        color: '#FFF',
         dashArray: '',
         fillOpacity: 0.7
     });
-
+    info.updateState(layer.feature.properties);
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-
-    info.updateState(layer.feature.properties);
 }
 
-function resetHighlightState(e) {
-    stateLayer.resetStyle(e.target);
-    info.updateState();
-}

@@ -1,12 +1,14 @@
 let API_KEY_MAPBOX = 'pk.eyJ1IjoicmJyYWNjbyIsImEiOiJjazZ6Z3c1c2IwbnNkM21tdmg0eGhmeWJkIn0.IfYSBvXVOMUlmKm8zm-XZA'
-// let dataCovidState = getJSON('data/dataCovidState.json', data => dataCovidState = data);
+
+/*---------------------------------------------MAP SETUP--------------------------------------------- */
+//On page load
+window.curLayer = "States"
+window.curState = null
 let [lat, long] = [42, -104]
 let zoomLevel = 5
 //'mapbox/satellite-v9'
 let tileProvider = 'mapbox/streets-v11'
 let map = L.map('map').setView([lat, long], zoomLevel);
-//dump countyData to file
-//dump stateData to file
 let mapAttribution = `<a href="https://github.com/rbracco/covidcompare" target="_blank">Github</a> |
                     Covid Data: 
                     <a href="https://covidtracking.com/api/" target="_blank">Testing</a> |
@@ -53,6 +55,20 @@ var stateLayer  = L.geoJson(stateData,
         
     }).addTo(map)
 
+//Register a link between state IDs and the layer of their feature
+let stateIDToLayer = {}
+let _layersState = stateLayer["_layers"]
+for (let layer_key in _layersState){
+    stateIDToLayer[_layersState[layer_key]["feature"]["id"]] = layer_key
+}
+
+//Register a link between county geo_id and the layer of their feature
+let countyIDToLayer = {}
+let _layersCounty = countyLayer["_layers"]
+for (let layer_key in _layersCounty){
+    countyIDToLayer[_layersCounty[layer_key]["feature"]["properties"]["geo_id"]] = layer_key
+}
+
 
 var overlayMaps = {
     "Counties": countyLayer,
@@ -73,12 +89,6 @@ function updateMapStyle(){
 
 /*-------------------------------LEGEND CONTROL ------------------------------ */
 
-// return risk > 0.0001 ? '#a50f15':
-//            risk > 0.00003  ? '#de2d26':
-//            risk > 0.00001   ? '#fb6a4a':
-//            risk > 0.000003    ? '#fc9272':
-//            risk > 0.000001    ? '#fcbba1':
-
 L.legend = L.control({position: 'bottomright'});
 
 function updateLegend(){
@@ -96,21 +106,16 @@ function updateLegend(){
         // loop through our density intervals and generate a label with a colored square for each interval
 
         for (var i = 0; i < grades.length; i++) {
+            grade_label = grades[i-1] ? `${grades[i]}&ndash;${grades[i-1]}<br>`: `${grades[i]}<br>`
             div.innerHTML +=
-                '<i style="background:' + colors[i]+ '"></i> ' +
-                (grades[i-1] ? grades[i] + '&ndash;' + grades[i-1] + '<br>' : grades[i]+'+<br>');
+                `<i style="background:${colors[i]}"></i>${grade_label}`
             
         }
-    
         return div;
     };
     L.legend.addTo(map);
 }
-
 updateLegend()
-
-
-
 
 /*------------------------------INITIALIZE INFO DISPLAY BLOCK---------------------------------- */
 var info = L.control();
@@ -173,6 +178,7 @@ info.updateCounty = function (props) {
         `<b>Covid19 Cases</b><br/>
         ${cases} cases<br/>
         ${props.deaths || 0} deaths<br/>
+        <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
         <hr>
         <b>Population</b><br/>
         ${numberWithCommas(props.population)} people<br/>
@@ -190,6 +196,15 @@ info.updateCounty = function (props) {
 };
 
 info.addTo(map);
+
+//On layer change
+map.on('baselayerchange', function (e) {
+    window.curLayer = e.name
+    initSidebarControls()
+    updateSidebar()
+    updateMapStyle()
+    updateLegend()
+});
 
 // for(let hospital of dataHospitals){
 //     var circle = L.circle([hospital.Y, hospital.X], {

@@ -2,19 +2,9 @@ var sidebar = L.control.sidebar({container:'sidebar'})
             .addTo(map)
             .open('home');
 
-        // be notified when a panel is opened
-        sidebar.on('content', function (ev) {
-            switch (ev.id) {
-                case 'autopan':
-                sidebar.options.autopan = true;
-                break;
-                default:
-                sidebar.options.autopan = false;
-            }
-        });
-
 let resetMap = () => {
     window.curState = null
+    window.curCounty = null
     map.setView([42, -104], 5);
     map.removeLayer(countyLayer)
     map.addLayer(stateLayer)
@@ -31,6 +21,20 @@ function getResetButton() {
     return resetButton
 }
 
+function getBackToStateButton(stateName, curStateLayer) {
+    let backToStateButton = document.createElement('input')
+    backToStateButton.type = "button"
+    backToStateButton.value = `Back to ${stateName}`
+    backToStateButton.classList.add("btn", "btn-primary") 
+    backToStateButton.onclick = function(){
+        window.curState = stateName
+        window.curCounty = null;
+        zoomToFeature(curStateLayer, padding=[100,100])
+        updateSidebar()
+    }
+    return backToStateButton
+}
+
 function getAllOptions(sections){
     option_list = []
     for(let section of sections){
@@ -45,6 +49,7 @@ function getSelectMenu(){
     let layerName = window.curLayer
     let oldValue =  getSelectedMetric().value
     let options = layerName === 'States'?
+                    //Menu Options for States
                     {
                         "Case Data":
                         {
@@ -72,6 +77,7 @@ function getSelectMenu(){
                         },
                     }
                     :
+                    //Menu Options for Counties
                     {
                         "Case Data":
                         {
@@ -136,6 +142,7 @@ function populateSidebarState(dataDiv){
     let region = window.curState ? window.curState:"United States"
     let {text:metricText, value:metric} = getSelectedMetric()
     let newOL = document.createElement('ol')
+
     for(let state of data.sort(sortByProp(metric))){
         let newLI = document.createElement('li')
         let {statename, cases, lat, long} = state["properties"]
@@ -146,14 +153,10 @@ function populateSidebarState(dataDiv){
             totalCases = ""
         }
         newLI.innerHTML = `<a>${state["properties"]["statename"]}</a> - ${curMetric} ${metricText}`
-        newLI.addEventListener("mouseover", () => info.updateState(state["properties"]))
-        newLI.addEventListener("click", (e) => {
-            map.setView([lat, long], 8)
-            window.curState = statename
-            map.removeLayer(stateLayer)
-            map.addLayer(countyLayer)
-            // updateSidebar()
-        })
+        let curLayer = convertStateIDToLayer([state["id"]])
+        newLI.addEventListener("mouseover", (e) => highlightState(curLayer))
+        newLI.addEventListener("mouseout", (e) => resetHighlightState(curLayer))
+        newLI.addEventListener("click", (e) => zoomToCounties(curLayer))
         newOL.appendChild(newLI)
     }
     header = document.createElement('h3')
@@ -164,12 +167,13 @@ function populateSidebarState(dataDiv){
 function populateSidebarCounty(dataDiv){
     let totalCases = 0
     let data = getSidebarData()
-    let region = window.curState ? window.curState:"United States"
+    let curState = window.curState
+    let region = curState ? curState:"United States"
     let {text:metricText, value:metric} = getSelectedMetric()
     let newOL = document.createElement('ol')
     for(let county of data.sort(sortByProp(metric))){
         let newLI = document.createElement('li')
-        let {name, statename, cases} = county["properties"]
+        let {name, statename, cases, geo_id:countyID} = county["properties"]
         let curMetric = county["properties"][metric]
         if(curMetric <= 0){
             break
@@ -179,9 +183,22 @@ function populateSidebarCounty(dataDiv){
             curMetric = curMetric.toFixed(3)
             totalCases = ""
         }
+        let curLayer = convertCountyIDToLayer(countyID)
         newLI.innerHTML = `<a>${name}, ${statename}</a> ${curMetric}  ${metricText}`
-        newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
+        newLI.addEventListener("mouseover", (e) => highlightCounty(curLayer))
+        newLI.addEventListener("mouseout", (e) => resetHighlightCounty(curLayer))
+        newLI.addEventListener("click", (e) => displayDetailed(curLayer, padding=[100,100]))
+        //newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
         newOL.appendChild(newLI)
+    }
+    if(curState && ["cases", "deaths"].includes(metric)){
+        let curMetric = getUnassigned(curState, metric)
+        if(curMetric){
+            let newLI = document.createElement('li')
+            newLI.innerHTML = `<strong>Unassigned</strong>, ${curState} ${curMetric} ${metricText}`
+            newOL.appendChild(newLI)
+            totalCases += curMetric
+        }
     }
     header = document.createElement('h3')
     header.innerText = `${metricText} in ${region}: ${totalCases}`
@@ -189,7 +206,51 @@ function populateSidebarCounty(dataDiv){
     note.innerText  = `Note: States sometimes report cases with county "unassigned", thus county totals for cases and deaths may be lower. For accurate totals, please view data by state, not county.`
     note.classList.add('discrepancy')
     dataDiv.append(header, note, newOL)
+}
 
+function populateSidebarDetailed(dataDiv){
+    let countyID = window.curCounty
+    let props = getCounty(countyID)["properties"]
+    console.log(props)
+    let {name, statename, stateabbr, cases, state:stateID, } = props
+    curStateLayer = convertStateIDToLayer(stateID)
+    header = document.createElement('h2')
+    header.innerText = `${name} County, ${stateabbr}`
+    header2 = document.createElement('h4')
+    header2.innerText = `Lots of new stuff will be posted here in the next few days including time trends, growth rates, county health data, ICU capacity and more.`
+    header2.style.color = "blue"
+
+    let content = document.createElement('div')
+    let note =  props.notes? `<span class="timestamp">${props.notes}</span><br/>`:``
+    let body =`<br/><b>Covid19 Cases</b><br/>
+        ${cases} cases<br/>
+        ${props.deaths || 0} deaths<br/>
+        <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
+        <hr>
+        <b>Population</b><br/>
+        ${numberWithCommas(props.population)} people<br/>
+        ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
+        <hr>
+        <b>Comparative Risk<br/></b>
+        Local Risk: ${(props.risk_local).toFixed(3)}<br/>
+        Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
+        Total Risk: ${(props.risk_total).toFixed(3)}<br/>
+        ${note}
+        `
+    content.innerHTML = body
+    let backToStateButton = getBackToStateButton(statename, curStateLayer)
+    dataDiv.append(header, header2, backToStateButton, content, )
+    
+}
+
+function getUnassigned(stateName, metric) {
+    if(!["cases", "deaths"].includes(metric)){
+        return null;
+    }
+    let filt = filterByProp("statename", stateName)
+    let state = stateData["features"].filter(filt)[0]
+    let value = metric === "cases"? state["properties"]["unassigned_cases"]:state["properties"]["unassigned_deaths"]
+    return value
 }
 
 function getSidebarData(){
@@ -207,9 +268,15 @@ function getSidebarData(){
 function updateSidebar(){
     let dataDiv = document.querySelector(".data")
     dataDiv.innerHTML = ''
-    window.curLayer === "States"?
+    if(window.curCounty){
+        populateSidebarDetailed(dataDiv)
+    }
+    else if(window.curLayer === "States"){
         populateSidebarState(dataDiv)
-        :populateSidebarCounty(dataDiv)
+    }
+    else{
+        populateSidebarCounty(dataDiv)
+    }
 }
 
 function sortByProp(prop, descending=true){
@@ -223,17 +290,7 @@ function filterByProp(prop, value){
     return (item) => item["properties"][prop] == value
 }
 
-//On page load
-window.curLayer = "States"
-window.curState = null
 initSidebarControls()
 updateSidebar()
-//On layer change
-map.on('baselayerchange', function (e) {
-    window.curLayer = e.name
-    initSidebarControls()
-    updateSidebar()
-    updateMapStyle()
-    updateLegend()
-});
+
 
