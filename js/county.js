@@ -32,16 +32,15 @@ function displayDetailed(layer){
     //let curMetric = getSelectedMetric().value
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
-    zoomToFeature(layer, padding=[100,100])
+    zoomToFeature(layer, padding=[300,300])
     updateSidebar()
 }
 
 
 function highlightCounty(layer) {
-    
     if (!isViewable(layer)){
-        if(map.getZoom() > 6){
-            map.setZoom(6)
+        if(map.getZoom() > 7){
+            map.setZoom(7)
         }
         map.panTo(layer.getBounds().getCenter())
     }
@@ -50,7 +49,6 @@ function highlightCounty(layer) {
         dashArray: '',
         fillOpacity: 0.7
     });
-
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
