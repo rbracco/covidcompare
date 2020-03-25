@@ -128,6 +128,7 @@ function populateSidebarState(dataDiv){
     let region = window.curState ? window.curState:"United States"
     let {text:metricText, value:metric} = getSelectedMetric()
     let newOL = document.createElement('ol')
+
     for(let state of data.sort(sortByProp(metric))){
         let newLI = document.createElement('li')
         let {statename, cases, lat, long} = state["properties"]
@@ -138,13 +139,10 @@ function populateSidebarState(dataDiv){
             totalCases = ""
         }
         newLI.innerHTML = `<a>${state["properties"]["statename"]}</a> - ${curMetric} ${metricText}`
-        newLI.addEventListener("mouseover", () => info.updateState(state["properties"]))
-        newLI.addEventListener("click", (e) => {
-            map.setView([lat, long], 8)
-            window.curState = statename
-            map.removeLayer(stateLayer)
-            map.addLayer(countyLayer)
-        })
+        let curLayer = convertStateIDToLayer([state["id"]])
+        newLI.addEventListener("mouseover", (e) => highlightState(curLayer))
+        newLI.addEventListener("mouseout", (e) => resetHighlightState(curLayer))
+        newLI.addEventListener("click", (e) => zoomToCounties(curLayer))
         newOL.appendChild(newLI)
     }
     header = document.createElement('h3')
@@ -161,7 +159,7 @@ function populateSidebarCounty(dataDiv){
     let newOL = document.createElement('ol')
     for(let county of data.sort(sortByProp(metric))){
         let newLI = document.createElement('li')
-        let {name, statename, cases} = county["properties"]
+        let {name, statename, cases, geo_id:countyID} = county["properties"]
         let curMetric = county["properties"][metric]
         if(curMetric <= 0){
             break
@@ -171,8 +169,12 @@ function populateSidebarCounty(dataDiv){
             curMetric = curMetric.toFixed(3)
             totalCases = ""
         }
+        let curLayer = convertCountyIDToLayer(countyID)
         newLI.innerHTML = `<a>${name}, ${statename}</a> ${curMetric}  ${metricText}`
-        newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
+        newLI.addEventListener("mouseover", (e) => highlightCounty(curLayer))
+        newLI.addEventListener("mouseout", (e) => resetHighlightCounty(curLayer))
+        newLI.addEventListener("click", (e) => zoomToFeature(curLayer, padding=[100,100]))
+        //newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
         newOL.appendChild(newLI)
     }
     if(["cases", "deaths"].includes(metric)){
@@ -204,6 +206,9 @@ function populateSidebarDetailed(dataDiv){
 }
 
 function getUnassigned(stateName, metric){
+    if(!["cases", "deaths"].includes(metric)){
+        return null;
+    }
     let filt = filterByProp("statename", stateName)
     let state = stateData["features"].filter(filt)[0]
     let value = metric === "cases"? state["properties"]["unassigned_cases"]:state["properties"]["unassigned_deaths"]

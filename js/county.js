@@ -2,6 +2,11 @@ function getCounty(countyID){
     return countyData["features"].find(element => element["properties"]["geo_id"] == countyID)
 }
 
+function convertCountyIDToLayer(countyID){
+    let layer_id = countyIDToLayer[countyID]
+    return countyLayer._layers[layer_id]
+}
+
 function countyStyle(feature) {
     return {
         fillColor: getColor(feature.properties),
@@ -15,24 +20,23 @@ function countyStyle(feature) {
 
 function onEachCounty(feature, layer){
     layer.on({
-        mouseover: highlightCounty,
-        mouseout: resetHighlightCounty,
-        click: displayDetailed,
+        mouseover: () => highlightCounty(layer),
+        mouseout: () => resetHighlightCounty(layer),
+        click: () => displayDetailed(layer),
     });
 }
 
-function displayDetailed(e){
-    window.curCounty = e.target.feature.properties.geo_id
+function displayDetailed(layer){
+    window.curCounty = layer.feature.properties.geo_id
     //let menuSelect = document.querySelector('#metricSelect')
     //let curMetric = getSelectedMetric().value
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
-    zoomToFeature(e, padding=[100,100]) 
+    zoomToFeature(layer, padding=[100,100])
     updateSidebar()
 }
 
-function highlightCounty(e) {
-    var layer = e.target;
+function highlightCounty(layer) {
     layer.setStyle({
         weight: 5,
         dashArray: '',
@@ -45,8 +49,7 @@ function highlightCounty(e) {
     info.updateCounty(layer.feature.properties);
 }
 
-function resetHighlightCounty(e) {
-    var layer = e.target;
+function resetHighlightCounty(layer) {
     layer.setStyle({
         weight: 1,
         opacity: 1,

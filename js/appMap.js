@@ -55,6 +55,20 @@ var stateLayer  = L.geoJson(stateData,
         
     }).addTo(map)
 
+//Register a link between state IDs and the layer of their feature
+let stateIDToLayer = {}
+let _layersState = stateLayer["_layers"]
+for (let layer_key in _layersState){
+    stateIDToLayer[_layersState[layer_key]["feature"]["id"]] = layer_key
+}
+
+//Register a link between county geo_id and the layer of their feature
+let countyIDToLayer = {}
+let _layersCounty = countyLayer["_layers"]
+for (let layer_key in _layersCounty){
+    countyIDToLayer[_layersCounty[layer_key]["feature"]["properties"]["geo_id"]] = layer_key
+}
+
 
 var overlayMaps = {
     "Counties": countyLayer,

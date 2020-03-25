@@ -42,8 +42,8 @@ function getDistance(c0, c1){
     return Math.sqrt(latDist*latDist + longDist*longDist) * 111
 }
 
-function zoomToFeature(e, padding) {
-    map.fitBounds(e.target.getBounds(), {padding:padding});
+function zoomToFeature(layer, padding) {
+    map.fitBounds(layer.getBounds(), {padding:padding});
 }
 
 function getColorsForMetric(metricValue){
