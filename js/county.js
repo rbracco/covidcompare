@@ -36,7 +36,15 @@ function displayDetailed(layer){
     updateSidebar()
 }
 
+
 function highlightCounty(layer) {
+    
+    if (!isViewable(layer)){
+        if(map.getZoom() > 6){
+            map.setZoom(6)
+        }
+        map.panTo(layer.getBounds().getCenter())
+    }
     layer.setStyle({
         weight: 5,
         dashArray: '',

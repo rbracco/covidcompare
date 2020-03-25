@@ -42,6 +42,10 @@ function getDistance(c0, c1){
     return Math.sqrt(latDist*latDist + longDist*longDist) * 111
 }
 
+function isViewable(layer){
+    return map.getBounds().contains(layer.getBounds().getNorthEast()) && map.getBounds().contains(layer.getBounds().getSouthWest()) 
+}
+
 function zoomToFeature(layer, padding) {
     map.fitBounds(layer.getBounds(), {padding:padding});
 }
