@@ -4,6 +4,7 @@ var sidebar = L.control.sidebar({container:'sidebar'})
 
 let resetMap = () => {
     window.curState = null
+    window.curCounty = null
     map.setView([42, -104], 5);
     map.removeLayer(countyLayer)
     map.addLayer(stateLayer)
@@ -192,6 +193,16 @@ function populateSidebarCounty(dataDiv){
     dataDiv.append(header, note, newOL)
 }
 
+function populateSidebarDetailed(dataDiv){
+    let countyID = window.curCounty
+    let props = getCounty(countyID)["properties"]
+    console.log(props)
+    let {name, stateabbr, cases} = props
+    header = document.createElement('h3')
+    header.innerText = `${name} County, ${stateabbr}: ${cases} Cases`
+    dataDiv.append(header)
+}
+
 function getUnassigned(stateName, metric){
     let filt = filterByProp("statename", stateName)
     let state = stateData["features"].filter(filt)[0]
@@ -211,14 +222,18 @@ function getSidebarData(){
     return allData
 }
 
-
-
 function updateSidebar(){
     let dataDiv = document.querySelector(".data")
     dataDiv.innerHTML = ''
-    window.curLayer === "States"?
+    if(window.curCounty){
+        populateSidebarDetailed(dataDiv)
+    }
+    else if(window.curLayer === "States"){
         populateSidebarState(dataDiv)
-        :populateSidebarCounty(dataDiv)
+    }
+    else{
+        populateSidebarCounty(dataDiv)
+    }
 }
 
 function sortByProp(prop, descending=true){

@@ -17,8 +17,18 @@ function onEachCounty(feature, layer){
     layer.on({
         mouseover: highlightCounty,
         mouseout: resetHighlightCounty,
-        click: zoomToFeature
+        click: displayDetailed,
     });
+}
+
+function displayDetailed(e){
+    window.curCounty = e.target.feature.properties.geo_id
+    //let menuSelect = document.querySelector('#metricSelect')
+    //let curMetric = getSelectedMetric().value
+    map.removeLayer(stateLayer)
+    map.addLayer(countyLayer)
+    zoomToFeature(e, padding=[100,100]) 
+    updateSidebar()
 }
 
 function highlightCounty(e) {
