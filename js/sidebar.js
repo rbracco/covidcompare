@@ -127,6 +127,7 @@ function populateSidebarState(dataDiv){
     let region = window.curState ? window.curState:"United States"
     let {text:metricText, value:metric} = getSelectedMetric()
     let newOL = document.createElement('ol')
+
     for(let state of data.sort(sortByProp(metric))){
         let newLI = document.createElement('li')
         let {statename, cases, lat, long} = state["properties"]
@@ -137,13 +138,10 @@ function populateSidebarState(dataDiv){
             totalCases = ""
         }
         newLI.innerHTML = `<a>${state["properties"]["statename"]}</a> - ${curMetric} ${metricText}`
-        newLI.addEventListener("mouseover", () => info.updateState(state["properties"]))
-        newLI.addEventListener("click", (e) => {
-            map.setView([lat, long], 8)
-            window.curState = statename
-            map.removeLayer(stateLayer)
-            map.addLayer(countyLayer)
-        })
+        let curLayer = stateIDToLayer([state["id"]])
+        newLI.addEventListener("mouseover", (e) => highlightState(curLayer))
+        newLI.addEventListener("mouseout", (e) => resetHighlightState(curLayer))
+        newLI.addEventListener("click", (e) => zoomToCounties(curLayer))
         newOL.appendChild(newLI)
     }
     header = document.createElement('h3')
