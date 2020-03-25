@@ -143,7 +143,6 @@ function populateSidebarState(dataDiv){
             window.curState = statename
             map.removeLayer(stateLayer)
             map.addLayer(countyLayer)
-            // updateSidebar()
         })
         newOL.appendChild(newLI)
     }
@@ -151,8 +150,6 @@ function populateSidebarState(dataDiv){
     header.innerText = `${metricText} in ${region}: ${totalCases}`
     dataDiv.append(header,  newOL)
 }
-
-
 
 function populateSidebarCounty(dataDiv){
     let totalCases = 0

@@ -164,6 +164,7 @@ info.updateCounty = function (props) {
         `<b>Covid19 Cases</b><br/>
         ${cases} cases<br/>
         ${props.deaths || 0} deaths<br/>
+        <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
         <hr>
         <b>Population</b><br/>
         ${numberWithCommas(props.population)} people<br/>
