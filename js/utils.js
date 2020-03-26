@@ -50,6 +50,12 @@ function zoomToFeature(layer, padding) {
     map.fitBounds(layer.getBounds(), {padding:padding});
 }
 
+function isChartsTabActive(){
+    let chartsTab = document.querySelector(".chartsLI")
+    let classList = chartsTab.classList.value.split(' ')
+    return classList.includes('active')
+}
+
 function getColorsForMetric(metricValue){
     redScale = ['#99000d','#cb181d','#ef3b2c','#fb6a4a','#fc9272','#fcbba1','#fee5d9','#abd9e9']
 
