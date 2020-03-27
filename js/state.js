@@ -1,5 +1,9 @@
 function getState(stateID) {
-    return statesData["features"].find(element => element["id"] == stateID)
+    return stateData["features"].find(element => element["id"] == stateID)
+}
+
+function getStateFromName(stateName){
+    return stateData["features"].find(element => element["properties"]["statename"] == stateName)
 }
 
 function convertStateIDToLayer(stateID){
@@ -37,14 +41,21 @@ function zoomToCounties(layer){
 }
 
 function resetHighlightState(layer) {
+    if(isChartsTabActive()){
+        updateCharts()
+    }
     stateLayer.resetStyle(layer);
     info.updateState();
 }
 
 function highlightState(layer) {
+    if(isChartsTabActive()){
+        updateCharts(state=layer.feature.properties.statename)
+    }
+
     layer.setStyle({
         weight: 5,
-        color: '#FFF',
+        color: '#777',
         dashArray: '',
         fillOpacity: 0.7
     });

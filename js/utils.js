@@ -4,6 +4,38 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+let resetMap = () => {
+    window.curState = null
+    window.curCounty = null
+    map.setView([42, -104], 5);
+    map.removeLayer(countyLayer)
+    map.addLayer(stateLayer)
+    updateSidebar()
+}
+
+function getResetButton() {
+    let resetButton = document.createElement('input')
+    resetButton.type = "button"
+    resetButton.value = "Reset Map"
+
+    resetButton.classList.add("btn", "btn-primary") 
+    resetButton.onclick = resetMap
+    return resetButton
+}
+
+function getCheckbox(name, labelText){
+    var checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+    checkbox.name = name;
+    checkbox.id = name;
+    checkbox.onclick = (e) => updateCharts()
+
+    var label = document.createElement(label)
+    label.htmlFor = name;
+    label.appendChild(document.createTextNode(labelText));
+    return [checkbox, label]
+}
+
 function getSelectedMetric(){
     let base = {value:"cases", text:"Total Cases"};
     let e = document.querySelector('#metricSelect')
@@ -48,6 +80,12 @@ function isViewable(layer){
 
 function zoomToFeature(layer, padding) {
     map.fitBounds(layer.getBounds(), {padding:padding});
+}
+
+function isChartsTabActive(){
+    let chartsTab = document.querySelector(".chartsLI")
+    let classList = chartsTab.classList.value.split(' ')
+    return classList.includes('active')
 }
 
 function getColorsForMetric(metricValue){

@@ -2,24 +2,7 @@ var sidebar = L.control.sidebar({container:'sidebar'})
             .addTo(map)
             .open('home');
 
-let resetMap = () => {
-    window.curState = null
-    window.curCounty = null
-    map.setView([42, -104], 5);
-    map.removeLayer(countyLayer)
-    map.addLayer(stateLayer)
-    updateSidebar()
-}
 
-function getResetButton() {
-    let resetButton = document.createElement('input')
-    resetButton.type = "button"
-    resetButton.value = "Reset Map"
-
-    resetButton.classList.add("btn", "btn-primary") 
-    resetButton.onclick = resetMap
-    return resetButton
-}
 
 function getBackToStateButton(stateName, curStateLayer) {
     let backToStateButton = document.createElement('input')
@@ -200,18 +183,17 @@ function populateSidebarCounty(dataDiv){
             totalCases += curMetric
         }
     }
+
+    let stateID = data[0]["properties"]["state"]
+    let props = getState(stateID)["properties"]
     header = document.createElement('h3')
     header.innerText = `${metricText} in ${region}: ${totalCases}`
-    note = document.createElement('span')
-    note.innerText  = `Note: States sometimes report cases with county "unassigned", thus county totals for cases and deaths may be lower. For accurate totals, please view data by state, not county.`
-    note.classList.add('discrepancy')
-    dataDiv.append(header, note, newOL)
+    dataDiv.append(header, newOL)
 }
 
 function populateSidebarDetailed(dataDiv){
     let countyID = window.curCounty
     let props = getCounty(countyID)["properties"]
-    console.log(props)
     let {name, statename, stateabbr, cases, state:stateID, } = props
     curStateLayer = convertStateIDToLayer(stateID)
     header = document.createElement('h2')
@@ -219,7 +201,6 @@ function populateSidebarDetailed(dataDiv){
     header2 = document.createElement('h4')
     header2.innerText = `Lots of new stuff will be posted here in the next few days including time trends, growth rates, county health data, ICU capacity and more.`
     header2.style.color = "blue"
-
     let content = document.createElement('div')
     let note =  props.notes? `<span class="timestamp">${props.notes}</span><br/>`:``
     let body =`<br/><b>Covid19 Cases</b><br/>
@@ -239,9 +220,12 @@ function populateSidebarDetailed(dataDiv){
         `
     content.innerHTML = body
     let backToStateButton = getBackToStateButton(statename, curStateLayer)
-    dataDiv.append(header, header2, backToStateButton, content, )
+
+    dataDiv.append(header,backToStateButton, content)
     
 }
+
+
 
 function getUnassigned(stateName, metric) {
     if(!["cases", "deaths"].includes(metric)){
@@ -277,12 +261,24 @@ function updateSidebar(){
     else{
         populateSidebarCounty(dataDiv)
     }
+    updateCharts()
 }
 
 function sortByProp(prop, descending=true){
     return descending ?
            ((a, b) => a["properties"][prop] > b["properties"][prop] ? -1 : 1)
            :((a, b) => a["properties"][prop] > b["properties"][prop] ? 1 : -1)
+}
+
+function sortByDate(a, b){
+    aPieces = a.split('-')
+    bPieces = b.split('-')
+    for(let i=0; i<3; i++){
+        if(aPieces[i] == bPieces[i]){
+            continue
+        }
+        return parseInt(aPieces[i]) > parseInt(bPieces[i]) ? 1 : -1
+    }
 }
 
 

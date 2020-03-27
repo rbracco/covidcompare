@@ -21,6 +21,7 @@
             <!-- top aligned tabs -->
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+                <li class="chartsLI"><a href="#charts" role="tab"><i class="fas fa-chart-pie"></i></a></li>
                 <li><a href="#method" role="tab"><i class="fas fa-flask"></i></a></li>
                 <li><a href="#about" role="tab"><i class="fa fa-info-circle"></i></a></li>
             </ul>
@@ -29,7 +30,6 @@
             <ul role="tablist">
                 <li><a href="https://github.com/rbracco/covidcompare" target="_blank"><i class="fab fa-github"></i></a></li>
                 <li><a href="https://twitter.com/covidcompare" target="_blank"><i class="fab fa-twitter" style="color:#1DA1F2"></i></a></li>
-                
                 <li><a href="mailto:robertbracco1@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a></li>
             </ul>
         </div>
@@ -38,7 +38,7 @@
         <div class="leaflet-sidebar-content">
             <div class="leaflet-sidebar-pane" id="home">
                 <h1 class="leaflet-sidebar-header">
-                    United States Covid19 Cases
+                    United States Covid19 Data
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
                 <div class="controls">
@@ -46,6 +46,20 @@
                 </div>
                 <div class="data">
                     
+                </div>
+            </div>
+            <div class="leaflet-sidebar-pane" id="charts">
+                <h1 class="leaflet-sidebar-header">
+                    Visualizing the Trends
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div class="visualizations">
+                    <div class="viz-reset"></div>
+                    <div class="infographic"></div>
+                    <div class="chart_container"></div>
+                        <div class="chart-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
+                        <div class="chart-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
+                        <div class="chart-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div>
                 </div>
             </div>
             <div class="leaflet-sidebar-pane" id="about">
@@ -108,12 +122,13 @@
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
     <script src="js/plugins/leaflet-sidebar.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="data/stateData.js"></script>
     <script src="data/countyData.js"></script>
     <script src="data/hospitals.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/charts.js"></script>
     <script src="js/state.js"></script>
     <script src="js/county.js"></script>
     <script src="js/appMap.js"></script>
