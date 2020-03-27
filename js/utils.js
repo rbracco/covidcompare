@@ -23,6 +23,19 @@ function getResetButton() {
     return resetButton
 }
 
+function getCheckbox(name, labelText){
+    var checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+    checkbox.name = name;
+    checkbox.id = name;
+    checkbox.onclick = (e) => updateCharts()
+
+    var label = document.createElement(label)
+    label.htmlFor = name;
+    label.appendChild(document.createTextNode(labelText));
+    return [checkbox, label]
+}
+
 function getSelectedMetric(){
     let base = {value:"cases", text:"Total Cases"};
     let e = document.querySelector('#metricSelect')

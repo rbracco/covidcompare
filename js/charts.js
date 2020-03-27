@@ -17,19 +17,6 @@ function destroyCharts(){
     }
 }
 
-function getCheckbox(name, labelText){
-    var checkbox = document.createElement('input');
-    checkbox.type = "checkbox";
-    checkbox.name = name;
-    checkbox.id = name;
-    checkbox.onclick = (e) => updateCharts()
-
-    var label = document.createElement(label)
-    label.htmlFor = name;
-    label.appendChild(document.createTextNode(labelText));
-    return [checkbox, label]
-}
-
 function updateCharts(statename=null, countyID=null){
     let infoDiv = document.querySelector(".infographic")
     infoDiv.innerHTML = ""
@@ -58,9 +45,8 @@ function updateCharts(statename=null, countyID=null){
         let props = getCounty(countyID)["properties"]
         let pop = props["population"]
         header.innerText = `${props["name"]} County, ${props["statename"]}`
-        fillChart(chart_cases, props["time_series"], ["cases"], pop)
-        fillChart(chart_deaths, props["time_series"], ["deaths"], pop)
-        //chartDiv.append(header, chart_cases, chart_deaths)
+        fillChart(chart_cases, props["time_series"], ["cases"], pop, level="county")
+        fillChart(chart_deaths, props["time_series"], ["deaths"], pop, level="county")
     }
     else if(statename){
         let state = getStateFromName(statename)
@@ -68,18 +54,20 @@ function updateCharts(statename=null, countyID=null){
         let pop = props["population"]
         header.innerText = `${props["statename"]}`
         console.log(Chart.instances)
-        fillChart(chart_cases, props["time_series"], ["cases"], pop)
-        fillChart(chart_deaths, props["time_series"], ["deaths"], pop)
+        fillChart(chart_cases, props["time_series"], ["cases"], pop, level="state")
+        fillChart(chart_deaths, props["time_series"], ["deaths"], pop, level="state")
         let chart_tests = chartTests
-        fillChart(chart_tests, props["time_series"], ["test_total"], pop)
-        //chartDiv.append(header, chart_cases, chart_deaths, chart_tests)
+        fillChart(chart_tests, props["time_series"], ["test_total"], pop, level="state")
     }
     else{
         header.innerText = 'Please click or hover on a state or county to see visualizations'
         destroyCharts()
         
     }
-    infoDiv.append(header)
+    note = document.createElement('p')
+    note.classList.add("discrepancy")
+    note.innerText = "Please note that the numbers on the Y-Axis change when you move between locations."
+    infoDiv.append(header, note)
 }
 
 function getDailyChangeData(data){
@@ -90,29 +78,45 @@ function getDailyChangeData(data){
     return dailyChange
 }
 
-function getTicksSettings(propname, pop, perCapita){
+function getTicksSettings(propname, pop, perCapita, level){
     let precision = perCapita? 2:0
     let suggestedMaxes = perCapita ?
                         {
-                            "cases":20,
-                            "deaths":1,
-                            "tests":1000,
+                        "county":
+                            {    
+                                "cases":20,
+                                "deaths":1,
+                           },
+                        "state":
+                            {
+                                "cases":20,
+                                "deaths":1,
+                                "test_total":1000,
+                            }
                         }
                         :
                         {
-                            "cases":Math.floor(pop/(100000/20)),
-                            "deaths":5,
-                            "tests":Math.floor(pop/100),
+                        "county":
+                            {    
+                                "cases":25,
+                                "deaths":1,
+                           },
+                        "state":
+                            {
+                                "cases":500,
+                                "deaths":20,
+                                "test_total":1000,
+                            }
                         }
     return {
         min: 0,
         beginAtZero: true,
         precision: precision,
-        suggestedMax: suggestedMaxes[propname],
+        suggestedMax: suggestedMaxes[level][propname],
     }
 }
 
-function fillChart(chart, time_series, propname, pop,days=14){
+function fillChart(chart, time_series, propname, pop, level, days=14){
     let perCapita=document.querySelector("#perCapitaCheckbox").checked
     add_options = {
         "cases":{
@@ -180,7 +184,7 @@ function fillChart(chart, time_series, propname, pop,days=14){
             responsive: false,
             scales: {
                 yAxes: [{
-                    ticks: getTicksSettings(propname, pop, perCapita),
+                    ticks: getTicksSettings(propname, pop, perCapita, level),
                     scaleLabel: {
                         display: true,
                         labelString: add_options[propname].label + (perCapita ? ` per capita`:""),
