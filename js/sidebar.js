@@ -2,24 +2,7 @@ var sidebar = L.control.sidebar({container:'sidebar'})
             .addTo(map)
             .open('home');
 
-let resetMap = () => {
-    window.curState = null
-    window.curCounty = null
-    map.setView([42, -104], 5);
-    map.removeLayer(countyLayer)
-    map.addLayer(stateLayer)
-    updateSidebar()
-}
 
-function getResetButton() {
-    let resetButton = document.createElement('input')
-    resetButton.type = "button"
-    resetButton.value = "Reset Map"
-
-    resetButton.classList.add("btn", "btn-primary") 
-    resetButton.onclick = resetMap
-    return resetButton
-}
 
 function getBackToStateButton(stateName, curStateLayer) {
     let backToStateButton = document.createElement('input')

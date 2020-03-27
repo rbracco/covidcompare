@@ -4,6 +4,25 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+let resetMap = () => {
+    window.curState = null
+    window.curCounty = null
+    map.setView([42, -104], 5);
+    map.removeLayer(countyLayer)
+    map.addLayer(stateLayer)
+    updateSidebar()
+}
+
+function getResetButton() {
+    let resetButton = document.createElement('input')
+    resetButton.type = "button"
+    resetButton.value = "Reset Map"
+
+    resetButton.classList.add("btn", "btn-primary") 
+    resetButton.onclick = resetMap
+    return resetButton
+}
+
 function getSelectedMetric(){
     let base = {value:"cases", text:"Total Cases"};
     let e = document.querySelector('#metricSelect')
