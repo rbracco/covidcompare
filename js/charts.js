@@ -36,7 +36,6 @@ function updateCharts(statename=null, countyID=null){
 
     countyID = countyID || window.curCounty
     statename = statename || window.curState
-    console.log("statename", statename)
     let header = document.createElement('h2')
     let chart_cases = chartCases
     let chart_deaths = chartDeaths
@@ -53,7 +52,6 @@ function updateCharts(statename=null, countyID=null){
         let props = state["properties"]
         let pop = props["population"]
         header.innerText = `${props["statename"]}`
-        console.log(Chart.instances)
         fillChart(chart_cases, props["time_series"], ["cases"], pop, level="state")
         fillChart(chart_deaths, props["time_series"], ["deaths"], pop, level="state")
         let chart_tests = chartTests
@@ -66,7 +64,7 @@ function updateCharts(statename=null, countyID=null){
     }
     note = document.createElement('p')
     note.classList.add("discrepancy")
-    note.innerText = "Please note that the numbers on the Y-Axis change when you move between locations."
+    note.innerText = "Please be aware the numbers on the Y-Axis change when you move between locations."
     infoDiv.append(header, note)
 }
 
@@ -99,12 +97,12 @@ function getTicksSettings(propname, pop, perCapita, level){
                         "county":
                             {    
                                 "cases":25,
-                                "deaths":1,
+                                "deaths":5,
                            },
                         "state":
                             {
                                 "cases":500,
-                                "deaths":20,
+                                "deaths":25,
                                 "test_total":1000,
                             }
                         }
@@ -154,7 +152,7 @@ function fillChart(chart, time_series, propname, pop, level, days=14){
     datasets = []
     let labels = []
     let data = []
-    dates = Object.keys(time_series).sort(sortByDate)        
+    dates = Object.keys(time_series).sort(sortByDate)   
     for(let date of dates){
         labels.push(date)
         let dataPoint = time_series[date][propname]
@@ -187,7 +185,7 @@ function fillChart(chart, time_series, propname, pop, level, days=14){
                     ticks: getTicksSettings(propname, pop, perCapita, level),
                     scaleLabel: {
                         display: true,
-                        labelString: add_options[propname].label + (perCapita ? ` per capita`:""),
+                        labelString: add_options[propname].label + (perCapita ? ` per 100,000 residents`:""),
                       }
                 }],
             

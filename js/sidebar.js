@@ -194,7 +194,6 @@ function populateSidebarCounty(dataDiv){
 function populateSidebarDetailed(dataDiv){
     let countyID = window.curCounty
     let props = getCounty(countyID)["properties"]
-    console.log(props)
     let {name, statename, stateabbr, cases, state:stateID, } = props
     curStateLayer = convertStateIDToLayer(stateID)
     header = document.createElement('h2')
