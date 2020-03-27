@@ -288,6 +288,17 @@ function sortByProp(prop, descending=true){
            :((a, b) => a["properties"][prop] > b["properties"][prop] ? 1 : -1)
 }
 
+function sortByDate(a, b){
+    aPieces = a.split('-')
+    bPieces = b.split('-')
+    for(let i=0; i<3; i++){
+        if(aPieces[i] == bPieces[i]){
+            continue
+        }
+        return parseInt(aPieces[i]) > parseInt(bPieces[i]) ? 1 : -1
+    }
+}
+
 
 function filterByProp(prop, value){
     return (item) => item["properties"][prop] == value

@@ -7,11 +7,12 @@ function getBlankChart(width=350, height=250){
 
 function updateCharts(statename=null, countyID=null){
     let visualDiv = document.querySelector(".visualizations")
+    //let resetButton = getResetButton()
+    //visualDiv.append(resetButton)
     let chartDiv = document.querySelector(".chart_container")
     chartDiv.innerHTML = ""
 
-    // let resetButton = getResetButton()
-    // visualDiv.append(resetButton)
+    
     
     
     countyID = countyID || window.curCounty
@@ -51,7 +52,7 @@ function getDailyChangeData(data){
     return dailyChange
 }
 
-function fillChart(chart, time_series, props, days=7){
+function fillChart(chart, time_series, props, days=14){
     add_options = {
         "cases":{
             backgroundColor: "#36A2EB",
@@ -90,18 +91,19 @@ function fillChart(chart, time_series, props, days=7){
     for(let prop of props){
         labels = []
         let data = []
-        for(let date of Object.keys(time_series)){
+        dates = Object.keys(time_series).sort(sortByDate)        
+        for(let date of dates){
             labels.push(date)
             data.push(time_series[date][prop])
         }
         datasets.push({
-            data:data,//.slice(-days),
+            data:data.slice(-days),
             fill:false,
             ...add_options[prop]
         })
         let dailyChangeData = getDailyChangeData(data)
         datasets.push({
-            data:dailyChangeData,//.slice(-days),
+            data:dailyChangeData.slice(-days),
             type:"bar",
             fill:false,
             steppedLine:true,
@@ -111,7 +113,7 @@ function fillChart(chart, time_series, props, days=7){
     var myChart = new Chart(chart, {
         type: 'line',
         data: {
-            labels: labels,//.slice(-days),
+            labels: labels.slice(-days),
             datasets: datasets
         },
         options: {
