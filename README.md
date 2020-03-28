@@ -19,7 +19,7 @@ We pull in data on population, hospital beds, and neighboring counties/states to
 ```
 let API_KEY_MAPBOX = '<yourMapboxApiKey>'
 ```
-- Open index.html in the browser of your choice to begin comparing Covid-19 at the state and county level.
+- Open index.html in the browser of your choice to begin comparing Covid19 at the state and county level.
 
 ## Data
 
@@ -27,7 +27,7 @@ All of our data is open-source and free to use. The US does not have a good cent
 
 For county level data a big thanks to [David Zemel](https://www.github.com/dzemel), [Sam King](https://www.github.com/SamSamDataMan), and [Steve Schmidt](https://www.youtube.com/watch?v=yoYZf-lBF_U) for manually sourcing it from state health department and media websites.
 
-For testing data we owe the [Covid tracking team](https://covidtracking.com/about-team/) for their great work and commitment to open-sourcing data during a public health crisis.
+For testing data we owe the [Covid19 tracking team](https://covidtracking.com/about-team/) for their great work and commitment to open-sourcing data during a public health crisis.
 
 #### Map Data 
 - [GeoJSON, SHP, and KML files for US States and Counties](https://eric.clst.org/tech/usgeojson/)
@@ -52,7 +52,7 @@ We are looking for contributors of all skill levels. CovidCompare is built with 
 We are in need of 
 - Data scientists who can help us improve our algorithm (it's very poor right now while we're prototyping).
 - [Leaflet.js](https://leafletjs.com/) and arcgis/qgis rockstars who can help make our display more useful
-- Data collectors (no coding needed!) to help us find more local data on covid19 transmission
+- Data collectors (no coding needed!) to help us find more local data on Covid19 transmission
 - Much more, this is a fast moving project launched on 3/10/2020.
 
 #### Current Contributors
