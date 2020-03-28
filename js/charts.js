@@ -162,13 +162,13 @@ function fillChart(chart, time_series, propname, pop, level, days=14){
         data.push(dataPoint)
     }
     datasets.push({
-        data:data.slice(-days),
+        data:data.slice(-days, -1),
         fill:false,
         ...add_options[propname]
     })
     let dailyChangeData = getDailyChangeData(data)
     datasets.push({
-        data:dailyChangeData.slice(-days),
+        data:dailyChangeData.slice(-days, -1),
         type:"bar",
         fill:false,
         steppedLine:true,
@@ -177,7 +177,7 @@ function fillChart(chart, time_series, propname, pop, level, days=14){
     var myChart = new Chart(chart, {
         type: 'line',
         data: {
-            labels: labels.slice(-days),
+            labels: labels.slice(-days, -1),
             datasets: datasets
         },
         options: {
