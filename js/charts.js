@@ -42,6 +42,7 @@ function updateCharts(statename=null, countyID=null){
     if(countyID){
         destroyCharts()
         let props = getCounty(countyID)["properties"]
+        console.log("Props", props)
         let pop = props["population"]
         header.innerText = `${props["name"]} County, ${props["statename"]}`
         fillChart(chart_cases, props["time_series"], ["cases"], pop, level="county")
@@ -152,6 +153,7 @@ function fillChart(chart, time_series, propname, pop, level, days=14){
     datasets = []
     let labels = []
     let data = []
+    console.log("TS", time_series)
     dates = Object.keys(time_series).sort(sortByDate)   
     for(let date of dates){
         labels.push(date)
