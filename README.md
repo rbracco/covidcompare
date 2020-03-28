@@ -12,6 +12,15 @@ We pull in data on population, hospital beds, and neighboring counties/states to
 
 [<img src="images/counties.jpg" alt="Comparison of US States" width=450/>](images/counties.jpg)
 
+## How to Run This Project
+- This project depends on an api key from Mapbox. [Generate one here.](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/)
+- Add a config.js file to the root of the project directory and add the following:
+
+```
+let API_KEY_MAPBOX = '<yourMapboxApiKey>'
+```
+- Open index.html in the browser of your choice to begin comparing Covid-19 at the state and county level.
+
 ## Data
 
 All of our data is open-source and free to use. The US does not have a good centralized data source for county level infections, or testing data, but we are working on an API to serve it up for other applications.
@@ -35,12 +44,6 @@ For testing data we owe the [Covid tracking team](https://covidtracking.com/abou
 
 #### Hospital Data
 - [HIFLD Hospital Dataset](https://hifld-geoplatform.opendata.arcgis.com/datasets/hospitals) - Taken and cleaned as they use "-999" beds to represent NaN. 
-
-## Local Development
-
-This project depends on an api key from Mapbox. [Generate one here.](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/)
-
-
 
 ## Contribute
 
