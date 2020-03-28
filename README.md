@@ -61,3 +61,4 @@ We are in need of
 - [Robert Bracco](https://www.github.com/rbracco)
 - [Sam King](https://www.github.com/SamSamDataMan)
 - [Steve Schmidt](https://www.youtube.com/watch?v=yoYZf-lBF_U)
+- [Adam Siemer](https://github.com/abcmer)
