@@ -36,6 +36,12 @@ For testing data we owe the [Covid tracking team](https://covidtracking.com/abou
 #### Hospital Data
 - [HIFLD Hospital Dataset](https://hifld-geoplatform.opendata.arcgis.com/datasets/hospitals) - Taken and cleaned as they use "-999" beds to represent NaN. 
 
+## Local Development
+
+This project depends on an api key from Mapbox. [Generate one here.](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/)
+
+
+
 ## Contribute
 
 We are looking for contributors of all skill levels. CovidCompare is built with javascript and vanilla js, with a bit of data massaging using Python. 
