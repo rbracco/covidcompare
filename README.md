@@ -8,11 +8,11 @@ We pull in data on population/age/sex, # of hospital/ICU beds, comorbidity preva
 
 ### Viewing state level Covid19 statistics:
 
-[<img src="images/basicStates.gif" alt="Comparison of US States" width=450/>](images/basicStates.gif)
+[<img src="images/BasicStates.gif" alt="Comparison of US States" width=450/>](images/basicStates.gif)
 
 ### Viewing county level Covid19 statistics:
 
-[<img src="images/basicCounties.gif" alt="Comparison of US States" width=450/>](images/basicCounties.gif)
+[<img src="images/BasicCounties.gif" alt="Comparison of US States" width=450/>](images/basicCounties.gif)
 
 ### Visualizing trends
 
