@@ -42,6 +42,10 @@ Running the script will both display information about the data being pulled/pro
 - `countyData["features"][0]["properties"]` will be the properties of the 1st county and include keys like `cases`, `deaths`, `population`, `risk_local`, `risk_total`...etc  
 - Counties are uniquely identified by their geo_id, also sometimes called a FIPS. geo_ids tend to look like this `0500000US36081` but the relevant portion is the last 5 digits (commonly called the FIPS), in this example `36081`, 36 represents the state "New York" and 081 the county "Queens". Since counties in different states can have the same name, it is important to use geo_id or fips. [Here is a list of FIPS codes for the US](https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/home/?cid=nrcs143_013697) although you shouldn't need to use it as county and state names are included in the `properties`
  
+### About total risk, local risk, and nearby risk
+The risk calculation algorithm is currently quite simple. We plan to add to it while still keeping it fully explainable. Currently...
+-Local Risk is just cases per capita for the given region
+-Nearby Risk is a factor of the number of cases and population of nearby counties, exponentially decayed as a factor of distance. Every 50km further away a county is, it's risk is halved, up to a max of 100km. We would like to expand this to use transportation flows instead of distance, but as they are changing rapidly due to lockdowns and social distancing, we have not yet found a way to do this so we choose to use distance as a simple proxy.
 
 ## Contributing
 
