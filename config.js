@@ -1,1 +1,0 @@
-let API_KEY_MAPBOX = 'pk.eyJ1IjoicmJyYWNjbyIsImEiOiJjazhkMWxnejQwcG85M2xzMm1zcWhwZWM1In0.yUuJ52EXfLZc9jL91vKHYw'
