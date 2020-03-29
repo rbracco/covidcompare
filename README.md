@@ -22,13 +22,22 @@ We pull in data on population, hospital beds, and neighboring counties/states to
 
 [<img src="images/visualizations.gif" alt="Comparison of US States" width=450/>](images/visualizations.gif)
 
+## How to Run This Project
+- This project depends on an api key from Mapbox. [Generate one here.](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/)
+- Add a config.js file to the root of the project directory and add the following:
+
+```
+let API_KEY_MAPBOX = '<yourMapboxApiKey>'
+```
+- Open index.html in the browser of your choice to begin comparing Covid19 at the state and county level.
+
 ## Data
 
 All of our data is open-source and free to use. The US does not have a good centralized data source for county level infections, or testing data, but we are working on an API to serve it up for other applications.
 
 For county level data a big thanks to [David Zemel](https://www.github.com/dzemel), [Sam King](https://www.github.com/SamSamDataMan), and [Steve Schmidt](https://www.youtube.com/watch?v=yoYZf-lBF_U) for manually sourcing it from state health department and media websites.
 
-For testing data we owe the [Covid tracking team](https://covidtracking.com/about-team/) for their great work and commitment to open-sourcing data during a public health crisis.
+For testing data we owe the [Covid19 tracking team](https://covidtracking.com/about-team/) for their great work and commitment to open-sourcing data during a public health crisis.
 
 #### Map Data 
 - [GeoJSON, SHP, and KML files for US States and Counties](https://eric.clst.org/tech/usgeojson/)
@@ -53,7 +62,7 @@ We are looking for contributors of all skill levels. CovidCompare is built with 
 We are in need of 
 - Data scientists who can help us improve our algorithm (it's very poor right now while we're prototyping).
 - [Leaflet.js](https://leafletjs.com/) and arcgis/qgis rockstars who can help make our display more useful
-- Data collectors (no coding needed!) to help us find more local data on covid19 transmission
+- Data collectors (no coding needed!) to help us find more local data on Covid19 transmission
 - Much more, this is a fast moving project launched on 3/10/2020.
 
 #### Current Contributors
@@ -62,3 +71,4 @@ We are in need of
 - [Robert Bracco](https://www.github.com/rbracco)
 - [Sam King](https://www.github.com/SamSamDataMan)
 - [Steve Schmidt](https://www.youtube.com/watch?v=yoYZf-lBF_U)
+- [Adam Siemer](https://github.com/abcmer)

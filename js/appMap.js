@@ -1,5 +1,3 @@
-let API_KEY_MAPBOX = 'pk.eyJ1IjoicmJyYWNjbyIsImEiOiJjazZ6Z3c1c2IwbnNkM21tdmg0eGhmeWJkIn0.IfYSBvXVOMUlmKm8zm-XZA'
-
 /*---------------------------------------------MAP SETUP--------------------------------------------- */
 //On page load
 window.curLayer = "States"
