@@ -8,9 +8,19 @@ Almost all the Covid19 maps I've seen show just the *absolute* number of cases i
 
 We pull in data on population, hospital beds, and neighboring counties/states to show the *relative* risk level so that people can better understand what their community is up against. 
 
-[<img src="images/states.jpg" alt="Comparison of US States" width=450/>](images/states.jpg)
+## Examples:
 
-[<img src="images/counties.jpg" alt="Comparison of US States" width=450/>](images/counties.jpg)
+### Viewing state level Covid19 statistics:
+
+[<img src="images/basicStates.gif" alt="Comparison of US States" width=450/>](images/basicStates.gif)
+
+### Viewing county level Covid19 statistics:
+
+[<img src="images/basicCounties.gif" alt="Comparison of US States" width=450/>](images/basicCounties.gif)
+
+### Visualizing the time-series data
+
+[<img src="images/visualizations.gif" alt="Comparison of US States" width=450/>](images/visualizations.gif)
 
 ## Data
 
