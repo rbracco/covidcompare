@@ -29,55 +29,68 @@ function updateChart(chart, props, propName, level, days=14){
     fillChart(chart, datasets, labels, options)
 }
 
-function updateCharts(statename=null, countyID=null){
-    let infoDiv = document.querySelector(".infographic")
-    infoDiv.innerHTML = ""
+function initResetDiv(){
     let resetDiv = document.querySelector(".viz-reset")
-    let chartCases = document.querySelector("#canvas-cases")
-    let chartDeaths = document.querySelector("#canvas-deaths")
-    let chartTests = document.querySelector("#canvas-tests")
-
     if(resetDiv.innerHTML === ""){
         let resetButton = getResetButton()
         resetDiv.append(resetButton)
         let [perCapitaCheckbox, perCapitaLabel] = getCheckbox("perCapitaCheckbox", "Show Per Capita")
         resetDiv.append(perCapitaCheckbox, perCapitaLabel)
     }
+}
+
+function setVizHeader(headerText){
+    let headerDiv = document.querySelector(".viz-header")
+    headerDiv.innerHTML = ""
+    let header = document.createElement('h2')
+    header.innerText = headerText
+    headerDiv.append(header)
+}
+
+function updateCharts(statename=null, countyID=null){
+    //let infoDiv = document.querySelector(".infographic")
+    //infoDiv.innerHTML = ""
+    initResetDiv()
+    let chartCases = document.querySelector("#canvas-cases")
+    //let chartDeaths = document.querySelector("#canvas-deaths")
+    //let chartTests = document.querySelector("#canvas-tests")
+
+    
 
     let chartDiv = document.querySelector(".chart_container")
 
     countyID = countyID || window.curCounty
     statename = statename || window.curState
-    let header = document.createElement('h2')
+    
     let chart_cases = chartCases
-    let chart_deaths = chartDeaths
+    //let chart_deaths = chartDeaths
     if(countyID){
         destroyCharts()
         let props = getCounty(countyID)["properties"]
         let pop = props["population"]
-        header.innerText = `${props["name"]} County, ${props["statename"]}`
+        setVizHeader(`${props["name"]} County, ${props["statename"]}`)
         updateChart(chart_cases, props, "cases", "county")
-        updateChart(chart_deaths, props, "deaths", "county")
+        //updateChart(chart_deaths, props, "deaths", "county")
     }
     else if(statename){
         let state = getStateFromName(statename)
         let props = state["properties"]
         let pop = props["population"]
-        header.innerText = `${props["statename"]}`
+        setVizHeader(`${props["statename"]}`)
         updateChart(chart_cases, props, "cases", "state")
-        updateChart(chart_deaths, props, "deaths", "state")
-        let chart_tests = chartTests
-        updateChart(chart_tests, props, "test_total", "state")
+        //updateChart(chart_deaths, props, "deaths", "state")
+        //let chart_tests = chartTests
+        //updateChart(chart_tests, props, "test_total", "state")
     }
     else{
-        header.innerText = 'Please click or hover on a state or county to see visualizations'
+        setVizHeader('Please click or hover on a state or county to see visualizations')
         destroyCharts()
         
     }
-    note = document.createElement('p')
-    note.classList.add("discrepancy")
-    note.innerText = "Please be aware the numbers on the Y-Axis change when you move between locations."
-    infoDiv.append(header, note)
+    // note = document.createElement('p')
+    // note.classList.add("discrepancy")
+    // note.innerText = "Please be aware the numbers on the Y-Axis change when you move between locations."
+    // infoDiv.append(header, note)
 }
 
 function getDailyChangeData(data){
@@ -179,7 +192,6 @@ function getTimeData(timeSeries, propName, perCapita, pop, days){
 }
 
 function getChartOptions(perCapita, level, propName){
-    console.log(perCapita, level, propName)
     return {
         responsive: false,
         scales: {
