@@ -226,7 +226,6 @@ function populateSidebarDetailed(dataDiv){
 }
 
 
-
 function getUnassigned(stateName, metric) {
     if(!["cases", "deaths"].includes(metric)){
         return null;
