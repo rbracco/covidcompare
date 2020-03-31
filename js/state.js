@@ -45,7 +45,7 @@ function resetHighlightState(layer) {
         visualize()
     }
     stateLayer.resetStyle(layer);
-    info.updateState();
+    // info.updateState();
 }
 
 function highlightState(layer) {
@@ -59,7 +59,7 @@ function highlightState(layer) {
         dashArray: '',
         fillOpacity: 0.7
     });
-    info.updateState(layer.feature.properties);
+    // info.updateState(layer.feature.properties);
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }

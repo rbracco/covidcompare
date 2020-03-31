@@ -115,85 +115,151 @@ function updateLegend(){
 }
 updateLegend()
 
-/*------------------------------INITIALIZE INFO DISPLAY BLOCK---------------------------------- */
-var info = L.control();
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.updateState();
-    return this._div;
+function getSelectMenu(){
+    let options = {
+                        "Case Data":
+                        {
+                            "Total Cases":"cases", 
+                            //"Active":"active", 
+                            "Recovered":"recovered", 
+                            "Deaths":"deaths",
+                        },
+                        "Per Capita":
+                        {
+                            "Cases per 100,000":"pc_cases", 
+                            //"Active per 100,000":"pc_active", 
+                            "Deaths per 100,000":"pc_deaths",
+                        },
+                        "Risk Data":
+                        {
+                            "Total Risk":"risk_total", 
+                            "Local Risk":"risk_local", 
+                            "Nearby Risk":"risk_nearby",
+                        },
+                        "Testing Data":
+                        {
+                            "Total Tests":"test_total", 
+                            "Tests per 100,000":"pc_tests",
+                        },
+                    }  
+    let selectMenu = document.createElement('select')
+    selectMenu.id = "metricSelect"
+    for (let category of Object.keys(options)){
+        console.log("Cat", category)
+        let menuOption = document.createElement('option')
+        menuOption.text = "  ---" + category + "---"
+        menuOption.disabled = "disabled"
+        menuOption.style = "font-weight:bold;"
+        selectMenu.appendChild(menuOption)
+        for (let displayName of Object.keys(options[category])){
+            let menuOption = document.createElement('option')
+            menuOption.value  = options[category][displayName]
+            menuOption.text = displayName
+            selectMenu.appendChild(menuOption)
+        }
+    }
+    selectMenu.addEventListener("change", ()=> {
+        console.log("Change")
+        updateSidebar()
+        updateMapStyle()
+        updateLegend()
+    })
+
+    selectMenu.text = "Total Cases"
+    selectMenu.value = "cases"
+    return selectMenu
+}
+
+
+var selectMetric = L.control({position: 'topright'});
+selectMetric.onAdd = function (map) {
+    var div = L.DomUtil.create('div',);
+    div.append(getSelectMenu())
+    div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+    return div;
 };
+selectMetric.addTo(map);
 
-/*-------------------------------DISPLAY STATE INFO ON HOVER ------------------------------ */
 
-// method that we will use to update the control based on feature properties passed
-info.updateState = function (props) {
-    let title = props ? `<h3>${props.statename}</h3>`:`<h3>Hover over a state</h3>`
-    // Add this back when active is working again(${props.active} active)
-    // And also change cases per 100,000 to use the active metric again
-    let body = props ? 
-        `<b>Covid19 Cases</b><br/>
-        ${props.cases} total cases <br/>
-        ${props.recovered} recovered<br/>
-        ${props.deaths || 0} deaths<br/>
-        <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
-        <hr>
-        <b>Population</b><br/>
-        ${numberWithCommas(props.population)} people<br/>
-        ${(props.pc_cases).toFixed(2)} cases per 100000<br/>
-        <hr>
+// /*------------------------------INITIALIZE INFO DISPLAY BLOCK---------------------------------- */
+// var info = L.control();
+// info.onAdd = function (map) {
+//     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+//     this.updateState();
+//     return this._div;
+// };
+
+// /*-------------------------------DISPLAY STATE INFO ON HOVER ------------------------------ */
+
+// // method that we will use to update the control based on feature properties passed
+// info.updateState = function (props) {
+//     let title = props ? `<h3>${props.statename}</h3>`:`<h3>Hover over a state</h3>`
+//     // Add this back when active is working again(${props.active} active)
+//     // And also change cases per 100,000 to use the active metric again
+//     let body = props ? 
+//         `<b>Covid19 Cases</b><br/>
+//         ${props.cases} total cases <br/>
+//         ${props.recovered} recovered<br/>
+//         ${props.deaths || 0} deaths<br/>
+//         <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
+//         <hr>
+//         <b>Population</b><br/>
+//         ${numberWithCommas(props.population)} people<br/>
+//         ${(props.pc_cases).toFixed(2)} cases per 100000<br/>
+//         <hr>
         
-        <b>Hospital Access</b><br>
-        ${props.beds} hospital beds<br/>
-        ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
-        <hr>
-        <b>Comparative Risk<br/></b>
-        Local Risk: ${(props.risk_local).toFixed(3)}<br/>
-        Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
-        Total Risk: ${(props.risk_total).toFixed(3)}<br/>
-        <hr>
-        <b>Testing Data<br/></b>
-        Total Tested: ${(props.test_total)}<br/>
-        Tested Positive: ${(props.test_positive)}<br/>
-        Tested Negative: ${(props.test_negative)}<br/>
-        ${(props.test_total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
-        Disclosure Grade: ${props.test_grade}<br/>
-        <span class="timestamp">Updated: ${props.time_tests_updated}</span><br/>
-        <br>
-        `
-        : "<br/>"
+//         <b>Hospital Access</b><br>
+//         ${props.beds} hospital beds<br/>
+//         ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
+//         <hr>
+//         <b>Comparative Risk<br/></b>
+//         Local Risk: ${(props.risk_local).toFixed(3)}<br/>
+//         Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
+//         Total Risk: ${(props.risk_total).toFixed(3)}<br/>
+//         <hr>
+//         <b>Testing Data<br/></b>
+//         Total Tested: ${(props.test_total)}<br/>
+//         Tested Positive: ${(props.test_positive)}<br/>
+//         Tested Negative: ${(props.test_negative)}<br/>
+//         ${(props.test_total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
+//         Disclosure Grade: ${props.test_grade}<br/>
+//         <span class="timestamp">Updated: ${props.time_tests_updated}</span><br/>
+//         <br>
+//         `
+//         : "<br/>"
         
-    this._div.innerHTML = title + body
+//     this._div.innerHTML = title + body
 
-};
+// };
 
-/*-------------------------------DISPLAY COUNTY INFO ON HOVER ------------------------------ */
+// /*-------------------------------DISPLAY COUNTY INFO ON HOVER ------------------------------ */
 
-info.updateCounty = function (props) {
-    let cases = props.cases || 0
-    let title = props ? `<h3>${props.name} County</h3>`:`<h3>Hover over a county</h3>`
-    let note =  props.notes? `<span class="timestamp">${props.notes}</span><br/>`:``
-    let body = props ? 
-        `<b>Covid19 Cases</b><br/>
-        ${cases} cases<br/>
-        ${props.deaths || 0} deaths<br/>
-        <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
-        <hr>
-        <b>Population</b><br/>
-        ${numberWithCommas(props.population)} people<br/>
-        ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
-        <hr>
-        <b>Comparative Risk<br/></b>
-        Local Risk: ${(props.risk_local).toFixed(3)}<br/>
-        Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
-        Total Risk: ${(props.risk_total).toFixed(3)}<br/>
-        ${note}
-        `
-        : "<br/>"
+// info.updateCounty = function (props) {
+//     let cases = props.cases || 0
+//     let title = props ? `<h3>${props.name} County</h3>`:`<h3>Hover over a county</h3>`
+//     let note =  props.notes? `<span class="timestamp">${props.notes}</span><br/>`:``
+//     let body = props ? 
+//         `<b>Covid19 Cases</b><br/>
+//         ${cases} cases<br/>
+//         ${props.deaths || 0} deaths<br/>
+//         <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
+//         <hr>
+//         <b>Population</b><br/>
+//         ${numberWithCommas(props.population)} people<br/>
+//         ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
+//         <hr>
+//         <b>Comparative Risk<br/></b>
+//         Local Risk: ${(props.risk_local).toFixed(3)}<br/>
+//         Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
+//         Total Risk: ${(props.risk_total).toFixed(3)}<br/>
+//         ${note}
+//         `
+//         : "<br/>"
         
-    this._div.innerHTML = title + body
-};
+//     this._div.innerHTML = title + body
+// };
 
-info.addTo(map);
+// info.addTo(map);
 
 //On layer change
 map.on('baselayerchange', function (e) {

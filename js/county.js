@@ -55,7 +55,7 @@ function highlightCounty(layer) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.updateCounty(layer.feature.properties);
+    //info.updateCounty(layer.feature.properties);
 }
 
 function resetHighlightCounty(layer) {
