@@ -34,7 +34,6 @@ function onEachState(feature, layer) {
 function zoomToCounties(layer){
     window.curState = layer.feature.properties.statename
     let menuSelect = document.querySelector('#metricSelect')
-    let curMetric = getSelectedMetric().value
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
     zoomToFeature(layer, padding=[100,100])   

@@ -11,6 +11,29 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function enableDisableOptions(){
+    let toggleOptions = ["test_total", "pc_tests"]
+    let selectMenus = document.querySelectorAll('select')
+    
+    for (let selectMenu of selectMenus){
+        console.log("Selected: ", selectMenu.selectedIndex)
+        let curIndex = 0
+        const options = selectMenu.getElementsByTagName("option")
+        for (let option of options){
+
+            if(toggleOptions.includes(option.value)){
+                if(curIndex === selectMenu.selectedIndex){
+                    console.log("Match")
+                    selectMenu.value = "cases"
+                }
+                option.disabled = !option.disabled
+            }
+            curIndex++
+        }
+        
+    }
+}
+
 let resetMap = () => {
     window.curState = null
     window.curCounty = null
@@ -43,24 +66,33 @@ function getCheckbox(name, labelText){
     return [checkbox, label]
 }
 
-function getSelectedMetric(){
+function updateSelectedMetric(selectMenu){
+    console.log("updating")
+    let metric
     let base = {value:"cases", text:"Total Cases"};
-    let e = document.querySelector('#metricSelect')
-    if(!e){
-        return base
+    
+    if(!selectMenu){
+        console.log("door a")
+        metric = base
     }
-    if(e.selectedIndex === -1){
-        e.selectedIndex = 1
-        return base
+    // else if(selectMenu.selectedIndex === -1){
+    //     console.log("alt case")
+    //     selectMenu.selectedIndex = 1
+    //     metric = base
+    // }
+    else { 
+        metric = {
+            value:selectMenu.options[selectMenu.selectedIndex].value,
+            text:selectMenu.options[selectMenu.selectedIndex].text
+            }
     }
-    return {
-        value:e.options[e.selectedIndex].value,
-        text:e.options[e.selectedIndex].text
-    }
+    window.curMetric = metric
+
 }
 
 function getColor(props){
-    let {value:metricValue, text:metricText} = getSelectedMetric()
+    console.log("Cur metric", window.curMetric)
+    let {value:metricValue, text:metricText} = window.curMetric
     let val = props[metricValue]
     let {grades, colors} = getColorsForMetric(metricValue)
     if(isNaN(val)){
@@ -172,4 +204,68 @@ let countyScales = {
     //Add additional identical scales
     countyScales["risk_local"] = countyScales["risk_total"]
     return window.curLayer === "States" ? statesScales[metricValue]:countyScales[metricValue]
+}
+
+function syncSelects(selectMenu){
+    let selectMenus = document.querySelectorAll('select')
+        for (let select of selectMenus){
+            select.value = selectMenu.value
+        }
+}
+
+function initSelectMenu(menuID){
+    let options = {
+                        "Case Data":
+                        {
+                            "Total Cases":"cases", 
+                            //"Active":"active", 
+                            "Recovered":"recovered", 
+                            "Deaths":"deaths",
+                        },
+                        "Per Capita":
+                        {
+                            "Cases per 100,000":"pc_cases", 
+                            //"Active per 100,000":"pc_active", 
+                            "Deaths per 100,000":"pc_deaths",
+                        },
+                        "Risk Data":
+                        {
+                            "Total Risk":"risk_total", 
+                            "Local Risk":"risk_local", 
+                            "Nearby Risk":"risk_nearby",
+                        },
+                        "Testing Data":
+                        {
+                            "Total Tests":"test_total", 
+                            "Tests per 100,000":"pc_tests",
+                        },
+                    }  
+    let selectMenu = document.createElement('select')
+    selectMenu.id = menuID
+    for (let category of Object.keys(options)){
+        let menuOption = document.createElement('option')
+        menuOption.text = "  ---" + category + "---"
+        menuOption.disabled = "disabled"
+        menuOption.style = "font-weight:bold;"
+        selectMenu.appendChild(menuOption)
+        for (let displayName of Object.keys(options[category])){
+            let menuOption = document.createElement('option')
+            menuOption.value  = options[category][displayName]
+            menuOption.text = displayName
+            selectMenu.appendChild(menuOption)
+        }
+    }
+    selectMenu.addEventListener("change", ()=> {
+        updateSelectedMetric(selectMenu)
+        console.log("Cur Metric", window.curMetric)
+        syncSelects(selectMenu)
+        updateSidebar()
+        updateMapStyle()
+        updateLegend()
+    })
+
+    selectMenu.text = "Total Cases"
+    selectMenu.value = "cases"
+    selectMenu.selectedIndex = 1
+    return selectMenu
 }

@@ -2,6 +2,7 @@
 //On page load
 window.curLayer = "States"
 window.curState = null
+window.curMetric = {value:"cases", text:"Total Cases"}
 let [lat, long] = [42, -104]
 let zoomLevel = 5
 //'mapbox/satellite-v9'
@@ -91,7 +92,7 @@ L.legend = L.control({position: 'bottomright'});
 
 function updateLegend(){
     
-    let {value:metricValue, text:metricText} = getSelectedMetric()
+    let {value:metricValue, text:metricText} = window.curMetric
     let {grades, colors} = getColorsForMetric(metricValue)
 
     L.legend.onAdd = function (map) {
@@ -115,66 +116,11 @@ function updateLegend(){
 }
 updateLegend()
 
-function getSelectMenu(){
-    let options = {
-                        "Case Data":
-                        {
-                            "Total Cases":"cases", 
-                            //"Active":"active", 
-                            "Recovered":"recovered", 
-                            "Deaths":"deaths",
-                        },
-                        "Per Capita":
-                        {
-                            "Cases per 100,000":"pc_cases", 
-                            //"Active per 100,000":"pc_active", 
-                            "Deaths per 100,000":"pc_deaths",
-                        },
-                        "Risk Data":
-                        {
-                            "Total Risk":"risk_total", 
-                            "Local Risk":"risk_local", 
-                            "Nearby Risk":"risk_nearby",
-                        },
-                        "Testing Data":
-                        {
-                            "Total Tests":"test_total", 
-                            "Tests per 100,000":"pc_tests",
-                        },
-                    }  
-    let selectMenu = document.createElement('select')
-    selectMenu.id = "metricSelect"
-    for (let category of Object.keys(options)){
-        console.log("Cat", category)
-        let menuOption = document.createElement('option')
-        menuOption.text = "  ---" + category + "---"
-        menuOption.disabled = "disabled"
-        menuOption.style = "font-weight:bold;"
-        selectMenu.appendChild(menuOption)
-        for (let displayName of Object.keys(options[category])){
-            let menuOption = document.createElement('option')
-            menuOption.value  = options[category][displayName]
-            menuOption.text = displayName
-            selectMenu.appendChild(menuOption)
-        }
-    }
-    selectMenu.addEventListener("change", ()=> {
-        console.log("Change")
-        updateSidebar()
-        updateMapStyle()
-        updateLegend()
-    })
-
-    selectMenu.text = "Total Cases"
-    selectMenu.value = "cases"
-    return selectMenu
-}
-
 
 var selectMetric = L.control({position: 'topright'});
 selectMetric.onAdd = function (map) {
     var div = L.DomUtil.create('div',);
-    div.append(getSelectMenu())
+    div.append(initSelectMenu("mapSelect"))
     div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
     return div;
 };
@@ -264,7 +210,8 @@ selectMetric.addTo(map);
 //On layer change
 map.on('baselayerchange', function (e) {
     window.curLayer = e.name
-    initSidebarControls()
+    enableDisableOptions()
+    updateSelectedMetric(document.querySelector('select'))
     updateSidebar()
     updateMapStyle()
     updateLegend()

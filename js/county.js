@@ -28,8 +28,6 @@ function onEachCounty(feature, layer){
 
 function displayDetailed(layer){
     window.curCounty = layer.feature.properties.geo_id
-    //let menuSelect = document.querySelector('#metricSelect')
-    //let curMetric = getSelectedMetric().value
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
     zoomToFeature(layer, padding=[300,300])

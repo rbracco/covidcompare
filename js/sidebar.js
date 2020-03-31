@@ -16,103 +16,15 @@ function getBackToStateButton(stateName, curStateLayer) {
     return backToStateButton
 }
 
-function getAllOptions(sections){
-    option_list = []
-    for(let section of sections){
-        for(let val of Object.values(section)){
-            option_list.push(val)
-        }
-    }
-    return option_list
-}
-
-function getSelectMenu(){
-    let layerName = window.curLayer
-    let oldValue =  getSelectedMetric().value
-    let options = layerName === 'States'?
-                    //Menu Options for States
-                    {
-                        "Case Data":
-                        {
-                            "Total Cases":"cases", 
-                            //"Active":"active", 
-                            "Recovered":"recovered", 
-                            "Deaths":"deaths",
-                        },
-                        "Per Capita":
-                        {
-                            "Cases per 100,000":"pc_cases", 
-                            //"Active per 100,000":"pc_active", 
-                            "Deaths per 100,000":"pc_deaths",
-                        },
-                        "Risk Data":
-                        {
-                            "Total Risk":"risk_total", 
-                            "Local Risk":"risk_local", 
-                            "Nearby Risk":"risk_nearby",
-                        },
-                        "Testing Data":
-                        {
-                            "Total Tests":"test_total", 
-                            "Tests per 100,000":"pc_tests",
-                        },
-                    }
-                    :
-                    //Menu Options for Counties
-                    {
-                        "Case Data":
-                        {
-                            "Total Cases":"cases", 
-                            "Deaths":"deaths", 
-                            "Cases per 100,000":"pc_cases",
-                            "Deaths per 100,000":"pc_deaths",
-                        },
-                        "Risk Data":
-                        {
-                            "Total Risk":"risk_total",
-                            "Local Risk":"risk_local",
-                            "Nearby Risk":"risk_nearby",
-                        },
-                    }
-    let selectMenu = document.createElement('select')
-    selectMenu.id = "metricSelect"
-    for (let category of Object.keys(options)){
-        let menuOption = document.createElement('option')
-        menuOption.text = "  ---" + category + "---"
-        menuOption.disabled = "disabled"
-        menuOption.style = "font-weight:bold;"
-        selectMenu.appendChild(menuOption)
-        for (let displayName of Object.keys(options[category])){
-            let menuOption = document.createElement('option')
-            menuOption.value  = options[category][displayName]
-            menuOption.text = displayName
-            selectMenu.appendChild(menuOption)
-        }
-    }
-    if(getAllOptions(Object.values(options)).includes(oldValue)){
-        selectMenu.value = oldValue
-    }
-    else {
-        selectMenu.text = "Total Cases"
-        selectMenu.value = "cases"
-    }
-    selectMenu.addEventListener("change", ()=> {
-        updateSidebar()
-        updateMapStyle()
-        updateLegend()
-    })
-    return selectMenu
-}
-
 function initSidebarControls(){
-    let curValue = getSelectedMetric()
+    // let curValue = getSelectedMetric()
     let controlsDiv = document.querySelector(".controls")
     let resetButton = getResetButton()
-    let selectMenu = getSelectMenu()
+    let selectMenu = initSelectMenu("sidebarSelect")
     //Make sure we keep the selected value 
-    if (curValue){
-        selectMenu.value = curValue.value
-    }
+    // if (curValue){
+    //     selectMenu.value = curValue.value
+    // }
     controlsDiv.innerHTML = ""
     controlsDiv.append(selectMenu, resetButton)
 }
@@ -121,7 +33,7 @@ function populateSidebarState(dataDiv){
     let totalCases = 0
     let data = getSidebarData()
     let region = window.curState ? window.curState:"United States"
-    let {text:metricText, value:metric} = getSelectedMetric()
+    let {text:metricText, value:metric} = window.curMetric
     let newOL = document.createElement('ol')
 
     for(let state of data.sort(sortByProp(metric))){
@@ -150,7 +62,7 @@ function populateSidebarCounty(dataDiv){
     let data = getSidebarData()
     let curState = window.curState
     let region = curState ? curState:"United States"
-    let {text:metricText, value:metric} = getSelectedMetric()
+    let {text:metricText, value:metric} = window.curMetric
     let newOL = document.createElement('ol')
     for(let county of data.sort(sortByProp(metric))){
         let newLI = document.createElement('li')
@@ -283,6 +195,7 @@ function filterByProp(prop, value){
     return (item) => item["properties"][prop] == value
 }
 
+console.log("initting")
 initSidebarControls()
 updateSidebar()
 
