@@ -17,25 +17,21 @@ function getBackToStateButton(stateName, curStateLayer) {
 }
 
 function initSidebarControls(){
-    // let curValue = getSelectedMetric()
     let controlsDiv = document.querySelector(".controls")
     let resetButton = getResetButton()
     let selectMenu = initSelectMenu("sidebarSelect")
-    //Make sure we keep the selected value 
-    // if (curValue){
-    //     selectMenu.value = curValue.value
-    // }
     controlsDiv.innerHTML = ""
     controlsDiv.append(selectMenu, resetButton)
 }
 
 function populateSidebarState(dataDiv){
+    console.log("state")
     let totalCases = 0
     let data = getSidebarData()
+    console.log("data", data)
     let region = window.curState ? window.curState:"United States"
     let {text:metricText, value:metric} = window.curMetric
     let newOL = document.createElement('ol')
-
     for(let state of data.sort(sortByProp(metric))){
         let newLI = document.createElement('li')
         let {statename, cases, lat, long} = state["properties"]
@@ -54,10 +50,15 @@ function populateSidebarState(dataDiv){
     }
     header = document.createElement('h3')
     header.innerText = `${metricText} in ${region}: ${totalCases}`
+    console.log(header)
+    console.log(dataDiv)
     dataDiv.append(header,  newOL)
+    
+    console.log("mydiv", dataDiv)
 }
 
 function populateSidebarCounty(dataDiv){
+    console.log("county")
     let totalCases = 0
     let data = getSidebarData()
     let curState = window.curState
@@ -99,9 +100,11 @@ function populateSidebarCounty(dataDiv){
     header = document.createElement('h3')
     header.innerText = `${metricText} in ${region}: ${totalCases}`
     dataDiv.append(header, newOL)
+    
 }
 
 function populateSidebarDetailed(dataDiv){
+    console.log("other")
     let countyID = window.curCounty
     let props = getCounty(countyID)["properties"]
     let {name, statename, stateabbr, cases, state:stateID, } = props
@@ -160,7 +163,8 @@ function getSidebarData(){
 
 function updateSidebar(){
     let dataDiv = document.querySelector(".data")
-    dataDiv.innerHTML = ''
+    dataDiv.children = []
+    dataDiv.innerHTML = ""
     if(window.curCounty){
         populateSidebarDetailed(dataDiv)
     }
@@ -195,7 +199,6 @@ function filterByProp(prop, value){
     return (item) => item["properties"][prop] == value
 }
 
-console.log("initting")
 initSidebarControls()
 updateSidebar()
 

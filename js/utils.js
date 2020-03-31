@@ -16,14 +16,12 @@ function enableDisableOptions(){
     let selectMenus = document.querySelectorAll('select')
     
     for (let selectMenu of selectMenus){
-        console.log("Selected: ", selectMenu.selectedIndex)
         let curIndex = 0
         const options = selectMenu.getElementsByTagName("option")
         for (let option of options){
 
             if(toggleOptions.includes(option.value)){
                 if(curIndex === selectMenu.selectedIndex){
-                    console.log("Match")
                     selectMenu.value = "cases"
                 }
                 option.disabled = !option.disabled
@@ -67,16 +65,13 @@ function getCheckbox(name, labelText){
 }
 
 function updateSelectedMetric(selectMenu){
-    console.log("updating")
     let metric
     let base = {value:"cases", text:"Total Cases"};
     
     if(!selectMenu){
-        console.log("door a")
         metric = base
     }
     // else if(selectMenu.selectedIndex === -1){
-    //     console.log("alt case")
     //     selectMenu.selectedIndex = 1
     //     metric = base
     // }
@@ -91,7 +86,6 @@ function updateSelectedMetric(selectMenu){
 }
 
 function getColor(props){
-    console.log("Cur metric", window.curMetric)
     let {value:metricValue, text:metricText} = window.curMetric
     let val = props[metricValue]
     let {grades, colors} = getColorsForMetric(metricValue)
@@ -123,7 +117,7 @@ function zoomToFeature(layer, padding) {
 
 
 function isChartsTabActive(){
-    let chartsTab = document.querySelector(".chartsLI")
+    let chartsTab = document.querySelector(".charts-li")
     let classList = chartsTab.classList.value.split(' ')
     return classList.includes('active')
 }
@@ -257,7 +251,6 @@ function initSelectMenu(menuID){
     }
     selectMenu.addEventListener("change", ()=> {
         updateSelectedMetric(selectMenu)
-        console.log("Cur Metric", window.curMetric)
         syncSelects(selectMenu)
         updateSidebar()
         updateMapStyle()

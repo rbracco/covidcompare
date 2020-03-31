@@ -21,11 +21,11 @@
         <div class="leaflet-sidebar-tabs">
             <!-- top aligned tabs -->
             <ul role="tablist">
-                <li class="homeLI"><a href="#info-tab" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
-                <li class="chartsLI"><a href="#charts-tab" role="tab"><i class="fas fa-chart-pie fa-lg"></i></a></li>
-                <li><a href="#list" role="tab"><i class="fas fa-list-ol fa-lg"></i></a></li>
-                <li><a href="#method" role="tab"><i class="fas fa-vial fa-lg"></i></a></li>
-                <li><a href="#about" role="tab"><i class="fa fa-info-circle fa-lg"></i></a></li>
+                <li class="home-li"><a href="#info-tab" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
+                <li class="charts-li"><a href="#charts-tab" role="tab"><i class="fas fa-chart-pie fa-lg"></i></a></li>
+                <li class="list-li"><a href="#list-tab" role="tab"><i class="fas fa-list-ol fa-lg"></i></a></li>
+                <li class="method-li"><a href="#method-tab" role="tab"><i class="fas fa-vial fa-lg"></i></a></li>
+                <li class="about-li"><a href="#about-tab" role="tab"><i class="fa fa-info-circle fa-lg"></i></a></li>
             </ul>
 
             <!-- bottom aligned tabs -->
@@ -49,14 +49,14 @@
                     <div class="info-infographic"></div>
                         <div class="info-row">
                             <div class="info-col-cases">Case Data</div>
-                            <div class="info-col-tests"></div>
+                            <div class="info-col-tests">__</div>
                         </div>
                         <div class="info-row">
-                            <div class="info-col-health"></div>
-                            <div class="info-col-risk"></div>
+                            <div class="info-col-health">__</div>
+                            <div class="info-col-risk">__</div>
                         </div>
                     <div class="info-chart-container"></div>
-                        <div class="chart-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
+                        <div class="info-chart"><canvas id="info-canvas" width="350" height="250"></canvas></div>
                         <!-- <div class="chart-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
                         <div class="chart-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div> -->
                 </div>
@@ -75,7 +75,7 @@
                         <div class="charts-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div>
                 </div>
             </div>
-            <div class="leaflet-sidebar-pane" id="list">
+            <div class="leaflet-sidebar-pane" id="list-tab">
                 <h1 class="leaflet-sidebar-header">
                     List of All States/Counties
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
@@ -87,26 +87,8 @@
                     
                 </div>
             </div>
-            <div class="leaflet-sidebar-pane" id="about">
-                <h1 class="leaflet-sidebar-header">
-                    About Us
-                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
-                </h1>
-                <div class="about">
-                    <h2>Disclaimer:</h2><p class="disclaimer">This project is under development and changing rapidly. The risk values shown are currently arbitrary calculations and, while they do represent the relative risk between counties and states, they are not ready to be relied on for any form of decision making.</p>
-
-                    <h2>Why this map?</h2>
-                    <p>Most Covid19 maps we've seen show the absolute number of cases in a location, but that's not the most important metric. 50 cases in Kentucky isn't the same as 50 cases in NYC.</p>
-                    <p>We pull in data on population, hospital beds, and neighboring counties/states to allow users to compare the risk level to better understand what their community is up against.</p>
-                    
-                    <h2> Who we are:</h2>
-                    <p>A group of volunteers trying to do our best to provide access to covid19 data and analysis at the most local level possible</p> 
-                    <p>We think county level infection data and state level testing data should be made widely available. Our work is open source and you may use any of the code or data for your own projects. </p>
-                    <p>See our <a href="https://github.com/rbracco/covidcompare">GitHub Page</a> for more details</a></p>
-                    
-                </div>
-            </div>
-            <div class="leaflet-sidebar-pane" id="method">
+            
+            <div class="leaflet-sidebar-pane" id="method-tab">
                 <h1 class="leaflet-sidebar-header">
                     Methodology and Details
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
@@ -135,6 +117,25 @@
                     <ol>
                         <li><a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/hospitals">Hospital Data</a></li>
                     </ol>
+                </div>
+            </div>
+            <div class="leaflet-sidebar-pane" id="about-tab">
+                <h1 class="leaflet-sidebar-header">
+                    About Us
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div class="about">
+                    <h2>Disclaimer:</h2><p class="disclaimer">This project is under development and changing rapidly. The risk values shown are currently arbitrary calculations and, while they do represent the relative risk between counties and states, they are not ready to be relied on for any form of decision making.</p>
+
+                    <h2>Why this map?</h2>
+                    <p>Most Covid19 maps we've seen show the absolute number of cases in a location, but that's not the most important metric. 50 cases in Kentucky isn't the same as 50 cases in NYC.</p>
+                    <p>We pull in data on population, hospital beds, and neighboring counties/states to allow users to compare the risk level to better understand what their community is up against.</p>
+                    
+                    <h2> Who we are:</h2>
+                    <p>A group of volunteers trying to do our best to provide access to covid19 data and analysis at the most local level possible</p> 
+                    <p>We think county level infection data and state level testing data should be made widely available. Our work is open source and you may use any of the code or data for your own projects. </p>
+                    <p>See our <a href="https://github.com/rbracco/covidcompare">GitHub Page</a> for more details</a></p>
+                    
                 </div>
             </div>
 

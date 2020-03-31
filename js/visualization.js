@@ -17,7 +17,7 @@ function setinfoHeader(headerText){
 }
 
 function visualize(statename=null, countyID=null){
-    let infoDiv = document.querySelector(".infographic")
+    let infoDiv = document.querySelector(".charts-header")
     infoDiv.innerHTML = ""
     initResetDiv()
     let chartCases = document.querySelector("#canvas-cases")
