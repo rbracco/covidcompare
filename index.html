@@ -5,7 +5,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
         integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
         crossorigin=""/>
@@ -20,32 +21,44 @@
         <div class="leaflet-sidebar-tabs">
             <!-- top aligned tabs -->
             <ul role="tablist">
-                <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
-                <li class="chartsLI"><a href="#charts" role="tab"><i class="fas fa-chart-pie"></i></a></li>
-                <li><a href="#method" role="tab"><i class="fas fa-flask"></i></a></li>
-                <li><a href="#about" role="tab"><i class="fa fa-info-circle"></i></a></li>
+                <li class="homeLI"><a href="#info" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
+                <li class="chartsLI"><a href="#charts" role="tab"><i class="fas fa-chart-pie fa-lg"></i></a></li>
+                <li><a href="#list" role="tab"><i class="fas fa-list-ol fa-lg"></i></a></li>
+                <li><a href="#method" role="tab"><i class="fas fa-vial fa-lg"></i></a></li>
+                <li><a href="#about" role="tab"><i class="fa fa-info-circle fa-lg"></i></a></li>
             </ul>
 
             <!-- bottom aligned tabs -->
             <ul role="tablist">
-                <li><a href="https://github.com/rbracco/covidcompare" target="_blank"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://twitter.com/covidcompare" target="_blank"><i class="fab fa-twitter" style="color:#1DA1F2"></i></a></li>
-                <li><a href="mailto:robertbracco1@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a></li>
+                <li><a href="https://github.com/rbracco/covidcompare" target="_blank"><i class="fab fa-github fa-lg"></i></a></li>
+                <li><a href="https://twitter.com/covidcompare" target="_blank"><i class="fab fa-twitter fa-lg" style="color:#1DA1F2"></i></a></li>
+                <li><a href="mailto:robertbracco1@gmail.com" target="_blank"><i class="fas fa-envelope fa-lg"></i></a></li>
             </ul>
         </div>
 
         <!-- panel content -->
         <div class="leaflet-sidebar-content">
-            <div class="leaflet-sidebar-pane" id="home">
+            <div class="leaflet-sidebar-pane" id="info">
                 <h1 class="leaflet-sidebar-header">
-                    United States Covid19 Data
+                    Visualizing the Trends
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <div class="controls">
-
-                </div>
-                <div class="data">
-                    
+                <div class="visualizations">
+                    <div class="viz-reset"></div>
+                    <div class="viz-header"></div>
+                    <div class="viz-infographic"></div>
+                        <div class="viz-row">
+                            <div class="viz-col-cases">Case Data</div>
+                            <div class="viz-col-tests"></div>
+                        </div>
+                        <div class="viz-row">
+                            <div class="viz-col-health"></div>
+                            <div class="viz-col-risk"></div>
+                        </div>
+                    <div class="viz-chart-container"></div>
+                        <div class="chart-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
+                        <!-- <div class="chart-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
+                        <div class="chart-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div> -->
                 </div>
             </div>
             <div class="leaflet-sidebar-pane" id="charts">
@@ -57,10 +70,30 @@
                     <div class="viz-reset"></div>
                     <div class="viz-header"></div>
                     <div class="viz-infographic"></div>
+                        <div class="viz-row">
+                            <div class="viz-col-cases">Case Data</div>
+                            <div class="viz-col-tests"></div>
+                        </div>
+                        <div class="viz-row">
+                            <div class="viz-col-health"></div>
+                            <div class="viz-col-risk"></div>
+                        </div>
                     <div class="viz-chart-container"></div>
                         <div class="chart-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
                         <!-- <div class="chart-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
                         <div class="chart-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div> -->
+                </div>
+            </div>
+            <div class="leaflet-sidebar-pane" id="list">
+                <h1 class="leaflet-sidebar-header">
+                    United States Covid19 Data
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div class="controls">
+
+                </div>
+                <div class="data">
+                    
                 </div>
             </div>
             <div class="leaflet-sidebar-pane" id="about">

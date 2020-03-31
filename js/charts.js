@@ -54,9 +54,6 @@ function updateCharts(statename=null, countyID=null){
     let chartCases = document.querySelector("#canvas-cases")
     //let chartDeaths = document.querySelector("#canvas-deaths")
     //let chartTests = document.querySelector("#canvas-tests")
-
-    
-
     let chartDiv = document.querySelector(".chart_container")
 
     countyID = countyID || window.curCounty
@@ -83,7 +80,7 @@ function updateCharts(statename=null, countyID=null){
         //updateChart(chart_tests, props, "test_total", "state")
     }
     else{
-        setVizHeader('Please click or hover on a state or county to see visualizations')
+        setVizHeader('Please click or hover ')
         destroyCharts()
         
     }

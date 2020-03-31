@@ -1,8 +1,6 @@
 var sidebar = L.control.sidebar({container:'sidebar'})
             .addTo(map)
-            .open('home');
-
-
+            .open('info');
 
 function getBackToStateButton(stateName, curStateLayer) {
     let backToStateButton = document.createElement('input')
