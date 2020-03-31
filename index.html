@@ -21,8 +21,8 @@
         <div class="leaflet-sidebar-tabs">
             <!-- top aligned tabs -->
             <ul role="tablist">
-                <li class="homeLI"><a href="#info" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
-                <li class="chartsLI"><a href="#charts" role="tab"><i class="fas fa-chart-pie fa-lg"></i></a></li>
+                <li class="homeLI"><a href="#info-tab" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
+                <li class="chartsLI"><a href="#charts-tab" role="tab"><i class="fas fa-chart-pie fa-lg"></i></a></li>
                 <li><a href="#list" role="tab"><i class="fas fa-list-ol fa-lg"></i></a></li>
                 <li><a href="#method" role="tab"><i class="fas fa-vial fa-lg"></i></a></li>
                 <li><a href="#about" role="tab"><i class="fa fa-info-circle fa-lg"></i></a></li>
@@ -38,55 +38,46 @@
 
         <!-- panel content -->
         <div class="leaflet-sidebar-content">
-            <div class="leaflet-sidebar-pane" id="info">
+            <div class="leaflet-sidebar-pane" id="info-tab">
                 <h1 class="leaflet-sidebar-header">
-                    Visualizing the Trends
+                    Latest Covid19 USA Analyis 
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <div class="visualizations">
-                    <div class="viz-reset"></div>
-                    <div class="viz-header"></div>
-                    <div class="viz-infographic"></div>
-                        <div class="viz-row">
-                            <div class="viz-col-cases">Case Data</div>
-                            <div class="viz-col-tests"></div>
+                <div class="infographic">
+                    <div class="info-reset"></div>
+                    <div class="info-header"></div>
+                    <div class="info-infographic"></div>
+                        <div class="info-row">
+                            <div class="info-col-cases">Case Data</div>
+                            <div class="info-col-tests"></div>
                         </div>
-                        <div class="viz-row">
-                            <div class="viz-col-health"></div>
-                            <div class="viz-col-risk"></div>
+                        <div class="info-row">
+                            <div class="info-col-health"></div>
+                            <div class="info-col-risk"></div>
                         </div>
-                    <div class="viz-chart-container"></div>
+                    <div class="info-chart-container"></div>
                         <div class="chart-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
                         <!-- <div class="chart-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
                         <div class="chart-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div> -->
                 </div>
             </div>
-            <div class="leaflet-sidebar-pane" id="charts">
+            <div class="leaflet-sidebar-pane" id="charts-tab">
                 <h1 class="leaflet-sidebar-header">
                     Visualizing the Trends
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <div class="visualizations">
-                    <div class="viz-reset"></div>
-                    <div class="viz-header"></div>
-                    <div class="viz-infographic"></div>
-                        <div class="viz-row">
-                            <div class="viz-col-cases">Case Data</div>
-                            <div class="viz-col-tests"></div>
-                        </div>
-                        <div class="viz-row">
-                            <div class="viz-col-health"></div>
-                            <div class="viz-col-risk"></div>
-                        </div>
-                    <div class="viz-chart-container"></div>
-                        <div class="chart-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
-                        <!-- <div class="chart-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
-                        <div class="chart-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div> -->
+                <div class="charts">
+                    <div class="charts-reset"></div>
+                    <div class="charts-header"></div>
+                    <div class="charts-container"></div>
+                        <div class="charts-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
+                        <div class="charts-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
+                        <div class="charts-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div>
                 </div>
             </div>
             <div class="leaflet-sidebar-pane" id="list">
                 <h1 class="leaflet-sidebar-header">
-                    United States Covid19 Data
+                    List of All States/Counties
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
                 <div class="controls">
@@ -167,6 +158,8 @@
     <script src="js/state.js"></script>
     <script src="js/county.js"></script>
     <script src="js/appMap.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/infographic.js"></script>
     <script src="js/sidebar.js"></script>
     
 </body>

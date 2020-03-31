@@ -80,15 +80,15 @@ html, body, #map {
     font-weight:bold;
 }
 
-.viz-row{
+.info-row{
     width:100%;
     display: flex;
 }
 
-.viz-col-cases,
-.viz-col-tests,
-.viz-col-risk,
-.viz-col-health{
+.info-col-cases,
+.info-col-tests,
+.info-col-risk,
+.info-col-health{
     width: 50%;
     height:180px;
     font-family: 'Baloo Thambi 2', sans-serif;
@@ -96,26 +96,26 @@ html, body, #map {
     
     
 }
-.viz-col-cases{
+.info-col-cases{
     background-color: #9ecae1;
     border-top-left-radius: 20px;
     color: #045a8d;
     /* box-shadow: -5px -5px 10px 0px rgba(0, 0, 0, .6); */
 }
 
-.viz-col-tests{
+.info-col-tests{
     width: 50%;
     background-color: #a1d99b;
     border-top-right-radius: 20px;
     /* box-shadow: 5px -5px 10px 0px rgba(0, 0, 0, .6); */
 }
 
-.viz-col-risk{
+.info-col-risk{
     background-color: #fc9272;
     border-bottom-right-radius: 20px;
 }
 
-.viz-col-health{
+.info-col-health{
     width: 50%;
     background-color: #ffeda0;
     border-bottom-left-radius: 20px;

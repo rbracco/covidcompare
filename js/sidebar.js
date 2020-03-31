@@ -1,6 +1,6 @@
 var sidebar = L.control.sidebar({container:'sidebar'})
             .addTo(map)
-            .open('info');
+            .open('info-tab');
 
 function getBackToStateButton(stateName, curStateLayer) {
     let backToStateButton = document.createElement('input')
@@ -258,7 +258,7 @@ function updateSidebar(){
     else{
         populateSidebarCounty(dataDiv)
     }
-    updateCharts()
+    visualize()
 }
 
 function sortByProp(prop, descending=true){

@@ -42,7 +42,7 @@ function zoomToCounties(layer){
 
 function resetHighlightState(layer) {
     if(isChartsTabActive()){
-        updateCharts()
+        visualize()
     }
     stateLayer.resetStyle(layer);
     info.updateState();
@@ -50,7 +50,7 @@ function resetHighlightState(layer) {
 
 function highlightState(layer) {
     if(isChartsTabActive()){
-        updateCharts(state=layer.feature.properties.statename)
+        visualize(state=layer.feature.properties.statename)
     }
 
     layer.setStyle({

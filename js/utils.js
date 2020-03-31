@@ -35,7 +35,7 @@ function getCheckbox(name, labelText){
     checkbox.type = "checkbox";
     checkbox.name = name;
     checkbox.id = name;
-    checkbox.onclick = (e) => updateCharts()
+    checkbox.onclick = (e) => visualize()
 
     var label = document.createElement(label)
     label.htmlFor = name;

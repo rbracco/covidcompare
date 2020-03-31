@@ -45,7 +45,7 @@ function highlightCounty(layer) {
         map.panTo(layer.getBounds().getCenter())
     }
     if(isChartsTabActive()){
-        updateCharts(state=null, countyID=layer.feature.properties.geo_id)
+        visualize(state=null, countyID=layer.feature.properties.geo_id)
     }
     layer.setStyle({
         weight: 5,
@@ -60,7 +60,7 @@ function highlightCounty(layer) {
 
 function resetHighlightCounty(layer) {
     if(isChartsTabActive()){
-        updateCharts()
+        visualize()
     }
     layer.setStyle({
         weight: 1,
