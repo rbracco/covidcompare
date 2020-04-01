@@ -32,13 +32,34 @@ function enableDisableOptions(){
     }
 }
 
+function filterByProp(prop, value){
+    return (item) => item["properties"][prop] == value
+}
+
+function sortByProp(prop, descending=true){
+    return descending ?
+           ((a, b) => a["properties"][prop] > b["properties"][prop] ? -1 : 1)
+           :((a, b) => a["properties"][prop] > b["properties"][prop] ? 1 : -1)
+}
+
+function sortByDate(a, b){
+    aPieces = a.split('-')
+    bPieces = b.split('-')
+    for(let i=0; i<3; i++){
+        if(aPieces[i] == bPieces[i]){
+            continue
+        }
+        return parseInt(aPieces[i]) > parseInt(bPieces[i]) ? 1 : -1
+    }
+}
+
 let resetMap = () => {
     window.curState = null
     window.curCounty = null
     map.setView([42, -104], 5);
     map.removeLayer(countyLayer)
     map.addLayer(stateLayer)
-    updateSidebar()
+    updateList()
 }
 
 function getResetButton() {
@@ -116,10 +137,24 @@ function zoomToFeature(layer, padding) {
 }
 
 
-function isChartsTabActive(){
-    let chartsTab = document.querySelector(".visualize-li")
-    let classList = chartsTab.classList.value.split(' ')
-    return classList.includes('active')
+// function isChartsTabActive(){
+//     let chartsTab = document.querySelector(".visualize-li")
+//     let classList = chartsTab.classList.value.split(' ')
+//     return classList.includes('active')
+// }
+
+function isActiveTab(tabName){
+    return document.querySelector(`.${tabName}-li`).classList.value.split(' ').includes('active')
+}
+
+function getActiveTab(){
+    let tabNames = ['infographic', 'visualize', 'list', 'method', 'about']
+    for (let tabName of tabNames){
+        if(isActiveTab(tabName)){
+            return tabName
+        }
+    }
+    return undefined
 }
 
 function getColorsForMetric(metricValue){
@@ -252,7 +287,7 @@ function initSelectMenu(menuID){
     selectMenu.addEventListener("change", ()=> {
         updateSelectedMetric(selectMenu)
         syncSelects(selectMenu)
-        updateSidebar()
+        updateList()
         updateMapStyle()
         updateLegend()
     })

@@ -212,7 +212,7 @@ map.on('baselayerchange', function (e) {
     window.curLayer = e.name
     enableDisableOptions()
     updateSelectedMetric(document.querySelector('select'))
-    updateSidebar()
+    updateList()
     updateMapStyle()
     updateLegend()
 });

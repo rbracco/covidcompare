@@ -40,17 +40,19 @@ function zoomToCounties(layer){
 }
 
 function resetHighlightState(layer) {
-    if(isChartsTabActive()){
-        visualize()
-    }
+    // if(isChartsTabActive()){
+    //     visualize()
+    // }
+    updateData()
     stateLayer.resetStyle(layer);
     // info.updateState();
 }
 
 function highlightState(layer) {
-    if(isChartsTabActive()){
-        visualize(state=layer.feature.properties.statename)
-    }
+    // if(isChartsTabActive()){
+    //     visualize(state=layer.feature.properties.statename)
+    // }
+    updateData(state=layer.feature.properties.statename, county=null)
 
     layer.setStyle({
         weight: 5,

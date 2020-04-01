@@ -31,7 +31,7 @@ function displayDetailed(layer){
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
     zoomToFeature(layer, padding=[300,300])
-    updateSidebar()
+    updateList()
 }
 
 
@@ -42,9 +42,10 @@ function highlightCounty(layer) {
         }
         map.panTo(layer.getBounds().getCenter())
     }
-    if(isChartsTabActive()){
-        visualize(state=null, countyID=layer.feature.properties.geo_id)
-    }
+    // if(isChartsTabActive()){
+    //     visualize(state=null, countyID=layer.feature.properties.geo_id)
+    // }
+    updateData(state=null, countyID=layer.feature.properties.geo_id)
     layer.setStyle({
         weight: 5,
         dashArray: '',
@@ -57,9 +58,10 @@ function highlightCounty(layer) {
 }
 
 function resetHighlightCounty(layer) {
-    if(isChartsTabActive()){
-        visualize()
-    }
+    updateData()
+    // if(isChartsTabActive()){
+    //     visualize()
+    // }
     layer.setStyle({
         weight: 1,
         opacity: 1,

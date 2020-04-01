@@ -8,7 +8,7 @@ function initVisualizationControls(){
     }
 }
 
-function setinfoHeader(headerText){
+function setVisualizationHeader(headerText){
     let headerDiv = document.querySelector(".visualize-header")
     headerDiv.innerHTML = ""
     let header = document.createElement('h2')
@@ -16,46 +16,60 @@ function setinfoHeader(headerText){
     headerDiv.append(header)
 }
 
-function visualize(statename=null, countyID=null){
-    let infoDiv = document.querySelector(".visualize-header")
-    infoDiv.innerHTML = ""
-    
-    let chartCases = document.querySelector("#canvas-cases")
-    let chartDeaths = document.querySelector("#canvas-deaths")
-    let chartTests = document.querySelector("#canvas-tests")
-    let chartDiv = document.querySelector(".visualize-data")
-
+function updateVisualize(statename=null, countyID=null){
     countyID = countyID || window.curCounty
     statename = statename || window.curState
-    
-    let chart_cases = chartCases
-    let chart_deaths = chartDeaths
     if(countyID){
-        destroyCharts()
-        let props = getCounty(countyID)["properties"]
-        let pop = props["population"]
-        setinfoHeader(`${props["name"]} County, ${props["statename"]}`)
-        updateChart(chart_cases, props, "cases", "county")
-        updateChart(chart_deaths, props, "deaths", "county")
+        visualizeCounty(countyID)
     }
     else if(statename){
-        let state = getStateFromName(statename)
-        let props = state["properties"]
-        let pop = props["population"]
-        setinfoHeader(`${props["statename"]}`)
-        updateChart(chart_cases, props, "cases", "state")
-        updateChart(chart_deaths, props, "deaths", "state")
-        let chart_tests = chartTests
-        updateChart(chart_tests, props, "test_total", "state")
+        visualizeState(statename)
     }
     else{
-        setinfoHeader('Please click or hover ')
-        destroyCharts()
+        visualizeDefault()
     }
-    note = document.createElement('p')
-    note.classList.add("discrepancy")
-    note.innerText = "Please be aware the numbers on the Y-Axis change when you move between locations."
-    infoDiv.append(note)
+
+}
+
+function getChartCanvases(){
+    return {
+    "chartCases":document.querySelector("#canvas-cases"),
+    "chartDeaths":document.querySelector("#canvas-deaths"),
+    "chartTests":document.querySelector("#canvas-tests"),
+    }
+}
+
+    // note = document.createElement('p')
+    // note.classList.add("discrepancy")
+    // note.innerText = "Please be aware the numbers on the Y-Axis change when you move between locations."
+    // infoDiv.append(note)
+
+
+function visualizeState(statename){
+    let {chartCases, chartDeaths, chartTests} = getChartCanvases()
+    let state = getStateFromName(statename)
+    let props = state["properties"]
+    setVisualizationHeader(`${props["statename"]}`)
+    updateChart(chartCases, props, "cases", "state")
+    updateChart(chartDeaths, props, "deaths", "state")
+    let chart_tests = chartTests
+    updateChart(chartTests, props, "test_total", "state")
+
+    
+}
+
+function visualizeCounty(countyID){
+    let {chartCases, chartDeaths, chartTests} = getChartCanvases()
+    destroyCharts()
+    let props = getCounty(countyID)["properties"]
+    setVisualizationHeader(`${props["name"]} County, ${props["statename"]}`)
+    updateChart(chartCases, props, "cases", "county")
+    updateChart(chartDeaths, props, "deaths", "county")
+}
+
+function visualizeDefault(){
+    destroyCharts()
+    setVisualizationHeader('Please click or hover ')
 }
 
 initVisualizationControls()
