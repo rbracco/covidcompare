@@ -4,8 +4,8 @@
 window.curLayer = "States"
 window.curState = null
 window.curMetric = {value:"cases", text:"Total Cases"}
-let [lat, long] = [40, -96]
-let zoomLevel = 5
+let [lat, long] = mobileCheck()? [40, -99]:[40, -96]
+let zoomLevel = mobileCheck()?3:5
 //'mapbox/satellite-v9'
 let tileProvider = 'mapbox/streets-v11'
 let map = L.map('map').setView([lat, long], zoomLevel);
@@ -117,6 +117,13 @@ function updateLegend(){
 }
 updateLegend()
 
+var resetButton = L.control({position: 'topright'});
+resetButton.onAdd = function (map) {
+    var resetDiv = L.DomUtil.create('div',);
+    resetDiv.append(getResetButton())
+    return resetDiv;
+};
+resetButton.addTo(map);
 
 var selectMetric = L.control({position: 'topright'});
 selectMetric.onAdd = function (map) {
@@ -126,6 +133,8 @@ selectMetric.onAdd = function (map) {
     return div;
 };
 selectMetric.addTo(map);
+
+
 
 
 // /*------------------------------INITIALIZE INFO DISPLAY BLOCK---------------------------------- */

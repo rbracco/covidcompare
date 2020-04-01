@@ -56,7 +56,10 @@ function sortByDate(a, b){
 let resetMap = () => {
     window.curState = null
     window.curCounty = null
-    map.setView([42, -104], 5);
+    let [lat, long] = mobileCheck()? [40, -99]:[40, -96]
+    let zoomLevel = mobileCheck()?3:5
+
+    map.setView([lat,long], zoomLevel);
     map.removeLayer(countyLayer)
     map.addLayer(stateLayer)
 }
