@@ -36,7 +36,8 @@ function zoomToCounties(layer){
     let menuSelect = document.querySelector('#metricSelect')
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
-    zoomToFeature(layer, padding=[100,100])   
+    zoomToFeature(layer, padding=[100,100])
+    openSidebar()
 }
 
 function resetHighlightState(layer) {

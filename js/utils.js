@@ -146,15 +146,7 @@ function isActiveTab(tabName){
     return document.querySelector(`.${tabName}-li`).classList.value.split(' ').includes('active')
 }
 
-function getActiveTab(){
-    let tabNames = ['infographic', 'visualize', 'list', 'method', 'about']
-    for (let tabName of tabNames){
-        if(isActiveTab(tabName)){
-            return tabName
-        }
-    }
-    return undefined
-}
+
 
 function getColorsForMetric(metricValue){
     redScale = ['#99000d','#cb181d','#ef3b2c','#fb6a4a','#fc9272','#fcbba1','#fee5d9','#abd9e9']

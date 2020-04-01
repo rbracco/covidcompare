@@ -16,10 +16,29 @@ function getBackToStateButton(stateName, curStateLayer) {
     return backToStateButton
 }
 
+function getActiveTab(){
+    let tabNames = ['infographic', 'visualize', 'list', 'method', 'about']
+    for (let tabName of tabNames){
+        if(isActiveTab(tabName)){
+            return tabName
+        }
+    }
+    return null
+}
+
+function openSidebar(){
+    const sidebar = document.querySelector('#sidebar')
+    sidebar.classList.remove('collapsed')
+}
+
+function closeSidebar(){
+    sidebar.classList.add('collapsed')
+}
+
 //Only called for hover events
 function updateSidebarOnHover(statename=null, countyID=null){
     let activeTab = getActiveTab()
-    if(activeTab === "infographic"){
+    if(activeTab === "infographic" || activeTab === null){
         updateInfographic(statename, countyID)
     }
     else if(activeTab === "visualize"){
