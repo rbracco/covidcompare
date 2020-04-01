@@ -128,7 +128,8 @@ function getTimeData(timeSeries, propName, perCapita, pop, days){
 
 function getChartOptions(perCapita, level, propName){
     return {
-        responsive: false,
+        responsive: true,
+        maintainAspectRatio:false,
         scales: {
             yAxes: [{
                 ticks: {
