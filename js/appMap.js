@@ -3,7 +3,7 @@
 window.curLayer = "States"
 window.curState = null
 window.curMetric = {value:"cases", text:"Total Cases"}
-let [lat, long] = [42, -104]
+let [lat, long] = [40, -96]
 let zoomLevel = 5
 //'mapbox/satellite-v9'
 let tileProvider = 'mapbox/streets-v11'
