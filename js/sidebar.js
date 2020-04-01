@@ -32,6 +32,7 @@ function openSidebar(){
 }
 
 function closeSidebar(){
+    const sidebar = document.querySelector('#sidebar')
     sidebar.classList.add('collapsed')
 }
 
@@ -86,5 +87,10 @@ function visualize(statename=null, countyID=null){
     note.classList.add("discrepancy")
     note.innerText = "Please be aware the numbers on the Y-Axis change when you move between locations."
     infoDiv.append(note)
+}
+
+if(mobileCheck()){
+    console.log("hey")
+    closeSidebar()
 }
 

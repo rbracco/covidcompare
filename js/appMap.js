@@ -1,5 +1,6 @@
 /*---------------------------------------------MAP SETUP--------------------------------------------- */
 //On page load
+
 window.curLayer = "States"
 window.curState = null
 window.curMetric = {value:"cases", text:"Total Cases"}
