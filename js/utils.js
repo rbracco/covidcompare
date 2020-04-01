@@ -59,7 +59,6 @@ let resetMap = () => {
     map.setView([42, -104], 5);
     map.removeLayer(countyLayer)
     map.addLayer(stateLayer)
-    updateList()
 }
 
 function getResetButton() {

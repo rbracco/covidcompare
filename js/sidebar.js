@@ -16,19 +16,14 @@ function getBackToStateButton(stateName, curStateLayer) {
     return backToStateButton
 }
 
-function updateData(statename=null, countyID=null){
+//Only called for hover events
+function updateSidebarOnHover(statename=null, countyID=null){
     let activeTab = getActiveTab()
     if(activeTab === "infographic"){
         updateInfographic(statename, countyID)
     }
     else if(activeTab === "visualize"){
         updateVisualize(statename, countyID)
-    }
-    else if(activeTab === "list"){
-        updateList()
-    }
-    else{
-        console.log("doing nothing")
     }
 }
 

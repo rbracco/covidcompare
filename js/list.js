@@ -22,7 +22,6 @@ function updateList(){
     else{
         populateListCounty(dataDiv)
     }
-    //visualize()
 }
 
 function populateListState(dataDiv){
@@ -32,7 +31,6 @@ function populateListState(dataDiv){
     let {text:metricText, value:metric} = window.curMetric
     let newOL = document.createElement('ol')
     for(let state of data.sort(sortByProp(metric))){
-        let newLI = document.createElement('li')
         let {statename, cases, lat, long} = state["properties"]
         let curMetric = state["properties"][metric]
         totalCases += curMetric
@@ -40,19 +38,20 @@ function populateListState(dataDiv){
             curMetric = curMetric.toFixed(3)
             totalCases = ""
         }
+        let newLI = document.createElement('li')
+        
         newLI.innerHTML = `<a>${state["properties"]["statename"]}</a> - ${curMetric} ${metricText}`
+        console.log(newLI)
         let curLayer = convertStateIDToLayer([state["id"]])
-        newLI.addEventListener("mouseover", (e) => highlightState(curLayer))
-        newLI.addEventListener("mouseout", (e) => resetHighlightState(curLayer))
-        newLI.addEventListener("click", (e) => zoomToCounties(curLayer))
+        newLI.addEventListener("mouseover", (e) => highlightState(curLayer));
+        newLI.addEventListener("mouseout", (e) => resetHighlightState(curLayer));
+        newLI.addEventListener("click", (e) => zoomToCounties(curLayer));
         newOL.appendChild(newLI)
+        
     }
     let stateHeader = document.createElement('h3')
     stateHeader.innerText = `${metricText} in ${region}: ${totalCases}`
-    console.log(dataDiv)
     dataDiv.append(stateHeader,  newOL)
-    
-    console.log("mydiv", dataDiv)
 }
 
 function populateListCounty(dataDiv){

@@ -1,3 +1,6 @@
+initVisualizationControls()
+updateVisualize()
+
 function initVisualizationControls(){
     let resetDiv = document.querySelector(".visualize-controls")
     if(resetDiv.innerHTML === ""){
@@ -72,4 +75,3 @@ function visualizeDefault(){
     setVisualizationHeader('Please click or hover ')
 }
 
-initVisualizationControls()

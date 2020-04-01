@@ -40,10 +40,11 @@ function zoomToCounties(layer){
 }
 
 function resetHighlightState(layer) {
+    console.log("Layer:",layer)
     // if(isChartsTabActive()){
     //     visualize()
     // }
-    updateData()
+    updateSidebarOnHover()
     stateLayer.resetStyle(layer);
     // info.updateState();
 }
@@ -52,7 +53,7 @@ function highlightState(layer) {
     // if(isChartsTabActive()){
     //     visualize(state=layer.feature.properties.statename)
     // }
-    updateData(state=layer.feature.properties.statename, county=null)
+    updateSidebarOnHover(state=layer.feature.properties.statename, county=null)
 
     layer.setStyle({
         weight: 5,

@@ -208,14 +208,16 @@ selectMetric.addTo(map);
 // info.addTo(map);
 
 //On layer change
-map.on('baselayerchange', function (e) {
+map.on('baselayerchange', (e)=> onBaseLayerChange(e))
+
+function onBaseLayerChange(e){
     window.curLayer = e.name
     enableDisableOptions()
-    updateSelectedMetric(document.querySelector('select'))
     updateList()
+    updateSelectedMetric(document.querySelector('select'))
     updateMapStyle()
     updateLegend()
-});
+};
 
 // for(let hospital of dataHospitals){
 //     var circle = L.circle([hospital.Y, hospital.X], {
