@@ -21,7 +21,7 @@
         <div class="leaflet-sidebar-tabs">
             <!-- top aligned tabs -->
             <ul role="tablist">
-                <li class="home-li"><a href="#infographic-tab" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
+                <li class="infographic-li"><a href="#infographic-tab" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
                 <li class="visualize-li"><a href="#visualize-tab" role="tab"><i class="fas fa-chart-pie fa-lg"></i></a></li>
                 <li class="list-li"><a href="#list-tab" role="tab"><i class="fas fa-list-ol fa-lg"></i></a></li>
                 <li class="method-li"><a href="#method-tab" role="tab"><i class="fas fa-vial fa-lg"></i></a></li>
@@ -48,17 +48,17 @@
                     <div class="controls infographic-controls"></div>
                     <div class="header infographic-header"></div>
                     <div class="data infographic-data"></div>
-                        <div class="info-row">
-                            <div class="info-col-cases">Case Data</div>
-                            <div class="info-col-tests">Test Data</div>
+                        <div class="infographic-graphic">
+                            <div class="info-row">
+                                <div class="info-col-cases">Case Data</div>
+                                <div class="info-col-tests">Test Data</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-col-health">Health Data</div>
+                                <div class="info-col-risk">Risk Data</div>
+                            </div>
                         </div>
-                        <div class="info-row">
-                            <div class="info-col-health">Health Data</div>
-                            <div class="info-col-risk">Risk Data</div>
-                        </div>
-                    <div class="info-chart-container">
-                        <div class="info-chart"><canvas id="info-canvas" width="350" height="250"></canvas></div>
-                    </div>
+                        <div class="infographic-chart"><canvas id="canvas-infographic" width="350" height="250"></canvas></div>
                 </div>
             </div>
 
@@ -77,6 +77,8 @@
                         <div class="visualize-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div>
                 </div>
             </div>
+
+            <!------------------------------------------LIST TAB -------------------------------------------->
             <div class="leaflet-sidebar-pane" id="list-tab">
                 <h1 class="leaflet-sidebar-header">
                     List of All States/Counties
@@ -91,7 +93,9 @@
                     
                 </div>
             </div>
-            
+
+            <!------------------------------------------BEGIN STATIC TABS -------------------------------------------->
+            <!----------------------------------------------METHOD TAB -------------------------------------------->
             <div class="leaflet-sidebar-pane" id="method-tab">
                 <h1 class="leaflet-sidebar-header">
                     Methodology and Details
