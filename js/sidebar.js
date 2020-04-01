@@ -1,6 +1,6 @@
 var sidebar = L.control.sidebar({container:'sidebar'})
             .addTo(map)
-            .open('info-tab');
+            .open('infographic-tab');
 
 function getBackToStateButton(stateName, curStateLayer) {
     let backToStateButton = document.createElement('input')
@@ -14,14 +14,6 @@ function getBackToStateButton(stateName, curStateLayer) {
         updateSidebar()
     }
     return backToStateButton
-}
-
-function initSidebarControls(){
-    let controlsDiv = document.querySelector(".controls")
-    let resetButton = getResetButton()
-    let selectMenu = initSelectMenu("sidebarSelect")
-    controlsDiv.innerHTML = ""
-    controlsDiv.append(selectMenu, resetButton)
 }
 
 function populateSidebarState(dataDiv){
@@ -48,11 +40,10 @@ function populateSidebarState(dataDiv){
         newLI.addEventListener("click", (e) => zoomToCounties(curLayer))
         newOL.appendChild(newLI)
     }
-    header = document.createElement('h3')
-    header.innerText = `${metricText} in ${region}: ${totalCases}`
-    console.log(header)
+    let stateHeader = document.createElement('h3')
+    stateHeader.innerText = `${metricText} in ${region}: ${totalCases}`
     console.log(dataDiv)
-    dataDiv.append(header,  newOL)
+    dataDiv.append(stateHeader,  newOL)
     
     console.log("mydiv", dataDiv)
 }
@@ -97,9 +88,9 @@ function populateSidebarCounty(dataDiv){
 
     let stateID = data[0]["properties"]["state"]
     let props = getState(stateID)["properties"]
-    header = document.createElement('h3')
-    header.innerText = `${metricText} in ${region}: ${totalCases}`
-    dataDiv.append(header, newOL)
+    let countyHeader = document.createElement('h3')
+    countyHeader.innerText = `${metricText} in ${region}: ${totalCases}`
+    dataDiv.append(countyHeader, newOL)
     
 }
 
@@ -109,8 +100,8 @@ function populateSidebarDetailed(dataDiv){
     let props = getCounty(countyID)["properties"]
     let {name, statename, stateabbr, cases, state:stateID, } = props
     curStateLayer = convertStateIDToLayer(stateID)
-    header = document.createElement('h2')
-    header.innerText = `${name} County, ${stateabbr}`
+    let detailHeader = document.createElement('h2')
+    detailHeader.innerText = `${name} County, ${stateabbr}`
     header2 = document.createElement('h4')
     header2.innerText = `Lots of new stuff will be posted here in the next few days including time trends, growth rates, county health data, ICU capacity and more.`
     header2.style.color = "blue"
@@ -134,10 +125,9 @@ function populateSidebarDetailed(dataDiv){
     content.innerHTML = body
     let backToStateButton = getBackToStateButton(statename, curStateLayer)
 
-    dataDiv.append(header,backToStateButton, content)
+    dataDiv.append(detailHeader,backToStateButton, content)
     
 }
-
 
 function getUnassigned(stateName, metric) {
     if(!["cases", "deaths"].includes(metric)){
@@ -161,8 +151,8 @@ function getSidebarData(){
     return allData
 }
 
-function updateSidebar(){
-    let dataDiv = document.querySelector(".data")
+function updateList(){
+    let dataDiv = document.querySelector(".list-data")
     dataDiv.children = []
     dataDiv.innerHTML = ""
     if(window.curCounty){
@@ -199,7 +189,6 @@ function filterByProp(prop, value){
     return (item) => item["properties"][prop] == value
 }
 
-initSidebarControls()
 updateSidebar()
 
 

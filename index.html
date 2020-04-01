@@ -21,8 +21,8 @@
         <div class="leaflet-sidebar-tabs">
             <!-- top aligned tabs -->
             <ul role="tablist">
-                <li class="home-li"><a href="#info-tab" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
-                <li class="charts-li"><a href="#charts-tab" role="tab"><i class="fas fa-chart-pie fa-lg"></i></a></li>
+                <li class="home-li"><a href="#infographic-tab" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
+                <li class="visualize-li"><a href="#visualize-tab" role="tab"><i class="fas fa-chart-pie fa-lg"></i></a></li>
                 <li class="list-li"><a href="#list-tab" role="tab"><i class="fas fa-list-ol fa-lg"></i></a></li>
                 <li class="method-li"><a href="#method-tab" role="tab"><i class="fas fa-vial fa-lg"></i></a></li>
                 <li class="about-li"><a href="#about-tab" role="tab"><i class="fa fa-info-circle fa-lg"></i></a></li>
@@ -37,42 +37,44 @@
         </div>
 
         <!-- panel content -->
+        <!------------------------------------------INFOGRAPHIC TAB -------------------------------------------->
         <div class="leaflet-sidebar-content">
-            <div class="leaflet-sidebar-pane" id="info-tab">
+            <div class="leaflet-sidebar-pane" id="infographic-tab">
                 <h1 class="leaflet-sidebar-header">
                     Latest Covid19 USA Analyis 
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
                 <div class="infographic">
-                    <div class="info-reset"></div>
-                    <div class="info-header"></div>
-                    <div class="info-infographic"></div>
+                    <div class="controls infographic-controls"></div>
+                    <div class="header infographic-header"></div>
+                    <div class="data infographic-data"></div>
                         <div class="info-row">
                             <div class="info-col-cases">Case Data</div>
-                            <div class="info-col-tests">__</div>
+                            <div class="info-col-tests">Test Data</div>
                         </div>
                         <div class="info-row">
-                            <div class="info-col-health">__</div>
-                            <div class="info-col-risk">__</div>
+                            <div class="info-col-health">Health Data</div>
+                            <div class="info-col-risk">Risk Data</div>
                         </div>
-                    <div class="info-chart-container"></div>
+                    <div class="info-chart-container">
                         <div class="info-chart"><canvas id="info-canvas" width="350" height="250"></canvas></div>
-                        <!-- <div class="chart-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
-                        <div class="chart-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div> -->
+                    </div>
                 </div>
             </div>
-            <div class="leaflet-sidebar-pane" id="charts-tab">
+
+            <!------------------------------------------VISUALIZE TAB -------------------------------------------->
+            <div class="leaflet-sidebar-pane" id="visualize-tab">
                 <h1 class="leaflet-sidebar-header">
                     Visualizing the Trends
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <div class="charts">
-                    <div class="charts-reset"></div>
-                    <div class="charts-header"></div>
-                    <div class="charts-container"></div>
-                        <div class="charts-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
-                        <div class="charts-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
-                        <div class="charts-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div>
+                <div class="visualize">
+                    <div class="controls visualize-controls"></div>
+                    <div class="header visualize-header"></div>
+                    <div class="data visualize-data"></div>
+                        <div class="visualize-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
+                        <div class="visualize-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
+                        <div class="visualize-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div>
                 </div>
             </div>
             <div class="leaflet-sidebar-pane" id="list-tab">
@@ -80,10 +82,12 @@
                     List of All States/Counties
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <div class="controls">
+                <div class="controls list-controls">
 
                 </div>
-                <div class="data">
+                <div class="header list-header"></div>
+                <div class="data list-data">
+                    
                     
                 </div>
             </div>
@@ -159,8 +163,9 @@
     <script src="js/state.js"></script>
     <script src="js/county.js"></script>
     <script src="js/appMap.js"></script>
-    <script src="js/visualization.js"></script>
     <script src="js/infographic.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/list.js"></script>
     <script src="js/sidebar.js"></script>
     
 </body>

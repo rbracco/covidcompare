@@ -1,5 +1,5 @@
-function initResetDiv(){
-    let resetDiv = document.querySelector(".charts-reset")
+function initVisualizationControls(){
+    let resetDiv = document.querySelector(".visualize-controls")
     if(resetDiv.innerHTML === ""){
         let resetButton = getResetButton()
         resetDiv.append(resetButton)
@@ -9,7 +9,7 @@ function initResetDiv(){
 }
 
 function setinfoHeader(headerText){
-    let headerDiv = document.querySelector(".charts-header")
+    let headerDiv = document.querySelector(".visualize-header")
     headerDiv.innerHTML = ""
     let header = document.createElement('h2')
     header.innerText = headerText
@@ -17,13 +17,13 @@ function setinfoHeader(headerText){
 }
 
 function visualize(statename=null, countyID=null){
-    let infoDiv = document.querySelector(".charts-header")
+    let infoDiv = document.querySelector(".visualize-header")
     infoDiv.innerHTML = ""
-    initResetDiv()
+    
     let chartCases = document.querySelector("#canvas-cases")
     let chartDeaths = document.querySelector("#canvas-deaths")
     let chartTests = document.querySelector("#canvas-tests")
-    let chartDiv = document.querySelector(".charts-container")
+    let chartDiv = document.querySelector(".visualize-data")
 
     countyID = countyID || window.curCounty
     statename = statename || window.curState
@@ -51,10 +51,11 @@ function visualize(statename=null, countyID=null){
     else{
         setinfoHeader('Please click or hover ')
         destroyCharts()
-        
     }
     note = document.createElement('p')
     note.classList.add("discrepancy")
     note.innerText = "Please be aware the numbers on the Y-Axis change when you move between locations."
-    infoDiv.append(header, note)
+    infoDiv.append(note)
 }
+
+initVisualizationControls()

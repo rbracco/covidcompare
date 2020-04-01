@@ -117,7 +117,7 @@ function zoomToFeature(layer, padding) {
 
 
 function isChartsTabActive(){
-    let chartsTab = document.querySelector(".charts-li")
+    let chartsTab = document.querySelector(".visualize-li")
     let classList = chartsTab.classList.value.split(' ')
     return classList.includes('active')
 }
