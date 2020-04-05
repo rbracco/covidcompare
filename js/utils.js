@@ -11,6 +11,7 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+
 function enableDisableOptions(){
     let toggleOptions = ["test_total", "pc_tests"]
     let selectMenus = document.querySelectorAll('select')
@@ -53,10 +54,20 @@ function sortByDate(a, b){
     }
 }
 
+function getMapDefaultCoords(){
+    if(mobileCheck()){
+        //check if sidebar is open, autopan messes up map reset, this is a slight hack
+        return isSidebarOpen()? [40, -99]:[40, -106.12]
+    }
+    return isSidebarOpen()? [40, -106.12]:[40, -96]
+}
+
 let resetMap = () => {
     window.curState = null
     window.curCounty = null
-    let [lat, long] = mobileCheck()? [40, -99]:[40, -96]
+    window.clickState = null
+    window.clickCounty = null
+    let [lat, long] = getMapDefaultCoords()
     let zoomLevel = mobileCheck()?3:5
 
     map.setView([lat,long], zoomLevel);
@@ -138,13 +149,6 @@ function isViewable(layer){
 function zoomToFeature(layer, padding) {
     map.fitBounds(layer.getBounds(), {padding:padding});
 }
-
-
-// function isChartsTabActive(){
-//     let chartsTab = document.querySelector(".visualize-li")
-//     let classList = chartsTab.classList.value.split(' ')
-//     return classList.includes('active')
-// }
 
 function isActiveTab(tabName){
     return document.querySelector(`.${tabName}-li`).classList.value.split(' ').includes('active')

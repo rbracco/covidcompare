@@ -20,8 +20,10 @@ function setVisualizationHeader(headerText){
 }
 
 function updateVisualize(statename=null, countyID=null){
-    countyID = countyID || window.curCounty
-    statename = statename || window.curState
+    // countyID = countyID || window.curCounty
+    // statename = statename || window.curState
+    countyID = window.curCounty || window.clickCounty
+    statename = window.curState || window.clickState
     if(countyID){
         visualizeCounty(countyID)
     }

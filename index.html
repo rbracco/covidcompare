@@ -50,14 +50,57 @@
                     <div class="data infographic-data"></div>
                         <div class="infographic-graphic">
                             <div class="info-row">
-                                <div class="info-col-cases">Case Data</div>
-                                <div class="info-col-health">Health Data</div>
+                                <div class="info-col-cases">
+                                    <i class="fas fa-virus fa-2x info-icon"></i>
+                                    <h3 class="info-col-header">Case Data</h3>
+                                    <div class="stats-display">
+                                        Total:&nbsp;<span class="datapoint" id="cases-cases-total">132,475</span><br/>
+                                        <span class="datapoint" id="cases-cases-pc">21.21</span> cases per 100k<br/>
+                                        Rank: <span class="datapoint" id="cases-cases-rank"></span><br/>
+                                        24h Growth: <span class="datapoint" id="cases-cases-growth24h">24.21</span>%<br/>
+                                        72h Growth  <span class="datapoint" id="cases-cases-growth72h">124.21</span>%<br/>
+                                        &nbsp;1w Growth <span class="datapoint" id="cases-cases-growth1w">124.21</span>%<br/>
+                                    </div>
+                                </div>
+                                <div class="info-col-deaths">
+                                    <i class="fas fa-skull-crossbones fa-2x info-icon"></i>
+                                    <h3 class="info-col-header">Death Data</h3>
+                                    <div class="stats-display">
+                                        Total:&nbsp<span class="datapoint" id="deaths-deaths-total">147</span><br/>
+                                        <span class="datapoint" id="deaths-deaths-pc">1.21</span>&nbsp;deaths per 100k<br/>
+                                        Rank: <span class="datapoint" id="deaths-deaths-rank"></span><br/>
+                                        24h Growth: <span class="datapoint" id="deaths-deaths-growth24h">24.21</span>%<br/>
+                                        72h Growth <span class="datapoint" id="deaths-deaths-growth72h">124.21</span>%<br/>
+                                        &nbsp;1w Growth <span class="datapoint" id="deaths-deaths-growth1w">124.21</span>%<br/>
+                                    </div>
+                                </div>
+                                    
                             </div>
                             <div class="info-row">
-                                <div class="info-col-tests">Test Data</div>
+                                <div class="info-col-tests">
+                                    <i class="fas fa-microscope fa-2x info-icon"></i>
+                                    <h3 class="info-col-header">Test Data</h3>
+                                    <div class="stats-display">
+                                    Total Tests:&nbsp;<span class="datapoint" id="tests-tests-total">132,475</span><br/>
+                                    <span class="datapoint" id="tests-tests-pc">32.68</span> tests per 100k<br/>
+                                    Rank: <span class="datapoint" id="tests-tests-rank"></span><br/>
+                                    Positive: <span class="datapoint" id="tests-tests-positive">21,808</span><br/>
+                                    Negative: <span class="datapoint" id="tests-tests-negative">111,000</span><br/>
+                                    </div>
+                                </div>
+                                <div class="info-col-health">
+                                    <i class="fas fa-notes-medical fa-2x info-icon"></i>
+                                    <h3 class="info-col-header">Health Data</h3>
+                                    <div class="stats-display"></div>
+                                    <h2>Coming Soon</h2>
+                                </div>
                             </div>
                             <div class="info-row">
-                                <div class="info-col-risk">Risk Data</div>
+                                <div class="info-col-risk">
+                                    <i class="fas fa-exclamation-triangle fa-2x info-icon"></i>
+                                    <h3 class="info-col-header">Risk Assessment</h3>
+                                    <div class="stats-display"></div>
+                                </div>
                             </div>
                                 
                             
@@ -175,6 +218,7 @@
     <script src="js/visualization.js"></script>
     <script src="js/list.js"></script>
     <script src="js/sidebar.js"></script>
+    
     
 </body>
 </html>

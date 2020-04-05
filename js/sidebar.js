@@ -2,6 +2,20 @@ var sidebar = L.control.sidebar({container:'sidebar'})
             .addTo(map)
             .open('infographic-tab');
 
+//Set events on tab change
+sidebar.on('content', function(e) {
+    let tabName = e.id
+    if(tabName === "infographic-tab"){
+        updateInfographic()
+    }
+    if(tabName === "visualize-tab"){
+        updateVisualize()
+    }
+    else if(tabName === "list-tab"){
+        updateList()
+    }
+})
+
 function getBackToStateButton(stateName, curStateLayer) {
     let backToStateButton = document.createElement('input')
     backToStateButton.type = "button"
@@ -24,6 +38,11 @@ function getActiveTab(){
         }
     }
     return null
+}
+
+function isSidebarOpen(){
+    const sidebar = document.querySelector('#sidebar')
+    return !sidebar.classList.contains('collapsed')
 }
 
 function openSidebar(){

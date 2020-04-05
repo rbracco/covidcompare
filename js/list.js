@@ -41,7 +41,6 @@ function populateListState(dataDiv){
         let newLI = document.createElement('li')
         
         newLI.innerHTML = `<a>${state["properties"]["statename"]}</a> - ${curMetric} ${metricText}`
-        console.log(newLI)
         let curLayer = convertStateIDToLayer([state["id"]])
         newLI.addEventListener("mouseover", (e) => highlightState(curLayer));
         newLI.addEventListener("mouseout", (e) => resetHighlightState(curLayer));
@@ -100,7 +99,6 @@ function populateListCounty(dataDiv){
 }
 
 function populateListDetailed(dataDiv){
-    console.log("other")
     let countyID = window.curCounty
     let props = getCounty(countyID)["properties"]
     let {name, statename, stateabbr, cases, state:stateID, } = props

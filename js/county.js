@@ -27,14 +27,20 @@ function onEachCounty(feature, layer){
 }
 
 function displayDetailed(layer){
-    window.curCounty = layer.feature.properties.geo_id
+    window.clickCounty = layer.feature.properties.geo_id
+    updateSidebarOnHover()
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
-    zoomToFeature(layer, padding=[300,300])
+    let padding = mobileCheck()?[100,100]:[200,200]
+    zoomToFeature(layer, padding)
+    updateList()
+    setTimeout(() => openSidebar(), 1250)
 }
 
 
 function highlightCounty(layer) {
+    window.curCounty = layer.feature.properties.geo_id
+    updateSidebarOnHover()
     if (!isViewable(layer)){
         if(map.getZoom() > 7){
             map.setZoom(7)
@@ -44,7 +50,7 @@ function highlightCounty(layer) {
     // if(isChartsTabActive()){
     //     visualize(state=null, countyID=layer.feature.properties.geo_id)
     // }
-    updateSidebarOnHover(state=null, countyID=layer.feature.properties.geo_id)
+    
     layer.setStyle({
         weight: 5,
         dashArray: '',
@@ -57,6 +63,7 @@ function highlightCounty(layer) {
 }
 
 function resetHighlightCounty(layer) {
+    window.curCounty = window.clickCounty;
     updateSidebarOnHover()
     // if(isChartsTabActive()){
     //     visualize()

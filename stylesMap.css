@@ -77,45 +77,123 @@ html, body, #map {
 }
 
 .info-row{
-    width:100%;
+    width:95%;
     display: flex;
     height: 170px;
+    margin: 5px 10px 5px 0px;
 }
 
 .info-col-cases,
+.info-col-deaths,
+.info-col-tests,
 .info-col-health{
     width: 50%;
     font-family: 'Baloo Thambi 2', sans-serif;
     font-weight: bold;
 }
 
-.info-col-tests,
 .info-col-risk{
     width: 100%;
     font-family: 'Baloo Thambi 2', sans-serif;
-    font-weight: bold;
 }
 
 .info-col-cases{
-    background-color: #9ecae1;
-    color: #045a8d;
-    border-top-left-radius: 20px;
+    background-color: #565C9F;
+    border-radius:10px;
     /* box-shadow: -5px -5px 10px 0px rgba(0, 0, 0, .6); */
 }
 
-.info-col-tests{
-    background-color: #a1d99b;
+.info-col-tests, .info-col-health{
+    background-color: #43ADC5;
+    margin: 0px;
     /* box-shadow: 5px -5px 10px 0px rgba(0, 0, 0, .6); */
 }
 
-.info-col-risk{
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    background-color: #fc9272;
+.info-col-tests,
+.info-col-cases{
+    margin-right: 5px;
+    border-radius:10px;
 }
 
-.info-col-health{
-    background-color: #ffeda0;
-    border-top-right-radius: 20px;
-    /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .6); */
+/* .info-col-cases > .info-col-header{
+    background-color: lightskyblue;
+} */
+/* 
+.info-col-risk > .info-col-header{
+    background-color: #F6AC8D;
 }
+
+.info-col-test > .info-col-header{
+    background-color: #F6AC8D;
+} */
+
+
+.info-col-header{
+    margin-top:0px;
+    padding-bottom:5px;
+    margin-bottom:2px;
+    padding-left:5px;
+    font-size:22px;
+    color:#000;
+    font-weight:bold;
+    border-bottom: 1px solid #888;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.info-col-tests,
+.info-col-health,
+.info-col-cases,
+.info-col-deaths,
+.info-col-risk{
+    border-radius:10px;
+    background-color:#E1E1E1;
+}
+
+.stats-display{
+    line-height: 1.2em;
+}
+.datapoint{
+    color:#0054d9
+}
+
+.info-icon{
+    float: left;
+    padding:5px;
+    color: #0054d9
+}
+table{
+    margin-top: 0px;
+    padding-top:0px;
+    border-spacing: 10px;
+    
+    
+}
+
+th {
+    width:40px;
+    padding:0px 10px;
+    line-height: 1em;
+    
+}
+tr{
+    padding:10px;
+    margin-top: 0px;
+    padding-top:0px;
+   
+}
+
+.body-row{
+    
+}
+
+td.row-header{
+    font-weight:bold;
+    text-align: right;
+}
+
+.datapoint{
+    text-align:center;
+    font-size:18px;
+}
+

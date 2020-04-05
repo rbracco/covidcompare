@@ -3,6 +3,9 @@
 
 window.curLayer = "States"
 window.curState = null
+window.curCounty = null
+window.clickState = null
+window.clickCounty = null
 window.curMetric = {value:"cases", text:"Total Cases"}
 let [lat, long] = mobileCheck()? [40, -99]:[40, -96]
 let zoomLevel = mobileCheck()?3:5
