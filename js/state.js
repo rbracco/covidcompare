@@ -27,31 +27,28 @@ function onEachState(feature, layer) {
         mouseover: () => highlightState(layer),
         mouseout: () => resetHighlightState(layer),
         click: () => zoomToCounties(layer)
-    //click: zoomToCounties,
     });
 }
 
 function zoomToCounties(layer){
-    window.curState = layer.feature.properties.statename
+    window.clickState = layer.feature.properties.statename
     let menuSelect = document.querySelector('#metricSelect')
-    let curMetric = getSelectedMetric().value
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
-    zoomToFeature(layer, padding=[100,100])   
+    let padding = mobileCheck()?[0,0]:[100,100]
+    zoomToFeature(layer, padding=[0,0])
+    setTimeout(() => openSidebar(), 1250)
 }
 
 function resetHighlightState(layer) {
-    if(isChartsTabActive()){
-        updateCharts()
-    }
+    window.curState = window.clickState
+    updateSidebarOnHover()
     stateLayer.resetStyle(layer);
-    info.updateState();
 }
 
 function highlightState(layer) {
-    if(isChartsTabActive()){
-        updateCharts(state=layer.feature.properties.statename)
-    }
+    window.curState=layer.feature.properties.statename
+    updateSidebarOnHover()
 
     layer.setStyle({
         weight: 5,
@@ -59,7 +56,6 @@ function highlightState(layer) {
         dashArray: '',
         fillOpacity: 0.7
     });
-    info.updateState(layer.feature.properties);
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }

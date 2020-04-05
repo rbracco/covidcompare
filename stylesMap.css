@@ -1,6 +1,7 @@
 body {
     padding: 0;
     margin: 0;
+    
 }
 
 html, body, #map {
@@ -60,10 +61,6 @@ html, body, #map {
     color: red;
 }
 
-/* #sidebar {
-    width:400px;
-} */
-
 .data{
     padding:0px;
     margin:0px;
@@ -78,3 +75,112 @@ html, body, #map {
     color:red;
     font-weight:bold;
 }
+
+.info-row{
+    width:95%;
+    display: flex;
+    height: 155px;
+    margin: 5px 10px 5px 0px;
+}
+
+.info-col-cases,
+.info-col-deaths,
+.info-col-tests,
+.info-col-health{
+    
+}
+
+/* .info-col-risk{
+    width: 100%;
+    font-family: 'Baloo Thambi 2', sans-serif;
+} */
+
+.info-col-cases{
+    background-color: #565C9F;
+    /* border-radius:10px; */
+    /* box-shadow: -5px -5px 10px 0px rgba(0, 0, 0, .6); */
+}
+
+.info-col-tests, .info-col-health{
+    background-color: #43ADC5;
+    margin: 0px;
+    /* box-shadow: 5px -5px 10px 0px rgba(0, 0, 0, .6); */
+}
+
+.info-col-tests,
+.info-col-cases,
+.info-col-age{
+    margin-right: 5px;
+    /* border-radius:10px; */
+}
+
+/* .info-col-cases > .info-col-header{
+    background-color: lightskyblue;
+} */
+/* 
+.info-col-risk > .info-col-header{
+    background-color: #F6AC8D;
+}
+
+.info-col-test > .info-col-header{
+    background-color: #F6AC8D;
+} */
+
+
+.info-col-header{
+    margin-top:0px;
+    padding-bottom:5px;
+    margin-bottom:2px;
+    padding-left:5px;
+    font-size:18px;
+    color:#000;
+    font-weight:bold;
+    border-bottom: 1px solid #888;
+    /*border-top-left-radius: 10px;
+    border-top-right-radius: 10px;*/
+}
+
+.info-col-tests,
+.info-col-health,
+.info-col-cases,
+.info-col-deaths,
+.info-col-risk,
+.info-col-age{
+    /* border-radius:10px; */
+    background-color:#E1E1E1;
+    width: 50%;
+    font-family: 'Baloo Thambi 2', sans-serif;
+    font-weight: bold;
+}
+
+.stats-display{
+    line-height: 1.2em;
+}
+.datapoint{
+    color:#0054d9
+}
+.data-small{
+    font-size:14px !important
+}
+
+.info-icon{
+    float: left;
+    padding:5px;
+    color: #0054d9
+}
+
+
+.body-row{
+    
+}
+
+td.row-header{
+    font-weight:bold;
+    text-align: right;
+}
+
+.datapoint{
+    text-align:center;
+    font-size:18px;
+}
+

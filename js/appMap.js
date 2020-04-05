@@ -1,9 +1,14 @@
 /*---------------------------------------------MAP SETUP--------------------------------------------- */
 //On page load
+
 window.curLayer = "States"
 window.curState = null
-let [lat, long] = [42, -104]
-let zoomLevel = 5
+window.curCounty = null
+window.clickState = null
+window.clickCounty = null
+window.curMetric = {value:"cases", text:"Total Cases"}
+let [lat, long] = mobileCheck()? [40, -99]:[40, -96]
+let zoomLevel = mobileCheck()?3:5
 //'mapbox/satellite-v9'
 let tileProvider = 'mapbox/streets-v11'
 let map = L.map('map').setView([lat, long], zoomLevel);
@@ -15,9 +20,9 @@ let mapAttribution = `<a href="https://github.com/rbracco/covidcompare" target="
                     Map data: 
                     <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> |
                     <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a> |
-                    <a href="https://www.mapbox.com/" target="_blank">Imagery:Mapbox</a>`
+                    <a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a>`
 
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=JUdfeZRkXltAhTrUZSpJ', {
     attribution: mapAttribution,
     maxZoom: 18,
     id: tileProvider,
@@ -91,7 +96,7 @@ L.legend = L.control({position: 'bottomright'});
 
 function updateLegend(){
     
-    let {value:metricValue, text:metricText} = getSelectedMetric()
+    let {value:metricValue, text:metricText} = window.curMetric
     let {grades, colors} = getColorsForMetric(metricValue)
 
     L.legend.onAdd = function (map) {
@@ -115,94 +120,117 @@ function updateLegend(){
 }
 updateLegend()
 
-/*------------------------------INITIALIZE INFO DISPLAY BLOCK---------------------------------- */
-var info = L.control();
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.updateState();
-    return this._div;
+var resetButton = L.control({position: 'topright'});
+resetButton.onAdd = function (map) {
+    var resetDiv = L.DomUtil.create('div',);
+    resetDiv.append(getResetButton())
+    return resetDiv;
 };
+resetButton.addTo(map);
 
-/*-------------------------------DISPLAY STATE INFO ON HOVER ------------------------------ */
-
-// method that we will use to update the control based on feature properties passed
-info.updateState = function (props) {
-    let title = props ? `<h3>${props.statename}</h3>`:`<h3>Hover over a state</h3>`
-    // Add this back when active is working again(${props.active} active)
-    // And also change cases per 100,000 to use the active metric again
-    let body = props ? 
-        `<b>Covid19 Cases</b><br/>
-        ${props.cases} total cases <br/>
-        ${props.recovered} recovered<br/>
-        ${props.deaths || 0} deaths<br/>
-        <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
-        <hr>
-        <b>Population</b><br/>
-        ${numberWithCommas(props.population)} people<br/>
-        ${(props.pc_cases).toFixed(2)} cases per 100000<br/>
-        <hr>
-        
-        <b>Hospital Access</b><br>
-        ${props.beds} hospital beds<br/>
-        ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
-        <hr>
-        <b>Comparative Risk<br/></b>
-        Local Risk: ${(props.risk_local).toFixed(3)}<br/>
-        Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
-        Total Risk: ${(props.risk_total).toFixed(3)}<br/>
-        <hr>
-        <b>Testing Data<br/></b>
-        Total Tested: ${(props.test_total)}<br/>
-        Tested Positive: ${(props.test_positive)}<br/>
-        Tested Negative: ${(props.test_negative)}<br/>
-        ${(props.test_total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
-        Disclosure Grade: ${props.test_grade}<br/>
-        <span class="timestamp">Updated: ${props.time_tests_updated}</span><br/>
-        <br>
-        `
-        : "<br/>"
-        
-    this._div.innerHTML = title + body
-
+var selectMetric = L.control({position: 'topright'});
+selectMetric.onAdd = function (map) {
+    var div = L.DomUtil.create('div',);
+    div.append(initSelectMenu("mapSelect"))
+    div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+    return div;
 };
+selectMetric.addTo(map);
 
-/*-------------------------------DISPLAY COUNTY INFO ON HOVER ------------------------------ */
 
-info.updateCounty = function (props) {
-    let cases = props.cases || 0
-    let title = props ? `<h3>${props.name} County</h3>`:`<h3>Hover over a county</h3>`
-    let note =  props.notes? `<span class="timestamp">${props.notes}</span><br/>`:``
-    let body = props ? 
-        `<b>Covid19 Cases</b><br/>
-        ${cases} cases<br/>
-        ${props.deaths || 0} deaths<br/>
-        <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
-        <hr>
-        <b>Population</b><br/>
-        ${numberWithCommas(props.population)} people<br/>
-        ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
-        <hr>
-        <b>Comparative Risk<br/></b>
-        Local Risk: ${(props.risk_local).toFixed(3)}<br/>
-        Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
-        Total Risk: ${(props.risk_total).toFixed(3)}<br/>
-        ${note}
-        `
-        : "<br/>"
+
+
+// /*------------------------------INITIALIZE INFO DISPLAY BLOCK---------------------------------- */
+// var info = L.control();
+// info.onAdd = function (map) {
+//     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+//     this.updateState();
+//     return this._div;
+// };
+
+// /*-------------------------------DISPLAY STATE INFO ON HOVER ------------------------------ */
+
+// // method that we will use to update the control based on feature properties passed
+// info.updateState = function (props) {
+//     let title = props ? `<h3>${props.statename}</h3>`:`<h3>Hover over a state</h3>`
+//     // Add this back when active is working again(${props.active} active)
+//     // And also change cases per 100,000 to use the active metric again
+//     let body = props ? 
+//         `<b>Covid19 Cases</b><br/>
+//         ${props.cases} total cases <br/>
+//         ${props.recovered} recovered<br/>
+//         ${props.deaths || 0} deaths<br/>
+//         <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
+//         <hr>
+//         <b>Population</b><br/>
+//         ${numberWithCommas(props.population)} people<br/>
+//         ${(props.pc_cases).toFixed(2)} cases per 100000<br/>
+//         <hr>
         
-    this._div.innerHTML = title + body
-};
+//         <b>Hospital Access</b><br>
+//         ${props.beds} hospital beds<br/>
+//         ${(props.beds/(props.population/100000)).toFixed(2)} beds per 100000<br/>
+//         <hr>
+//         <b>Comparative Risk<br/></b>
+//         Local Risk: ${(props.risk_local).toFixed(3)}<br/>
+//         Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
+//         Total Risk: ${(props.risk_total).toFixed(3)}<br/>
+//         <hr>
+//         <b>Testing Data<br/></b>
+//         Total Tested: ${(props.test_total)}<br/>
+//         Tested Positive: ${(props.test_positive)}<br/>
+//         Tested Negative: ${(props.test_negative)}<br/>
+//         ${(props.test_total/(props.population/100000)).toFixed(2)} tests per 100000<br/>
+//         Disclosure Grade: ${props.test_grade}<br/>
+//         <span class="timestamp">Updated: ${props.time_tests_updated}</span><br/>
+//         <br>
+//         `
+//         : "<br/>"
+        
+//     this._div.innerHTML = title + body
 
-info.addTo(map);
+// };
+
+// /*-------------------------------DISPLAY COUNTY INFO ON HOVER ------------------------------ */
+
+// info.updateCounty = function (props) {
+//     let cases = props.cases || 0
+//     let title = props ? `<h3>${props.name} County</h3>`:`<h3>Hover over a county</h3>`
+//     let note =  props.notes? `<span class="timestamp">${props.notes}</span><br/>`:``
+//     let body = props ? 
+//         `<b>Covid19 Cases</b><br/>
+//         ${cases} cases<br/>
+//         ${props.deaths || 0} deaths<br/>
+//         <span class="timestamp">Updated: ${props.time_cases_update}</span><br/>
+//         <hr>
+//         <b>Population</b><br/>
+//         ${numberWithCommas(props.population)} people<br/>
+//         ${(cases/(props.population/100000)).toFixed(2)} cases per 100000<br/>
+//         <hr>
+//         <b>Comparative Risk<br/></b>
+//         Local Risk: ${(props.risk_local).toFixed(3)}<br/>
+//         Nearby Risk: ${(props.risk_nearby).toFixed(3)}<br/>
+//         Total Risk: ${(props.risk_total).toFixed(3)}<br/>
+//         ${note}
+//         `
+//         : "<br/>"
+        
+//     this._div.innerHTML = title + body
+// };
+
+// info.addTo(map);
 
 //On layer change
-map.on('baselayerchange', function (e) {
+map.on('baselayerchange', (e)=> onBaseLayerChange(e))
+
+function onBaseLayerChange(e){
     window.curLayer = e.name
-    initSidebarControls()
-    updateSidebar()
+    enableDisableOptions()
+    updateList()
+    updateSelectedMetric(document.querySelector('select'))
     updateMapStyle()
     updateLegend()
-});
+};
 
 // for(let hospital of dataHospitals){
 //     var circle = L.circle([hospital.Y, hospital.X], {

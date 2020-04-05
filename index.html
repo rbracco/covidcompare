@@ -5,7 +5,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
         integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
         crossorigin=""/>
@@ -20,68 +21,151 @@
         <div class="leaflet-sidebar-tabs">
             <!-- top aligned tabs -->
             <ul role="tablist">
-                <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
-                <li class="chartsLI"><a href="#charts" role="tab"><i class="fas fa-chart-pie"></i></a></li>
-                <li><a href="#method" role="tab"><i class="fas fa-flask"></i></a></li>
-                <li><a href="#about" role="tab"><i class="fa fa-info-circle"></i></a></li>
+                <li class="infographic-li"><a href="#infographic-tab" role="tab"><i class="fas fa-heartbeat fa-lg active"></i></a></li>
+                <li class="visualize-li"><a href="#visualize-tab" role="tab"><i class="fas fa-chart-pie fa-lg"></i></a></li>
+                <li class="list-li"><a href="#list-tab" role="tab"><i class="fas fa-list-ol fa-lg"></i></a></li>
+                <li class="method-li"><a href="#method-tab" role="tab"><i class="fas fa-vial fa-lg"></i></a></li>
+                <li class="about-li"><a href="#about-tab" role="tab"><i class="fa fa-info-circle fa-lg"></i></a></li>
             </ul>
 
             <!-- bottom aligned tabs -->
             <ul role="tablist">
-                <li><a href="https://github.com/rbracco/covidcompare" target="_blank"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://twitter.com/covidcompare" target="_blank"><i class="fab fa-twitter" style="color:#1DA1F2"></i></a></li>
-                <li><a href="mailto:robertbracco1@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a></li>
+                <li><a href="https://github.com/rbracco/covidcompare" target="_blank"><i class="fab fa-github fa-lg"></i></a></li>
+                <li><a href="https://twitter.com/covidcompare" target="_blank"><i class="fab fa-twitter fa-lg" style="color:#1DA1F2"></i></a></li>
+                <li><a href="mailto:robertbracco1@gmail.com" target="_blank"><i class="fas fa-envelope fa-lg"></i></a></li>
             </ul>
         </div>
 
         <!-- panel content -->
+        <!------------------------------------------INFOGRAPHIC TAB -------------------------------------------->
         <div class="leaflet-sidebar-content">
-            <div class="leaflet-sidebar-pane" id="home">
+            <div class="leaflet-sidebar-pane" id="infographic-tab">
                 <h1 class="leaflet-sidebar-header">
-                    United States Covid19 Data
+                    Latest Covid19 USA Analyis 
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <div class="controls">
-
-                </div>
-                <div class="data">
-                    
+                <div class="infographic">
+                    <div class="controls infographic-controls"></div>
+                    <div class="header infographic-header"></div>
+                    <div class="data infographic-data"></div>
+                        <div class="infographic-graphic">
+                            <div class="info-row">
+                                <div class="info-col-cases">
+                                    <i class="fas fa-virus fa-lg info-icon"></i>
+                                    <h3 class="info-col-header">Case Data</h3>
+                                    <div class="stats-display">
+                                        Total:&nbsp;<span class="datapoint" id="cases-cases-total">132,475</span> cases<br/>
+                                        <span class="datapoint" id="cases-cases-pc">21.21</span> per 100k 
+                                        <span class="datapoint data-small" id="cases-cases-rank"></span><br/>
+                                        24h Growth: <span class="datapoint" id="cases-cases-growth24h">24.21</span>%<br/>
+                                        72h Growth  <span class="datapoint" id="cases-cases-growth72h">124.21</span>%<br/>
+                                        &nbsp;1w Growth <span class="datapoint" id="cases-cases-growth1w">124.21</span>%<br/>
+                                    </div>
+                                </div>
+                                <div class="info-col-deaths">
+                                    <i class="fas fa-skull-crossbones fa-lg info-icon"></i>
+                                    <h3 class="info-col-header">Death Data</h3>
+                                    <div class="stats-display">
+                                        Total:&nbsp<span class="datapoint" id="deaths-deaths-total">147</span> deaths<br/>
+                                        <span class="datapoint" id="deaths-deaths-pc">1.21</span>&nbsp;per 100k
+                                        <span class="datapoint data-small" id="deaths-deaths-rank"></span><br/>
+                                        24h Growth: <span class="datapoint" id="deaths-deaths-growth24h">24.21</span>%<br/>
+                                        72h Growth <span class="datapoint" id="deaths-deaths-growth72h">124.21</span>%<br/>
+                                        &nbsp;1w Growth <span class="datapoint" id="deaths-deaths-growth1w">124.21</span>%<br/>
+                                    </div>
+                                </div>
+                                    
+                            </div>
+                            <div class="info-row">
+                                <div class="info-col-tests">
+                                    <i class="fas fa-microscope fa-lg info-icon"></i>
+                                    <h3 class="info-col-header">Test Data</h3>
+                                    <div class="stats-display">
+                                    Total Tests:&nbsp;<span class="datapoint" id="tests-tests-total">132,475</span><br/>
+                                    <span class="datapoint" id="tests-tests-pc">32.68</span> per 100k
+                                    <span class="datapoint data-small" id="tests-tests-rank"></span><br/>
+                                    Positive: <span class="datapoint" id="tests-tests-positive">21,808</span><br/>
+                                    Negative: <span class="datapoint" id="tests-tests-negative">111,000</span><br/>
+                                    Reporting Grade: <span class="datapoint" id="tests-tests-grade"></span><br/>
+                                    </div>
+                                </div>
+                                <div class="info-col-health">
+                                    <i class="fas fa-notes-medical fa-lg info-icon"></i>
+                                    <h3 class="info-col-header">Risk Factors</h3>
+                                    <div class="stats-display">
+                                        Hypertension: <span class="datapoint" id="health-comorbid-hypertension"></span><br/>
+                                        Diabetes: <span class="datapoint" id="health-comorbid-diabetes"></span><br/>
+                                        Obesity: <span class="datapoint" id="health-comorbid-obesity"></span><br/>
+                                        Smoking: <span class="datapoint" id="health-comorbid-smoking"></span><br/>
+                                        Pop Density: <span class="datapoint data-small" id="health-population-density"></span><br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-col-age">
+                                    <i class="fas fa-users fa-lg info-icon"></i>
+                                    <h3 class="info-col-header">Resident Data</h3>
+                                    <div class="stats-display">
+                                        Population: <span class="datapoint" id="resident-population">46,295</span><br/>
+                                        Age 65+: <span class="datapoint data-small" id="resident-age-65"></span><br/>
+                                        Age 75+: <span class="datapoint data-small" id="resident-age-75"></span><br/>
+                                        Age 85+: <span class="datapoint data-small" id="resident-age-85"></span><br/>
+                                        
+                                        
+                                    </div>
+                                </div>
+                                <div class="info-col-risk">
+                                    <i class="fas fa-exclamation-triangle fa-lg info-icon"></i>
+                                    <h3 class="info-col-header">Risk Info</h3>
+                                    <div class="stats-display">
+                                        Total Risk: <span class="datapoint" id="risk-risk-total"></span><br/>
+                                        Local Risk: <span class="datapoint" id="risk-risk-local"></span><br/>
+                                        Nearby Risk: <span class="datapoint" id="risk-risk-nearby"></span><br/>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                            
+                        </div>
+                        <div class="infographic-chart" style="width:100%"><canvas id="canvas-infographic" style="margin-left: -20px" width="350px;" height="250px;"></canvas></div>
                 </div>
             </div>
-            <div class="leaflet-sidebar-pane" id="charts">
+
+            <!------------------------------------------VISUALIZE TAB -------------------------------------------->
+            <div class="leaflet-sidebar-pane" id="visualize-tab">
                 <h1 class="leaflet-sidebar-header">
                     Visualizing the Trends
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <div class="visualizations">
-                    <div class="viz-reset"></div>
-                    <div class="infographic"></div>
-                    <div class="chart_container"></div>
-                        <div class="chart-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
-                        <div class="chart-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
-                        <div class="chart-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div>
+                <div class="visualize">
+                    <div class="controls visualize-controls"></div>
+                    <div class="header visualize-header"></div>
+                    <div class="data visualize-data"></div>
+                        <div class="visualize-cases"><canvas id="canvas-cases" width="350" height="250"></canvas></div>
+                        <div class="visualize-deaths"><canvas id="canvas-deaths" width="350" height="250"></canvas></div>
+                        <div class="visualize-tests"><canvas id="canvas-tests" width="350" height="250"></canvas></div>
                 </div>
             </div>
-            <div class="leaflet-sidebar-pane" id="about">
+
+            <!------------------------------------------LIST TAB -------------------------------------------->
+            <div class="leaflet-sidebar-pane" id="list-tab">
                 <h1 class="leaflet-sidebar-header">
-                    About Us
+                    List of All States/Counties
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <div class="about">
-                    <h2>Disclaimer:</h2><p class="disclaimer">This project is under development and changing rapidly. The risk values shown are currently arbitrary calculations and, while they do represent the relative risk between counties and states, they are not ready to be relied on for any form of decision making.</p>
+                <div class="controls list-controls">
 
-                    <h2>Why this map?</h2>
-                    <p>Most Covid19 maps we've seen show the absolute number of cases in a location, but that's not the most important metric. 50 cases in Kentucky isn't the same as 50 cases in NYC.</p>
-                    <p>We pull in data on population, hospital beds, and neighboring counties/states to allow users to compare the risk level to better understand what their community is up against.</p>
+                </div>
+                <div class="header list-header"></div>
+                <div class="data list-data">
                     
-                    <h2> Who we are:</h2>
-                    <p>A group of volunteers trying to do our best to provide access to covid19 data and analysis at the most local level possible</p> 
-                    <p>We think county level infection data and state level testing data should be made widely available. Our work is open source and you may use any of the code or data for your own projects. </p>
-                    <p>See our <a href="https://github.com/rbracco/covidcompare">GitHub Page</a> for more details</a></p>
                     
                 </div>
             </div>
-            <div class="leaflet-sidebar-pane" id="method">
+
+            <!------------------------------------------BEGIN STATIC TABS -------------------------------------------->
+            <!----------------------------------------------METHOD TAB -------------------------------------------->
+            <div class="leaflet-sidebar-pane" id="method-tab">
                 <h1 class="leaflet-sidebar-header">
                     Methodology and Details
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
@@ -112,6 +196,25 @@
                     </ol>
                 </div>
             </div>
+            <div class="leaflet-sidebar-pane" id="about-tab">
+                <h1 class="leaflet-sidebar-header">
+                    About Us
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div class="about">
+                    <h2>Disclaimer:</h2><p class="disclaimer">This project is under development and changing rapidly. The risk values shown are currently arbitrary calculations and, while they do represent the relative risk between counties and states, they are not ready to be relied on for any form of decision making.</p>
+
+                    <h2>Why this map?</h2>
+                    <p>Most Covid19 maps we've seen show the absolute number of cases in a location, but that's not the most important metric. 50 cases in Kentucky isn't the same as 50 cases in NYC.</p>
+                    <p>We pull in data on population, hospital beds, and neighboring counties/states to allow users to compare the risk level to better understand what their community is up against.</p>
+                    
+                    <h2> Who we are:</h2>
+                    <p>A group of volunteers trying to do our best to provide access to covid19 data and analysis at the most local level possible</p> 
+                    <p>We think county level infection data and state level testing data should be made widely available. Our work is open source and you may use any of the code or data for your own projects. </p>
+                    <p>See our <a href="https://github.com/rbracco/covidcompare">GitHub Page</a> for more details</a></p>
+                    
+                </div>
+            </div>
 
         </div>
     </div>
@@ -133,7 +236,11 @@
     <script src="js/state.js"></script>
     <script src="js/county.js"></script>
     <script src="js/appMap.js"></script>
+    <script src="js/infographic.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/list.js"></script>
     <script src="js/sidebar.js"></script>
+    
     
 </body>
 </html>

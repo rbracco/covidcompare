@@ -15,7 +15,7 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
     includes: L.Evented ? L.Evented.prototype : L.Mixin.Events,
 
     options: {
-        autopan: false,
+        autopan: true,
         closeButton: true,
         container: null,
         position: 'left'
