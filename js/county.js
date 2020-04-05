@@ -65,9 +65,7 @@ function highlightCounty(layer) {
 function resetHighlightCounty(layer) {
     window.curCounty = window.clickCounty;
     updateSidebarOnHover()
-    // if(isChartsTabActive()){
-    //     visualize()
-    // }
+
     layer.setStyle({
         weight: 1,
         opacity: 1,

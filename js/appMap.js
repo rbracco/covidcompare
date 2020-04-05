@@ -20,9 +20,9 @@ let mapAttribution = `<a href="https://github.com/rbracco/covidcompare" target="
                     Map data: 
                     <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> |
                     <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a> |
-                    <a href="https://www.mapbox.com/" target="_blank">Imagery:Mapbox</a>`
+                    <a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a>`
 
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=JUdfeZRkXltAhTrUZSpJ', {
     attribution: mapAttribution,
     maxZoom: 18,
     id: tileProvider,

@@ -109,7 +109,6 @@ function visualize(statename=null, countyID=null){
 }
 
 if(mobileCheck()){
-    console.log("hey")
     closeSidebar()
 }
 
