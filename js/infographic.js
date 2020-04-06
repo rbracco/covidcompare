@@ -51,7 +51,7 @@ function updateInfographicState(statename){
 
 function updateInfographicDefault(){
     setInfographicHeader("United States: Hover on a state")
-    //updateInfographicGraphic()
+    resetInfographicGraphic()
 }
 
 function displayPctGrowth(growth, digits=2){
@@ -109,4 +109,11 @@ function updateInfographicGraphic(props){
     document.querySelector('#risk-risk-local').innerHTML = numberWithCommas(props["risk_local"].toFixed(2))
     document.querySelector('#risk-risk-nearby').innerHTML = numberWithCommas(props["risk_nearby"].toFixed(2))
 
+}
+
+function resetInfographicGraphic(){
+    datapoints = document.querySelectorAll('.datapoint')
+    for(let datapoint of datapoints){
+        datapoint.innerHTML = '-'
+    }
 }
