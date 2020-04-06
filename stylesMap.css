@@ -188,6 +188,9 @@ td.row-header{
 .stats-display{
     font-size:14px;
 }
+.data-small{
+    font-size:12px;
+}
 .datapoint{
     font-size:14px;
 }

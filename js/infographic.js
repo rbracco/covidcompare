@@ -51,7 +51,7 @@ function updateInfographicState(statename){
 
 function updateInfographicDefault(){
     setInfographicHeader("United States: Hover on a state")
-    resetInfographicGraphic()
+    updateInfographicGraphic(USData["properties"])
 }
 
 function displayPctGrowth(growth, digits=2){
@@ -62,20 +62,24 @@ function displayPct(decimal, digits=2){
     return (100*parseFloat(decimal)).toFixed(digits)
 }
 
+//only apply toFixed if it's numeric, else just return
+function safeToFixed(item, digits){
+    return isNaN(item) ? item:item.toFixed(digits)
+}
 
 function updateInfographicGraphic(props){
     const curLayer = window.curLayer
     let rank_total = curLayer === "States" ? stateData["features"].length:countyData["features"].length
     document.querySelector('#cases-cases-total').innerHTML = numberWithCommas(props["cases"])
     document.querySelector('#cases-cases-pc').innerHTML = props["pc_cases"].toFixed(2)
-    document.querySelector('#cases-cases-rank').innerHTML = `(${props["rank_cases"]}/${rank_total})`
+    document.querySelector('#cases-cases-rank').innerHTML = isNaN(props["rank_cases"])?"(-)":`(${props["rank_cases"]}/${rank_total})`
     document.querySelector('#cases-cases-growth24h').innerHTML = displayPctGrowth(props["growth_cases24hr"])
     document.querySelector('#cases-cases-growth72h').innerHTML = displayPctGrowth(props["growth_cases72hr"])
     document.querySelector('#cases-cases-growth1w').innerHTML = displayPctGrowth(props["growth_cases1w"])
 
     document.querySelector('#deaths-deaths-total').innerHTML = numberWithCommas(props["deaths"])
     document.querySelector('#deaths-deaths-pc').innerHTML = props["pc_deaths"].toFixed(2)
-    document.querySelector('#deaths-deaths-rank').innerHTML = `(${props["rank_deaths"]}/${rank_total})`
+    document.querySelector('#deaths-deaths-rank').innerHTML = isNaN(props["rank_deaths"])?"(-)":`(${props["rank_deaths"]}/${rank_total})`
     document.querySelector('#deaths-deaths-growth24h').innerHTML = displayPctGrowth(props["growth_deaths24hr"])
     document.querySelector('#deaths-deaths-growth72h').innerHTML = displayPctGrowth(props["growth_deaths72hr"])
     document.querySelector('#deaths-deaths-growth1w').innerHTML = displayPctGrowth(props["growth_deaths1w"])
@@ -105,9 +109,9 @@ function updateInfographicGraphic(props){
     document.querySelector('#resident-age-75').innerHTML = `${numberWithCommas(above75)} (${displayPct(above75/pop, digits=1)}%)`
     document.querySelector('#resident-age-85').innerHTML = `${numberWithCommas(above85)} (${displayPct(above85/pop, digits=1)}%)`
     
-    document.querySelector('#risk-risk-total').innerHTML = numberWithCommas(props["risk_total"].toFixed(2))
-    document.querySelector('#risk-risk-local').innerHTML = numberWithCommas(props["risk_local"].toFixed(2))
-    document.querySelector('#risk-risk-nearby').innerHTML = numberWithCommas(props["risk_nearby"].toFixed(2))
+    document.querySelector('#risk-risk-total').innerHTML = numberWithCommas(safeToFixed(props["risk_total"], 2))
+    document.querySelector('#risk-risk-local').innerHTML = numberWithCommas(safeToFixed(props["risk_local"], 2))
+    document.querySelector('#risk-risk-nearby').innerHTML = numberWithCommas(safeToFixed(props["risk_nearby"], 2))
 
 }
 

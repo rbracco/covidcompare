@@ -17,10 +17,6 @@ function destroyCharts(){
     }
 }
 
-function updateInfographic(){
-
-}
-
 function updateChart(chart, props, propName, level, days=14){
     let perCapita = document.querySelector("#perCapitaCheckbox").checked
     let [datasets, labels] = getTimeData(props["time_series"], propName, perCapita, props["population"], days)

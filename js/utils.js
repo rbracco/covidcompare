@@ -8,8 +8,8 @@ function mobileCheck() {
 
 
 function numberWithCommas(x) {
-    if(x === null || x === undefined){
-        return null
+    if(isNaN(x)){
+        return x
     }
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
