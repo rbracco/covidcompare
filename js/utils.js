@@ -104,7 +104,7 @@ function getCheckbox(name, labelText){
 
 function updateSelectedMetric(selectMenu){
     let metric
-    let base = {value:"cases", text:"Total Cases"};
+    let base = {value:"pc_deaths", text:"Deaths Per 100,000"};
     
     if(!selectMenu){
         metric = base
@@ -294,8 +294,8 @@ function initSelectMenu(menuID){
         updateLegend()
     })
 
-    selectMenu.text = "Total Cases"
-    selectMenu.value = "cases"
-    selectMenu.selectedIndex = 1
+    selectMenu.text = "Deaths per 100,000"
+    selectMenu.value = "pc_deaths"
+    selectMenu.selectedIndex = 6
     return selectMenu
 }

@@ -169,7 +169,6 @@ html, body, #map {
     color: #0054d9
 }
 
-
 .body-row{
     
 }
@@ -184,3 +183,13 @@ td.row-header{
     font-size:18px;
 }
 
+/* Mobile Styles */
+@media only screen and (max-width: 500px) {
+.stats-display{
+    font-size:14px;
+}
+.datapoint{
+    font-size:14px;
+}
+
+}
