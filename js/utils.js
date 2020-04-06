@@ -250,7 +250,7 @@ function initSelectMenu(menuID){
                         {
                             "Total Cases":"cases", 
                             //"Active":"active", 
-                            "Recovered":"recovered", 
+                            //"Recovered":"recovered", 
                             "Deaths":"deaths",
                         },
                         "Per Capita":
@@ -296,6 +296,6 @@ function initSelectMenu(menuID){
 
     selectMenu.text = "Deaths per 100,000"
     selectMenu.value = "pc_deaths"
-    selectMenu.selectedIndex = 6
+    selectMenu.selectedIndex = 5
     return selectMenu
 }
