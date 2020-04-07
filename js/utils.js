@@ -94,7 +94,7 @@ function getCheckbox(name, labelText){
     checkbox.type = "checkbox";
     checkbox.name = name;
     checkbox.id = name;
-    checkbox.onclick = (e) => visualize()
+    checkbox.onclick = (e) => updateVisualize()
 
     var label = document.createElement(label)
     label.htmlFor = name;

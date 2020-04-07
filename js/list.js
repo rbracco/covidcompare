@@ -19,10 +19,10 @@ function updateList(){
         populateListDetailed(dataDiv)
     }
     else if(statename){
-        populateListState(dataDiv)
+        populateListCounty(dataDiv)
     }
     else{
-        populateListCounty(dataDiv)
+        populateListState(dataDiv)
     }
 }
 
