@@ -154,10 +154,6 @@ function zoomToFeature(layer, padding) {
     map.fitBounds(layer.getBounds(), {padding:padding});
 }
 
-function isActiveTab(tabName){
-    return document.querySelector(`.${tabName}-li`).classList.value.split(' ').includes('active')
-}
-
 
 
 function getColorsForMetric(metricValue){

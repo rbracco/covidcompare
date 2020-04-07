@@ -6,8 +6,9 @@ window.curState = null
 window.curCounty = null
 window.clickState = null
 window.clickCounty = null
+window.curTab = "infographic-tab"
 window.curMetric = {value:"pc_deaths", text:"Deaths per 100,000"}
-countyIndex = indexCounties()
+//countyIndex = indexCounties()
 let [lat, long] = mobileCheck()? [40, -99]:[40, -96]
 let zoomLevel = mobileCheck()?3:5
 //'mapbox/satellite-v9'

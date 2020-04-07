@@ -1,17 +1,21 @@
-function indexCounties(){
-    let i = 0
-    countyIDToIndex = {}
-    for(let county of countyData["features"]){
-        countyIDToIndex[county["properties"]["geo_id"]] = i
-        i += 1
-    }
-    return countyIDToIndex
-}
+// function indexCounties(){
+//     let i = 0
+//     countyIDToIndex = {}
+//     console.log(countyData["features"])
+//     for(let county of countyData["features"]){
+//         console.log(county)
+//         countyIDToIndex[county["properties"]["geo_id"]] = i
+//         i += 1
+//     }
+//     return countyIDToIndex
+// }
 
 function getCounty(countyID){
-    let index = countyIndex[countyID]
-    return countyData["features"][index]
-    //return countyData["features"].find(element => element["properties"]["geo_id"] == countyID)
+    
+    // let index = countyIndex[countyID]
+    // console.log("getting county", countyID, "index", index, countyData["features"][index])
+    // return countyData["features"][index]
+    return countyData["features"].find(element => element["properties"]["geo_id"] == countyID)
 }
 
 function convertCountyIDToLayer(countyID){

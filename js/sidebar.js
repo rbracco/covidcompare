@@ -5,6 +5,10 @@ var sidebar = L.control.sidebar({container:'sidebar'})
 //Set events on tab change
 sidebar.on('content', function(e) {
     let tabName = e.id
+    window.curTab = tabName
+    // tabClass = tabName.split('-')[0] + '-li'
+    // console.log(tabClass)
+    // document.querySelector(`.${tabClass}`).classList.add('active')
     if(tabName === "infographic-tab"){
         updateInfographic()
     }
@@ -41,19 +45,23 @@ function getActiveTab(){
     return null
 }
 
+function isActiveTab(tabName){
+    return document.querySelector(`.${tabName}-li`).classList.value.split(' ').includes('active')
+}
+
 function isSidebarOpen(){
     const sidebar = document.querySelector('#sidebar')
     return !sidebar.classList.contains('collapsed')
 }
 
 function openSidebar(){
-    const sidebar = document.querySelector('#sidebar')
-    sidebar.classList.remove('collapsed')
-}
-
-function closeSidebar(){
-    const sidebar = document.querySelector('#sidebar')
-    sidebar.classList.add('collapsed')
+    sidebar.open(window.curTab)
+    // const sidebar = document.querySelector('#sidebar')
+    
+    
+    // sidebar.classList.remove('collapsed')
+    // const infographicTab = document.querySelector('.infographic-li')
+    // infographicTab.classList.add('active')
 }
 
 //Only called for hover events
@@ -68,6 +76,6 @@ function updateSidebarOnHover(){
 }
 
 if(mobileCheck()){
-    closeSidebar()
+    sidebar.close()
 }
 
