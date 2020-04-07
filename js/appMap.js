@@ -7,6 +7,7 @@ window.curCounty = null
 window.clickState = null
 window.clickCounty = null
 window.curMetric = {value:"pc_deaths", text:"Deaths per 100,000"}
+countyIndex = indexCounties()
 let [lat, long] = mobileCheck()? [40, -99]:[40, -96]
 let zoomLevel = mobileCheck()?3:5
 //'mapbox/satellite-v9'

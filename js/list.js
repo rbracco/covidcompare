@@ -10,17 +10,19 @@ function initListControls(){
 }
 
 function updateList(){
+    countyID = window.curCounty || window.clickCounty
+    statename = window.curState || window.clickState
     let dataDiv = document.querySelector(".list-data")
     dataDiv.children = []
     dataDiv.innerHTML = ""
-    if(window.curCounty){
+    if(countyID){
         populateListDetailed(dataDiv)
     }
-    else if(window.curLayer === "States"){
-        populateListState(dataDiv)
+    else if(statename){
+        populateListCounty(dataDiv)
     }
     else{
-        populateListCounty(dataDiv)
+        populateListState(dataDiv)
     }
 }
 

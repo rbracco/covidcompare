@@ -14,9 +14,9 @@ function setInfographicHeader(headerText){
     headerDiv.append(header)
 }
 
-function updateInfographic(statename=null, countyID=null){
-    countyID = countyID || window.curCounty
-    statename = statename || window.curState
+function updateInfographic(){
+    countyID = window.curCounty || window.clickCounty
+    statename = window.curState || window.clickState
     destroyCharts()
     if(countyID){
         updateInfographicCounty(countyID)
@@ -35,7 +35,6 @@ function updateInfographicCounty(countyID){
     setInfographicHeader(`${props["name"]} County, ${props["statename"]}`)
     updateInfographicGraphic(props)
     let chartCases = document.querySelector('#canvas-infographic')
-    
     updateChart(chartCases, props, "deaths", "county")
 
 }
