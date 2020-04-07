@@ -66,7 +66,6 @@ function updateSidebarOnHover(){
     }
 }
 
-
 if(mobileCheck()){
     closeSidebar()
 }

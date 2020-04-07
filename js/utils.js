@@ -76,6 +76,7 @@ let resetMap = () => {
     map.setView([lat,long], zoomLevel);
     map.removeLayer(countyLayer)
     map.addLayer(stateLayer)
+    updateSidebarOnHover()
 }
 
 function getResetButton() {

@@ -14,7 +14,7 @@ function setInfographicHeader(headerText){
     headerDiv.append(header)
 }
 
-function updateInfographic(statename=null, countyID=null){
+function updateInfographic(){
     countyID = window.curCounty || window.clickCounty
     statename = window.curState || window.clickState
     destroyCharts()
