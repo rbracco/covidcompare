@@ -15,7 +15,7 @@ function updateList(){
     let dataDiv = document.querySelector(".list-data")
     dataDiv.children = []
     dataDiv.innerHTML = ""
-    console.log(window.curLayer)
+    console.log("updating list", window.curLayer)
     if(countyID){
         populateListDetailed(dataDiv)
     }

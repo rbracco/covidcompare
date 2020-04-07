@@ -93,6 +93,21 @@ L.control.locate({
     }
 }).addTo(map);
 
+async function onLocationFound(e) {
+    console.log(e)
+    let latitude = e.latitude
+    let longitude = e.longitude
+    const countyID = await getCountyIDFromLatLng(latitude, longitude)
+    console.log("ID", countyID)
+    window.clickCounty = countyID
+
+    map.removeLayer(stateLayer)
+    map.addLayer(countyLayer)
+    updateSidebarOnHover()
+}
+
+map.on('locationfound', onLocationFound)
+
 function updateMapStyle(){
     if(window.curLayer === "States"){
         stateLayer.eachLayer((layer) => stateLayer.resetStyle(layer))
