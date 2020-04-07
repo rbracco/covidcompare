@@ -135,7 +135,7 @@ function populateListDetailed(dataDiv){
 }
 
 function getListData(){
-    let curState = window.curState
+    let curState = window.curState || window.clickState
     let curLayer = window.curLayer
     let allData = curLayer === "States" ? stateData["features"]:countyData["features"]
     //if we've selected a current state, filter to only show data from that state

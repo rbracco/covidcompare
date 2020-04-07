@@ -6,9 +6,6 @@ var sidebar = L.control.sidebar({container:'sidebar'})
 sidebar.on('content', function(e) {
     let tabName = e.id
     window.curTab = tabName
-    // tabClass = tabName.split('-')[0] + '-li'
-    // console.log(tabClass)
-    // document.querySelector(`.${tabClass}`).classList.add('active')
     if(tabName === "infographic-tab"){
         updateInfographic()
     }
