@@ -19,9 +19,7 @@ function setVisualizationHeader(headerText){
     headerDiv.append(header)
 }
 
-function updateVisualize(statename=null, countyID=null){
-    // countyID = countyID || window.curCounty
-    // statename = statename || window.curState
+function updateVisualize(){
     countyID = window.curCounty || window.clickCounty
     statename = window.curState || window.clickState
     if(countyID){
@@ -73,7 +71,12 @@ function visualizeCounty(countyID){
 }
 
 function visualizeDefault(){
+    let {chartCases, chartDeaths, chartTests} = getChartCanvases()
     destroyCharts()
-    setVisualizationHeader('Please click or hover ')
+    let props = USData["properties"]
+    setVisualizationHeader(`United States: Hover on a state`)
+    updateChart(chartCases, props, "cases", "state")
+    updateChart(chartDeaths, props, "deaths", "state")
+    updateChart(chartTests, props, "test_total", "state")
 }
 

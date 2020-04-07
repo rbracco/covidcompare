@@ -57,6 +57,7 @@ function closeSidebar(){
 
 //Only called for hover events
 function updateSidebarOnHover(statename=null, countyID=null){
+    console.log("UpdateOnHover", statename, countyID)
     let activeTab = getActiveTab()
     if(activeTab === "infographic" || activeTab === null){
         updateInfographic(statename, countyID)
