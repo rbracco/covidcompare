@@ -22,8 +22,9 @@ function getBackToStateButton(stateName, curStateLayer) {
     backToStateButton.value = `Back to ${stateName}`
     backToStateButton.classList.add("btn", "btn-primary") 
     backToStateButton.onclick = function(){
-        window.curState = stateName
+        window.clickState = stateName
         window.curCounty = null;
+        window.clickCounty = null;
         zoomToFeature(curStateLayer, padding=[100,100])
         updateList()
     }

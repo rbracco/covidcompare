@@ -58,7 +58,7 @@ function populateListState(dataDiv){
 function populateListCounty(dataDiv){
     let totalCases = 0
     let data = getListData()
-    let curState = window.curState
+    let curState = window.curState || window.clickState
     let region = curState ? curState:"United States"
     let {text:metricText, value:metric} = window.curMetric
     let newOL = document.createElement('ol')
@@ -101,7 +101,7 @@ function populateListCounty(dataDiv){
 }
 
 function populateListDetailed(dataDiv){
-    let countyID = window.curCounty
+    let countyID = window.curCounty || window.clickCounty
     let props = getCounty(countyID)["properties"]
     let {name, statename, stateabbr, cases, state:stateID, } = props
     curStateLayer = convertStateIDToLayer(stateID)
