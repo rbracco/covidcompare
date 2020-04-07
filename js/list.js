@@ -15,10 +15,11 @@ function updateList(){
     let dataDiv = document.querySelector(".list-data")
     dataDiv.children = []
     dataDiv.innerHTML = ""
+    console.log(window.curLayer)
     if(countyID){
         populateListDetailed(dataDiv)
     }
-    else if(statename){
+    else if(statename || window.curLayer === "Counties"){
         populateListCounty(dataDiv)
     }
     else{
