@@ -83,6 +83,16 @@ var overlayMaps = {
 var layerControl = L.control.layers(overlayMaps).addTo(map);
 layerControl.expand()
 
+
+L.control.locate({
+    position: 'topright', 
+    flyTo:true, 
+    initialZoomLevel:8,
+    strings: {
+        title: "Show the latest data for my area"
+    }
+}).addTo(map);
+
 function updateMapStyle(){
     if(window.curLayer === "States"){
         stateLayer.eachLayer((layer) => stateLayer.resetStyle(layer))
