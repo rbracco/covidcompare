@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161482176-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-161482176-1');
+    </script>
     <title>Comparing Covid19 Risk in United States</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,6 +20,7 @@
         integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
         crossorigin=""/>
     <link rel="stylesheet" href="js/plugins/leaflet-sidebar.css" />
+    <link rel="stylesheet" href="js/plugins/leaflet.bookmarks.min.css" />
     <link rel="stylesheet" href="js/plugins/L.Control.Locate.scss" />
     <link rel="stylesheet" href="stylesMap.css" />
     
@@ -228,8 +238,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="js/plugins/leaflet-sidebar.js"></script>
     <script src="js/plugins/L.Control.Locate.js"></script>
+    <script src="js/plugins/L.Control.Bookmarks.js"></script>
+    <script src="js/plugins/Leaflet.Control.Custom.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
     <script src="config.js"></script>
     <script src="data/USData.js"></script>
     <script src="data/stateData.js"></script>
