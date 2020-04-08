@@ -41,6 +41,10 @@ wheels/
 .installed.cfg
 *.egg
 js/plugins/leaflet-sidebar-v2/
+js/plugins/leaflet-locatecontrol/
+js/plugins/Leaflet.Bookmarks/
+js/plugins/Leaflet.Control.Custom/
+js/plugins/Leaflet.Control.Custom.js
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

@@ -83,7 +83,9 @@ function getResetButton() {
     let resetButton = document.createElement('input')
     resetButton.type = "button"
     resetButton.value = "Reset Map"
-
+    // resetButton.classList.add("btn-reset") 
+    // resetButton.innerHTML = '<i class="fas fa-home"></i>'
+    // resetButton.style = "font-size:1em;width:34px; height:32px;"
     resetButton.classList.add("btn", "btn-primary") 
     resetButton.onclick = resetMap
     

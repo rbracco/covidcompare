@@ -34,8 +34,8 @@ function updateInfographicCounty(countyID){
     let props = getCounty(countyID)["properties"]
     setInfographicHeader(`${props["name"]} County, ${props["statename"]}`)
     updateInfographicGraphic(props)
-    let chartCases = document.querySelector('#canvas-infographic')
-    updateChart(chartCases, props, "deaths", "county")
+    let canvasCases = document.querySelector('#canvas-infographic')
+    updateChart(canvasCases, props, "deaths", "county")
 
 }
 
@@ -43,9 +43,9 @@ function updateInfographicState(statename){
     let state = getStateFromName(statename)
     let props = state["properties"]
     updateInfographicGraphic(props)
-    let chartCases = document.querySelector('#canvas-infographic')
+    let canvasCases = document.querySelector('#canvas-infographic')
     setInfographicHeader(`${statename}`)
-    updateChart(chartCases, props, "deaths", "state")
+    updateChart(canvasCases, props, "deaths", "state")
 }
 
 function updateInfographicDefault(){

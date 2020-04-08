@@ -37,7 +37,7 @@ function zoomToCounties(layer){
     map.addLayer(countyLayer)
     let padding = mobileCheck()?[0,0]:[100,100]
     zoomToFeature(layer, padding=[0,0])
-    setTimeout(() => openSidebar(), 1250)
+    setTimeout(() => openSidebar(), 1000)
 }
 
 function resetHighlightState(layer) {
