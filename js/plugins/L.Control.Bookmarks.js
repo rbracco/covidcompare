@@ -1469,9 +1469,8 @@
           map.removeLayer(stateLayer)
           map.addLayer(countyLayer)
       }
-      window.curState = bookmark["state"]
-      window.curCounty = bookmark["county"]
-      console.log("updating", window.curLayer, window.curState, window.curCounty)
+      window.clickState = bookmark["state"]
+      window.clickCounty = bookmark["county"]
       updateSidebarOnHover()
       setTimeout(() => openSidebar(), 1000)
       if (this._marker) { this._marker._popup_._close(); }

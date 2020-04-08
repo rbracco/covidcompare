@@ -102,6 +102,7 @@ async function onLocationFound(e) {
     map.addLayer(countyLayer)
     updateSidebarOnHover()
     openSidebar()
+    geolocate.stopFollowing()
 }
 
 map.on('locationfound', onLocationFound)
