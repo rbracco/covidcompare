@@ -15,7 +15,7 @@ function setVisualizationHeader(headerText){
     let headerDiv = document.querySelector(".visualize-header")
     headerDiv.innerHTML = ""
     let header = document.createElement('h2')
-    header.innerText = headerText
+    header.innerHTML = headerText
     headerDiv.append(header)
 }
 

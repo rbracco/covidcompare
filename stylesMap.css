@@ -185,12 +185,16 @@ td.row-header{
 
 /* Mobile Styles */
 @media only screen and (max-width: 500px) {
-.stats-display{
-    font-size:14px;
+    .stats-display{
+        font-size:12px;
+    }
+    .datapoint{
+        font-size:14px;
+    }
+    .data-small{
+        font-size:12px !important;
+    }
+    .info-col-header{
+        font-size:16px;
 }
-.data-small{
-    font-size:12px;
-}
-.datapoint{
-    font-size:14px;
 }
