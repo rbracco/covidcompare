@@ -36,9 +36,9 @@ function updateVisualize(){
 
 function getChartCanvases(){
     return {
-    "chartCases":document.querySelector("#canvas-cases"),
-    "chartDeaths":document.querySelector("#canvas-deaths"),
-    "chartTests":document.querySelector("#canvas-tests"),
+    "canvasCases":document.querySelector("#canvas-cases"),
+    "canvasDeaths":document.querySelector("#canvas-deaths"),
+    "canvasTests":document.querySelector("#canvas-tests"),
     }
 }
 
@@ -49,34 +49,41 @@ function getChartCanvases(){
 
 
 function visualizeState(statename){
-    let {chartCases, chartDeaths, chartTests} = getChartCanvases()
+    let {canvasCases, canvasDeaths, canvasTests} = getChartCanvases()
     let state = getStateFromName(statename)
     let props = state["properties"]
     setVisualizationHeader(`${props["statename"]}`)
-    updateChart(chartCases, props, "cases", "state")
-    updateChart(chartDeaths, props, "deaths", "state")
-    let chart_tests = chartTests
-    updateChart(chartTests, props, "test_total", "state")
-
-    
+    updateChart(canvasCases, props, "cases", "state")
+    updateChart(canvasDeaths, props, "deaths", "state")
+    updateChart(canvasTests, props, "test_total", "state")
 }
 
 function visualizeCounty(countyID){
-    let {chartCases, chartDeaths, chartTests} = getChartCanvases()
+    let {canvasCases, canvasDeaths, canvasTests} = getChartCanvases()
     destroyCharts()
     let props = getCounty(countyID)["properties"]
     setVisualizationHeader(`${props["name"]} County, ${props["statename"]}`)
-    updateChart(chartCases, props, "cases", "county")
-    updateChart(chartDeaths, props, "deaths", "county")
+    let chartCases = updateChart(canvasCases, props, "cases", "county")
+    let chartDeaths = updateChart(canvasDeaths, props, "deaths", "county")
 }
 
 function visualizeDefault(){
-    let {chartCases, chartDeaths, chartTests} = getChartCanvases()
+    let {canvasCases, canvasDeaths, canvasTests} = getChartCanvases()
     destroyCharts()
     let props = USData["properties"]
     setVisualizationHeader(`United States: Hover on a state`)
-    updateChart(chartCases, props, "cases", "state")
-    updateChart(chartDeaths, props, "deaths", "state")
-    updateChart(chartTests, props, "test_total", "state")
+    updateChart(canvasCases, props, "cases", "state")
+    updateChart(canvasDeaths, props, "deaths", "state")
+    updateChart(canvasTests, props, "test_total", "state")
 }
 
+// inside visualize county
+// for(let bookmark of bookmarks._data){
+//     if(bookmark.county){
+//         console.log("Inside", bookmark)
+//         let newCounty = getCounty(bookmark.county)
+//         console.log("new", newCounty)
+//         addToChart(chartCases, newCounty["properties"], "cases", "county")
+//     }
+//     console.log("bookmarksss", bookmark)
+// }

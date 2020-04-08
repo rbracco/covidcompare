@@ -11,17 +11,19 @@
 //     chart.update();
 // }
 
+
 function destroyCharts(){
     for(let c of Object.keys(Chart.instances)){
         Chart.instances[c].destroy()
     }
 }
 
-function updateChart(chart, props, propName, level, days=14){
+function updateChart(canvas, props, propName, level, days=14){
     let perCapita = document.querySelector("#perCapitaCheckbox").checked
     let [datasets, labels] = getTimeData(props["time_series"], propName, perCapita, props["population"], days)
     let options = getChartOptions(perCapita, level, propName)
-    fillChart(chart, datasets, labels, options)
+    let myChart = fillChart(canvas, datasets, labels, options)
+    return myChart
 }
 
 function getDailyChangeData(data){
@@ -153,6 +155,21 @@ function fillChart(ctx, datasets, labels, options){
         },
         options: options
     });
+    return myChart
     
 }
+
+// function addToChart(chart, props, propName, level, days=14){
+//     console.log("add to chart", chart, props, propName, level)
+//     let perCapita = document.querySelector("#perCapitaCheckbox").checked
+//     let [datasets, labels] = getTimeData(props["time_series"], propName, perCapita, props["population"], days)
+//     console.log("Labels", labels)
+//     for(let dataset of datasets){
+//         chart.config.data.datasets.push(dataset)
+//     }
+//     // chart.config.data.datasets.forEach((dataset) => {
+//     //     dataset.data.push(data);
+//     // });
+//     chart.update()
+// }
 

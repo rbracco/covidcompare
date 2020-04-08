@@ -10,13 +10,10 @@
 //     return countyIDToIndex
 // }
 async function getCountyIDFromLatLng(lat, lng){
-    const api_url = `https://geo.fcc.gov/api/census/block/find?latitude=${lat}&longitude=${lng}&format=xml`
-    const res = await axios.get(api_url)
-    const data = res.data
-    const startIndex = data.indexOf('County FIPS="')
-    const fips = data.slice(startIndex+13, startIndex+18)
-    console.log(fips)
-    return '0500000US' + fips
+    const api_url = `https://geo.fcc.gov/api/census/block/find?latitude=${lat}&longitude=${lng}&format=json`
+    const {data} = await axios.get(api_url)
+    //State Name -> data["State"]["name"] abbr -> data["State"]["code"] county name data["County"]["name"]
+    return '0500000US' + data["County"]["FIPS"]
 }
 
 function getCounty(countyID){

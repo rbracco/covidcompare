@@ -83,8 +83,7 @@ var overlayMaps = {
 var layerControl = L.control.layers(overlayMaps).addTo(map);
 layerControl.expand()
 
-
-L.control.locate({
+let geolocate = L.control.locate({
     position: 'topright', 
     flyTo:true, 
     initialZoomLevel:8,
@@ -94,16 +93,15 @@ L.control.locate({
 }).addTo(map);
 
 async function onLocationFound(e) {
-    console.log(e)
     let latitude = e.latitude
     let longitude = e.longitude
     const countyID = await getCountyIDFromLatLng(latitude, longitude)
-    console.log("ID", countyID)
     window.clickCounty = countyID
 
     map.removeLayer(stateLayer)
     map.addLayer(countyLayer)
     updateSidebarOnHover()
+    openSidebar()
 }
 
 map.on('locationfound', onLocationFound)
@@ -116,6 +114,9 @@ function updateMapStyle(){
         countyLayer.eachLayer((layer) => countyLayer.resetStyle(layer))
     }
 }
+
+var bookmarks = new L.Control.Bookmarks().addTo(map);
+console.log("bookmarks", bookmarks)
 
 /*-------------------------------LEGEND CONTROL ------------------------------ */
 
