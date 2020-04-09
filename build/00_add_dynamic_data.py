@@ -210,7 +210,7 @@ def add_record_to_county(record):
     if(record["combinedKey"] in missing_fips): 
         record["fips"] = missing_fips[record["combinedKey"]]
     #skip anything without a countyID
-    if(record['fips'] is None or record['fips'] in ['00078', '80015', '80040']):
+    if(record['fips'] is None or record['fips'] in ['00078', '80015', '80040', '46102']):
         print_and_log(f'No geo_id, skipping {record["combinedKey"]}')
         return
     #skip anything in the skip list
