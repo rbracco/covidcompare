@@ -52,17 +52,7 @@ App.prototype.addCounties = function(options) {
     app.highlightCounty = function(layer) {
       const { map } = app;
       window.curCounty = layer.feature.properties.geo_id
-      app.updateSidebarOnHover()
-      if (!app.isViewable(layer)){
-          if(map.getZoom() > 7){
-              map.setZoom(7)
-          }
-          map.panTo(layer.getBounds().getCenter())
-      }
-      // if(isChartsTabActive()){
-      //     visualize(state=null, countyID=layer.feature.properties.geo_id)
-      // }
-      
+      app.updateSidebarOnHover()    
       layer.setStyle({
           weight: 5,
           dashArray: '',
@@ -71,7 +61,6 @@ App.prototype.addCounties = function(options) {
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
           layer.bringToFront();
       }
-      //info.updateCounty(layer.feature.properties);
     }
 
     app.resetHighlightCounty = function(layer) {
