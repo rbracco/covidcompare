@@ -1,7 +1,7 @@
 ﻿#My Adds
-data/unused
-data/experiments
-build/logs
+src/data/unused
+src/data/experiments
+src/build/logs
 
 .bundle/
 *.bak
