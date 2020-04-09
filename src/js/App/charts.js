@@ -31,7 +31,7 @@ App.prototype.addCharts = function(options) {
     function getDailyChangeData(data){
         var dailyChange = [0];
         for (var i = 1; i < data.length; i++){
-            dailyChange.push(data[i] - data[i - 1])
+            dailyChange.push((data[i] - data[i - 1]).toFixed(2))
         }
         return dailyChange
     }
@@ -106,13 +106,15 @@ App.prototype.addCharts = function(options) {
         for(let date of dates){
             labels.push(date)
             let dataPoint = timeSeries[date][propName]
-            dataPoint = perCapita ? dataPoint/(pop/100000) : dataPoint
+            dataPoint = perCapita ? (dataPoint/(pop/100000)).toFixed(2) : dataPoint
             data.push(dataPoint)
         }
         labels = labels.slice(-days, -1),
         datasets.push({
             data:data.slice(-days, -1),
             fill:false,
+            pointHoverRadius:5,
+            pointHitRadius:7,
             ...add_options[propName]
         })
         let dailyChangeData = getDailyChangeData(data)
@@ -128,7 +130,7 @@ App.prototype.addCharts = function(options) {
 
     function getChartOptions(perCapita, level, propName){
         return {
-            responsive: true,
+            responsive: false,
             maintainAspectRatio:false,
             scales: {
                 yAxes: [{
