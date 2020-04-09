@@ -69,17 +69,17 @@ App.prototype.addCharts = function(options) {
         "cases":{
             backgroundColor: "#36A2EB",
             borderColor: "#36A2EB",
-            label: "Cases",
+            label: "Total Cases",
         },
         "deaths":{
             backgroundColor: "#FF6384",
             borderColor: "#FF6384",
-            label: "Deaths"
+            label: "Total Deaths"
         },
         "test_total":{
             backgroundColor: "#218F2A",
             borderColor: "#218F2A",
-            label: "Tests"
+            label: "Total Tests"
         },
         "cases_dc":{
             backgroundColor: "#9ecae1",
