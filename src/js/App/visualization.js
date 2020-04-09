@@ -22,6 +22,7 @@ App.prototype.addVisualizations = function(options) {
     }
     
     app.updateVisualize = function(){
+        console.log("Updating cvisualize")
         countyID = window.curCounty || window.clickCounty
         statename = window.curState || window.clickState
         if(countyID){
@@ -55,6 +56,7 @@ App.prototype.addVisualizations = function(options) {
         let {canvasCases, canvasDeaths, canvasTests} = getChartCanvases()
         let state = getStateFromName(statename)
         let props = state["properties"]
+        app.destroyCharts()
         setVisualizationHeader(`${props["statename"]}`)
         updateChart(canvasCases, props, "cases", "state")
         updateChart(canvasDeaths, props, "deaths", "state")

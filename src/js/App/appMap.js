@@ -29,7 +29,6 @@ App.prototype.addMap = function(options) {
         id: tileProvider,
         tileSize: 512,
         zoomOffset: -1,
-        accessToken: API_KEY_MAPBOX,
     }).addTo(app.map);
 
     let outlinePane = app.map.createPane('outlines');

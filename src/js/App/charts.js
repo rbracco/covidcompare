@@ -16,6 +16,7 @@ App.prototype.addCharts = function(options) {
 
     app.destroyCharts = function(){
         for(let c of Object.keys(Chart.instances)){
+            console.log("destroying")
             Chart.instances[c].destroy()
         }
     }
@@ -31,7 +32,7 @@ App.prototype.addCharts = function(options) {
     function getDailyChangeData(data){
         var dailyChange = [0];
         for (var i = 1; i < data.length; i++){
-            dailyChange.push(data[i] - data[i - 1])
+            dailyChange.push((data[i] - data[i - 1]).toFixed(2))
         }
         return dailyChange
     }
@@ -69,17 +70,17 @@ App.prototype.addCharts = function(options) {
         "cases":{
             backgroundColor: "#36A2EB",
             borderColor: "#36A2EB",
-            label: "Cases",
+            label: "Total Cases",
         },
         "deaths":{
             backgroundColor: "#FF6384",
             borderColor: "#FF6384",
-            label: "Deaths"
+            label: "Total Deaths"
         },
         "test_total":{
             backgroundColor: "#218F2A",
             borderColor: "#218F2A",
-            label: "Tests"
+            label: "Total Tests"
         },
         "cases_dc":{
             backgroundColor: "#9ecae1",
@@ -106,13 +107,15 @@ App.prototype.addCharts = function(options) {
         for(let date of dates){
             labels.push(date)
             let dataPoint = timeSeries[date][propName]
-            dataPoint = perCapita ? dataPoint/(pop/100000) : dataPoint
+            dataPoint = perCapita ? (dataPoint/(pop/100000)).toFixed(2) : dataPoint
             data.push(dataPoint)
         }
         labels = labels.slice(-days, -1),
         datasets.push({
             data:data.slice(-days, -1),
             fill:false,
+            pointHoverRadius:5,
+            pointHitRadius:7,
             ...add_options[propName]
         })
         let dailyChangeData = getDailyChangeData(data)
@@ -128,7 +131,7 @@ App.prototype.addCharts = function(options) {
 
     function getChartOptions(perCapita, level, propName){
         return {
-            responsive: true,
+            responsive: false,
             maintainAspectRatio:false,
             scales: {
                 yAxes: [{
@@ -148,7 +151,7 @@ App.prototype.addCharts = function(options) {
     }
 
     function fillChart(ctx, datasets, labels, options){
-        
+        console.log("filling chart")
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {

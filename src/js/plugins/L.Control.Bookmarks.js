@@ -1468,6 +1468,8 @@
           map.removeLayer(stateLayer)
           map.addLayer(countyLayer)
       }
+      window.curState = null
+      window.curCounty = null
       window.clickState = bookmark["state"]
       window.clickCounty = bookmark["county"]
       updateSidebarOnHover()
