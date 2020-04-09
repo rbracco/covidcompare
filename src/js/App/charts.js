@@ -16,6 +16,7 @@ App.prototype.addCharts = function(options) {
 
     app.destroyCharts = function(){
         for(let c of Object.keys(Chart.instances)){
+            console.log("destroying")
             Chart.instances[c].destroy()
         }
     }
@@ -150,7 +151,7 @@ App.prototype.addCharts = function(options) {
     }
 
     function fillChart(ctx, datasets, labels, options){
-        
+        console.log("filling chart")
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
