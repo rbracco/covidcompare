@@ -57,75 +57,6 @@ function sortByDate(a, b){
     }
 }
 
-function getMapDefaultCoords(){
-    if(mobileCheck()){
-        //check if sidebar is open, autopan messes up map reset, this is a slight hack
-        return isSidebarOpen()? [40, -99]:[40, -106.12]
-    }
-    return isSidebarOpen()? [40, -106.12]:[40, -96]
-}
-
-let resetMap = () => {
-    window.curState = null
-    window.curCounty = null
-    window.clickState = null
-    window.clickCounty = null
-    let [lat, long] = getMapDefaultCoords()
-    let zoomLevel = mobileCheck()?3:5
-
-    map.setView([lat,long], zoomLevel);
-    map.removeLayer(countyLayer)
-    map.addLayer(stateLayer)
-    updateSidebarOnHover()
-}
-
-function getResetButton() {
-    let resetButton = document.createElement('input')
-    resetButton.type = "button"
-    resetButton.value = "Reset Map"
-    // resetButton.classList.add("btn-reset") 
-    // resetButton.innerHTML = '<i class="fas fa-home"></i>'
-    // resetButton.style = "font-size:1em;width:34px; height:32px;"
-    resetButton.classList.add("btn", "btn-primary") 
-    resetButton.onclick = resetMap
-    
-    return resetButton
-}
-
-function getCheckbox(name, labelText){
-    var checkbox = document.createElement('input');
-    checkbox.type = "checkbox";
-    checkbox.name = name;
-    checkbox.id = name;
-    checkbox.onclick = (e) => updateVisualize()
-
-    var label = document.createElement(label)
-    label.htmlFor = name;
-    label.appendChild(document.createTextNode(labelText));
-    return [checkbox, label]
-}
-
-function updateSelectedMetric(selectMenu){
-    let metric
-    let base = {value:"pc_deaths", text:"Deaths Per 100,000"};
-    
-    if(!selectMenu){
-        metric = base
-    }
-    // else if(selectMenu.selectedIndex === -1){
-    //     selectMenu.selectedIndex = 1
-    //     metric = base
-    // }
-    else { 
-        metric = {
-            value:selectMenu.options[selectMenu.selectedIndex].value,
-            text:selectMenu.options[selectMenu.selectedIndex].text
-            }
-    }
-    window.curMetric = metric
-
-}
-
 function getColor(props){
     let {value:metricValue, text:metricText} = window.curMetric
     let val = props[metricValue]
@@ -147,16 +78,6 @@ function getDistance(c0, c1){
     let longDist = Math.abs(c0[1]-c1[1])
     return Math.sqrt(latDist*latDist + longDist*longDist) * 111
 }
-
-function isViewable(layer){
-    return map.getBounds().contains(layer.getBounds().getNorthEast()) || map.getBounds().contains(layer.getBounds().getSouthWest()) 
-}
-
-function zoomToFeature(layer, padding) {
-    map.fitBounds(layer.getBounds(), {padding:padding});
-}
-
-
 
 function getColorsForMetric(metricValue){
     redScale = ['#99000d','#cb181d','#ef3b2c','#fb6a4a','#fc9272','#fcbba1','#fee5d9','#abd9e9']
@@ -234,67 +155,4 @@ let countyScales = {
     //Add additional identical scales
     countyScales["risk_local"] = countyScales["risk_total"]
     return window.curLayer === "States" ? statesScales[metricValue]:countyScales[metricValue]
-}
-
-function syncSelects(selectMenu){
-    let selectMenus = document.querySelectorAll('select')
-        for (let select of selectMenus){
-            select.value = selectMenu.value
-        }
-}
-
-function initSelectMenu(menuID){
-    let options = {
-                        "Case Data":
-                        {
-                            "Total Cases":"cases", 
-                            //"Active":"active", 
-                            //"Recovered":"recovered", 
-                            "Deaths":"deaths",
-                        },
-                        "Per Capita":
-                        {
-                            "Cases per 100,000":"pc_cases", 
-                            //"Active per 100,000":"pc_active", 
-                            "Deaths per 100,000":"pc_deaths",
-                        },
-                        "Risk Data":
-                        {
-                            "Total Risk":"risk_total", 
-                            "Local Risk":"risk_local", 
-                            "Nearby Risk":"risk_nearby",
-                        },
-                        "Testing Data":
-                        {
-                            "Total Tests":"test_total", 
-                            "Tests per 100,000":"pc_tests",
-                        },
-                    }  
-    let selectMenu = document.createElement('select')
-    selectMenu.id = menuID
-    for (let category of Object.keys(options)){
-        let menuOption = document.createElement('option')
-        menuOption.text = "  ---" + category + "---"
-        menuOption.disabled = "disabled"
-        menuOption.style = "font-weight:bold;"
-        selectMenu.appendChild(menuOption)
-        for (let displayName of Object.keys(options[category])){
-            let menuOption = document.createElement('option')
-            menuOption.value  = options[category][displayName]
-            menuOption.text = displayName
-            selectMenu.appendChild(menuOption)
-        }
-    }
-    selectMenu.addEventListener("change", ()=> {
-        updateSelectedMetric(selectMenu)
-        syncSelects(selectMenu)
-        updateList()
-        updateMapStyle()
-        updateLegend()
-    })
-
-    selectMenu.text = "Deaths per 100,000"
-    selectMenu.value = "pc_deaths"
-    selectMenu.selectedIndex = 5
-    return selectMenu
 }

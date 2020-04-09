@@ -1024,6 +1024,7 @@
      * @param  {MouseEvent} evt
      */
     _onAddButtonPressed: function(evt) {
+      const { map } = app;
       L.DomEvent.stop(evt);
       let data = this._computeBookmarkData()
       
@@ -1037,6 +1038,7 @@
     },
 
     _computeBookmarkData: function() {
+      const { map, getCounty, getStateFromName} = app
       const curLayer = window.curLayer
       const countyID = window.clickCounty
       const curState = window.clickState
@@ -1174,7 +1176,6 @@
      * @return {Object}
      */
     _getBookmarkDataForTemplate: function(bookmark) {
-      console.log(bookmark)
       if (this.options.getBookmarkDataForTemplate) {
         return this.options.getBookmarkDataForTemplate.call(this, bookmark);
       }
@@ -1277,7 +1278,6 @@
      * @param  {Object} bookmark
      */
     _onBookmarkAdd: function(bookmark) {
-      console.log("onbookmarkAdd", bookmark)
       var this$1 = this;
 
       var map = this._map;
@@ -1320,7 +1320,6 @@
      * @return {Object}
      */
     _cleanBookmark: function(bookmark) {
-      console.log("bookmark", bookmark)
       if (!L.Util.isArray(bookmark.latlng)) {
         bookmark.latlng = [bookmark.latlng.lat, bookmark.latlng.lng];
       }
@@ -1459,7 +1458,7 @@
      * @param  {Object} bookmark
      */
     _showBookmark: function(bookmark) {
-      console.log("Bookmark", bookmark)
+      const { map, updateSidebarOnHover, countyLayer, openSidebar, stateLayer } = app;
       let bookmarkLayer = bookmark["layer"]
       if(bookmarkLayer === "States" && window.curLayer === "Counties"){
           map.removeLayer(countyLayer)
@@ -1469,9 +1468,8 @@
           map.removeLayer(stateLayer)
           map.addLayer(countyLayer)
       }
-      window.curState = bookmark["state"]
-      window.curCounty = bookmark["county"]
-      console.log("updating", window.curLayer, window.curState, window.curCounty)
+      window.clickState = bookmark["state"]
+      window.clickCounty = bookmark["county"]
       updateSidebarOnHover()
       setTimeout(() => openSidebar(), 1000)
       if (this._marker) { this._marker._popup_._close(); }
