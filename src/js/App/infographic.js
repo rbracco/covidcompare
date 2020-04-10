@@ -15,8 +15,8 @@ App.prototype.addInfographic = function(options) {
     }
     
     app.updateInfographic = function(){
-        countyID = window.curCounty || window.clickCounty
-        statename = window.curState || window.clickState
+        countyID = window.hoverCounty || window.clickCounty
+        statename = window.hoverState || window.clickState
         app.destroyCharts()
         if(countyID){
             updateInfographicCounty(countyID)
@@ -68,7 +68,7 @@ App.prototype.addInfographic = function(options) {
     }
     
     function updateInfographicGraphic(props){
-        const curLayer = window.curLayer
+        const curLayer = app.getCurLayer()
         let rank_total = curLayer === "States" ? stateData["features"].length:countyData["features"].length
         document.querySelector('#cases-cases-total').innerHTML = numberWithCommas(props["cases"])
         document.querySelector('#cases-cases-pc').innerHTML = props["pc_cases"].toFixed(2)

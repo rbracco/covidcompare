@@ -51,7 +51,7 @@ App.prototype.addCounties = function(options) {
 
     app.highlightCounty = function(layer) {
       const { map } = app;
-      window.curCounty = layer.feature.properties.geo_id
+      window.hoverCounty = layer.feature.properties.geo_id
       app.updateSidebarOnHover()    
       layer.setStyle({
           weight: 5,
@@ -64,7 +64,7 @@ App.prototype.addCounties = function(options) {
     }
 
     app.resetHighlightCounty = function(layer) {
-      window.curCounty = window.clickCounty;
+      window.hoverCounty = window.clickCounty;
       app.updateSidebarOnHover()
 
       layer.setStyle({

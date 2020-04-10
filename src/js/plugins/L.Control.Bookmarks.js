@@ -1038,18 +1038,18 @@
     },
 
     _computeBookmarkData: function() {
-      const { map, getCounty, getStateFromName} = app
-      const curLayer = window.curLayer
+      const { map, getCounty, getStateFromName, getCurLayer} = app
+      const curLayer = getCurLayer()
       const countyID = window.clickCounty
-      const curState = window.clickState
+      const hoverState = window.clickState
       const id = `${Math.floor(Math.random()*9999999999)}`
       const zoom = map.getZoom()
       let title;
-      if(!countyID && !curState){
+      if(!countyID && !hoverState){
         title = "United States"
       }
       else{
-        const object = countyID?getCounty(countyID):getStateFromName(curState)
+        const object = countyID?getCounty(countyID):getStateFromName(hoverState)
         title = countyID?`${object["properties"]["name"]} County, ${object["properties"]["statename"]}`:object["properties"]["statename"]
       }
       return {
@@ -1057,8 +1057,8 @@
         name: title,
         latlng: this._map.getCenter(),
         layer: curLayer,
-        state: curState,
-        county: curCounty,
+        state: hoverState,
+        county: hoverCounty,
         zoom:zoom,
       }
     },
@@ -1458,18 +1458,18 @@
      * @param  {Object} bookmark
      */
     _showBookmark: function(bookmark) {
-      const { map, updateSidebarOnHover, countyLayer, openSidebar, stateLayer } = app;
+      const { map, updateSidebarOnHover, countyLayer, openSidebar, stateLayer, getCurLayer } = app;
       let bookmarkLayer = bookmark["layer"]
-      if(bookmarkLayer === "States" && window.curLayer === "Counties"){
+      if(bookmarkLayer === "States" && getCurLayer() === "Counties"){
           map.removeLayer(countyLayer)
           map.addLayer(stateLayer)
       }
-      else if (bookmarkLayer === "Counties" && window.curLayer === "States"){
+      else if (bookmarkLayer === "Counties" && getCurLayer() === "States"){
           map.removeLayer(stateLayer)
           map.addLayer(countyLayer)
       }
-      window.curState = null
-      window.curCounty = null
+      window.hoverState = null
+      window.hoverCounty = null
       window.clickState = bookmark["state"]
       window.clickCounty = bookmark["county"]
       updateSidebarOnHover()

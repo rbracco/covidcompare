@@ -22,8 +22,8 @@ App.prototype.addVisualizations = function(options) {
     }
     
     app.updateVisualize = function(){
-        countyID = window.curCounty || window.clickCounty
-        statename = window.curState || window.clickState
+        countyID = window.hoverCounty || window.clickCounty
+        statename = window.hoverState || window.clickState
         if(countyID){
             visualizeCounty(countyID)
         }
