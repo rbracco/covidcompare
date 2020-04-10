@@ -22,7 +22,6 @@ App.prototype.addVisualizations = function(options) {
     }
     
     app.updateVisualize = function(){
-        console.log("Updating cvisualize")
         countyID = window.curCounty || window.clickCounty
         statename = window.curState || window.clickState
         if(countyID){
