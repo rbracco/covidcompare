@@ -2,6 +2,14 @@
 src/data/unused
 src/data/experiments
 src/build/logs
+src/build/USData.js
+src/build/counties.json
+src/build/countyData.js
+src/build/stateData.js
+src/build/states.json
+src/data/USData.js
+src/data/countyData.js
+src/data/stateData.js
 
 .bundle/
 *.bak
