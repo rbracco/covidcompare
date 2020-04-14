@@ -15,8 +15,8 @@ App.prototype.addInfographic = function(options) {
     }
     
     app.updateInfographic = function(){
-        countyID = window.curCounty || window.clickCounty
-        statename = window.curState || window.clickState
+        countyID = window.hoverCounty || window.clickCounty
+        statename = window.hoverState || window.clickState
         app.destroyCharts()
         if(countyID){
             updateInfographicCounty(countyID)
@@ -27,7 +27,6 @@ App.prototype.addInfographic = function(options) {
         else{
             updateInfographicDefault()
         }
-    
     }
     
     function updateInfographicCounty(countyID){
@@ -35,8 +34,8 @@ App.prototype.addInfographic = function(options) {
         let props = app.getCounty(countyID)["properties"]
         setInfographicHeader(`${props["name"]} County, ${props["statename"]}`)
         updateInfographicGraphic(props)
-        let canvasCases = document.querySelector('#canvas-infographic')
-        updateChart(canvasCases, props, "deaths", "county")
+        let canvasInfographic = document.querySelector('#canvas-infographic')
+        updateChart(canvasInfographic, props, "deaths", "county")
     }
     
     function updateInfographicState(statename){
@@ -44,14 +43,19 @@ App.prototype.addInfographic = function(options) {
         let state = app.getStateFromName(statename)
         let props = state["properties"]
         updateInfographicGraphic(props)        
-        let canvasCases = document.querySelector('#canvas-infographic')
+        let canvasInfographic = document.querySelector('#canvas-infographic')
         setInfographicHeader(`${statename}`)
-        updateChart(canvasCases, props, "deaths", "state")
+        updateChart(canvasInfographic, props, "deaths", "state")
     }
     
     function updateInfographicDefault(){
+        const { updateChart } = app;
         setInfographicHeader("United States: Hover on a state")
-        updateInfographicGraphic(USData["properties"])
+        const props = USData["properties"]
+        console.log(props)
+        updateInfographicGraphic(props)
+        let canvasInfographic = document.querySelector('#canvas-infographic')
+        updateChart(canvasInfographic, props, "deaths", "county")
     }
     
     function displayPctGrowth(growth, digits=2){
@@ -62,13 +66,13 @@ App.prototype.addInfographic = function(options) {
         return (100*parseFloat(decimal)).toFixed(digits)
     }
     
-    //only apply toFixed if it's numeric, else just return
+    //only apply toFixed if it's numeric, else just return the item
     function safeToFixed(item, digits){
         return isNaN(item) ? item:item.toFixed(digits)
     }
     
     function updateInfographicGraphic(props){
-        const curLayer = window.curLayer
+        const curLayer = app.getCurLayer()
         let rank_total = curLayer === "States" ? stateData["features"].length:countyData["features"].length
         document.querySelector('#cases-cases-total').innerHTML = numberWithCommas(props["cases"])
         document.querySelector('#cases-cases-pc').innerHTML = props["pc_cases"].toFixed(2)
@@ -114,13 +118,6 @@ App.prototype.addInfographic = function(options) {
         document.querySelector('#risk-risk-nearby').innerHTML = numberWithCommas(safeToFixed(props["risk_nearby"], 2))
     
     }
-    
-    function resetInfographicGraphic(){
-        datapoints = document.querySelectorAll('.datapoint')
-        for(let datapoint of datapoints){
-            datapoint.innerHTML = '-'
-        }
-    }  
 
     initInfographicControls()
     app.updateInfographic()    

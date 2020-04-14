@@ -11,8 +11,8 @@ App.prototype.addList = function(options) {
     }
     
     app.updateList = function(){
-        countyID = window.curCounty || window.clickCounty
-        statename = window.curState || window.clickState
+        countyID = window.hoverCounty || window.clickCounty
+        statename = window.hoverState || window.clickState
         let dataDiv = document.querySelector(".list-data")
         dataDiv.children = []
         dataDiv.innerHTML = ""
@@ -31,7 +31,7 @@ App.prototype.addList = function(options) {
         const {highlightState, resetHighlightState, zoomToCounties, getListData} = app;
         let totalCases = 0
         let data = getListData()
-        let region = window.curState ? window.curState:"United States"
+        let region = window.hoverState ? window.hoverState:"United States"
         let {text:metricText, value:metric} = window.curMetric
         let newOL = document.createElement('ol')
         for(let state of data.sort(sortByProp(metric))){
@@ -61,8 +61,8 @@ App.prototype.addList = function(options) {
         const {getListData, highlightCounty, resetHighlightCounty, displayDetailed} = app;
         let totalCases = 0
         let data = getListData()
-        let curState = window.curState || window.clickState
-        let region = curState ? curState:"United States"
+        let hoverState = window.hoverState || window.clickState
+        let region = hoverState ? hoverState:"United States"
         let {text:metricText, value:metric} = window.curMetric
         let newOL = document.createElement('ol')
         for(let county of data.sort(sortByProp(metric))){
@@ -85,11 +85,11 @@ App.prototype.addList = function(options) {
             //newLI.addEventListener("mouseover", () => info.updateCounty(county["properties"]))
             newOL.appendChild(newLI)
         }
-        if(curState && ["cases", "deaths"].includes(metric)){
-            let curMetric = getUnassigned(curState, metric)
+        if(hoverState && ["cases", "deaths"].includes(metric)){
+            let curMetric = getUnassigned(hoverState, metric)
             if(curMetric){
                 let newLI = document.createElement('li')
-                newLI.innerHTML = `<strong>Unassigned</strong>, ${curState} ${curMetric} ${metricText}`
+                newLI.innerHTML = `<strong>Unassigned</strong>, ${hoverState} ${curMetric} ${metricText}`
                 newOL.appendChild(newLI)
                 totalCases += curMetric
             }
@@ -105,10 +105,10 @@ App.prototype.addList = function(options) {
     
     function populateListDetailed(dataDiv){
         const {getBackToStateButton} = app
-        let countyID = window.curCounty || window.clickCounty
+        let countyID = window.hoverCounty || window.clickCounty
         let props = app.getCounty(countyID)["properties"]
         let {name, statename, stateabbr, cases, state:stateID, } = props
-        curStateLayer = app.convertStateIDToLayer(stateID)
+        hoverStateLayer = app.convertStateIDToLayer(stateID)
         let detailHeader = document.createElement('h2')
         detailHeader.innerText = `${name} County, ${stateabbr}`
         header2 = document.createElement('h4')
@@ -132,18 +132,18 @@ App.prototype.addList = function(options) {
             ${note}
             `
         content.innerHTML = body
-        let backToStateButton = getBackToStateButton(statename, curStateLayer)
+        let backToStateButton = getBackToStateButton(statename, hoverStateLayer)
     
         dataDiv.append(detailHeader,backToStateButton, content)
     }
     
     app.getListData = function(){
-        let curState = window.curState || window.clickState
-        let curLayer = window.curLayer
-        let allData = curState ? countyData["features"]:stateData["features"]
+        let hoverState = window.hoverState || window.clickState
+        let curLayer = app.getCurLayer
+        let allData = hoverState ? countyData["features"]:stateData["features"]
         //if we've selected a current state, filter to only show data from that state
-        if(curState){
-            let filt = filterByProp("statename", curState)
+        if(hoverState){
+            let filt = filterByProp("statename", hoverState)
             allData = allData.filter(filt)
         }
         return allData

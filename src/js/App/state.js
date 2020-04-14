@@ -44,13 +44,13 @@ App.prototype.addStates = function(options) {
     }
     
     app.resetHighlightState = function(layer) {
-      window.curState = window.clickState
+      window.hoverState = window.clickState
       app.updateSidebarOnHover()
       app.stateLayer.resetStyle(layer);
     }
     
     app.highlightState = function(layer) {
-      window.curState=layer.feature.properties.statename
+      window.hoverState=layer.feature.properties.statename
       app.updateSidebarOnHover()
     
       layer.setStyle({

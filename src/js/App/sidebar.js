@@ -21,16 +21,16 @@ App.prototype.addSidebar = function(options) {
         }
     })
 
-    app.getBackToStateButton = function(stateName, curStateLayer) {
+    app.getBackToStateButton = function(stateName, hoverStateLayer) {
         let backToStateButton = document.createElement('input')
         backToStateButton.type = "button"
         backToStateButton.value = `Back to ${stateName}`
         backToStateButton.classList.add("btn", "btn-primary") 
         backToStateButton.onclick = function(){
             window.clickState = stateName
-            window.curCounty = null;
+            window.hoverCounty = null;
             window.clickCounty = null;
-            app.zoomToFeature(curStateLayer, padding=[100,100])
+            app.zoomToFeature(hoverStateLayer, padding=[100,100])
             app.updateList()
         }
         return backToStateButton
@@ -61,16 +61,16 @@ App.prototype.addSidebar = function(options) {
 
     //Only called for hover events
     app.updateSidebarOnHover = () => {
-        const { updateVisualize } = app;
+        const { updateVisualize, updateInfographic } = app;
         let activeTab = getActiveTab()
         if(activeTab === "infographic" || activeTab === null){
-            app.updateInfographic()
+            updateInfographic()
         }
         else if(activeTab === "visualize"){
             updateVisualize()
         }
     }
-
+    //Start with sidebar closed on mobile
     if(mobileCheck()){
         sidebar.close()
     }

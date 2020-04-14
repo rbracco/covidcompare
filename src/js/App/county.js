@@ -1,11 +1,13 @@
 App.prototype.addCounties = function(options) {
     const app = this; 
+
+    //makes an api request to convert lat/long to county gei_id
     app.getCountyIDFromLatLng = async function(lat, lng){
       const api_url = `https://geo.fcc.gov/api/census/block/find?latitude=${lat}&longitude=${lng}&format=json`
       const {data} = await axios.get(api_url)
       //State Name -> data["State"]["name"] abbr -> data["State"]["code"] county name data["County"]["name"]
       return '0500000US' + data["County"]["FIPS"]
-  }
+    }
 
     app.getCounty = function(countyID){
       return countyData["features"].find(element => element["properties"]["geo_id"] == countyID)
@@ -51,7 +53,7 @@ App.prototype.addCounties = function(options) {
 
     app.highlightCounty = function(layer) {
       const { map } = app;
-      window.curCounty = layer.feature.properties.geo_id
+      window.hoverCounty = layer.feature.properties.geo_id
       app.updateSidebarOnHover()    
       layer.setStyle({
           weight: 5,
@@ -64,7 +66,7 @@ App.prototype.addCounties = function(options) {
     }
 
     app.resetHighlightCounty = function(layer) {
-      window.curCounty = window.clickCounty;
+      window.hoverCounty = window.clickCounty;
       app.updateSidebarOnHover()
 
       layer.setStyle({
