@@ -10,7 +10,7 @@ App.prototype.addMap = function(options) {
 
     let [lat, long] = mobileCheck()? [40, -99]:[40, -96]
     let zoomLevel = mobileCheck()?3:5
-
+    //https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=JUdfeZRkXltAhTrUZSpJ
 
     /*------------------------------CREATE AND INITIALIZE MAP---------------------------------- */
     let tileProvider = 'mapbox/streets-v11'
@@ -24,13 +24,12 @@ App.prototype.addMap = function(options) {
                         <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> |
                         <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a> |
                         <a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a>`
-
-    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=JUdfeZRkXltAhTrUZSpJ', {
+    L.tileLayer('http://covidcompare.com:8080/tile/{z}/{x}/{y}.png', {
         attribution: mapAttribution,
         maxZoom: 18,
-        id: tileProvider,
-        tileSize: 512,
-        zoomOffset: -1,
+        //id: tileProvider,
+        tileSize: 256,
+        zoomOffset: 0,
     }).addTo(app.map);
 
     

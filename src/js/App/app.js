@@ -9,8 +9,8 @@ App.prototype.initialize = function(options) {
   app.addStates()
   app.addCounties()  
   app.addMap()
-  app.addInfographic()  
   app.addVisualizations()
+  app.addInfographic()  
   app.addList()
   app.addSidebar()  
 }
