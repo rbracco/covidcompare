@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[89]:
+# In[1]:
 
 
 import pandas as pd
@@ -20,7 +20,7 @@ import datetime
 
 # ### Read in static data
 
-# In[90]:
+# In[2]:
 
 
 county_data_folder = Path('static_data/county')
@@ -28,7 +28,7 @@ with open(county_data_folder/"staticCounties.json", 'r') as f:
     county_json = json.load(f)
 
 
-# In[91]:
+# In[3]:
 
 
 state_data_folder = Path('static_data/state')
@@ -36,9 +36,18 @@ with open(state_data_folder/"staticStates.json", 'r') as f:
     state_json = json.load(f)
 
 
+# #### Convert decimal to percent for state hypertension
+
+# In[4]:
+
+
+for state in state_json["features"]:
+    state["properties"]["comorbid_hypertension"] *= 100
+
+
 # We make one request that will be parsed once for State Data and once for county
 
-# In[92]:
+# In[5]:
 
 
 def request_multiple_attempts(url):
@@ -56,7 +65,7 @@ def request_multiple_attempts(url):
 
 # ### Go through the county_json records and index by geo_id
 
-# In[93]:
+# In[6]:
 
 
 geo_id_index_dict = {}
@@ -68,20 +77,20 @@ for idx, county in enumerate(counties):
 
 # ### Setup logging
 
-# In[94]:
+# In[7]:
 
 
 now = datetime.datetime.now()
 date_str = f"{now.month}-{now.day}-{now.year}-{now.hour}{now.minute}"
 
 
-# In[95]:
+# In[8]:
 
 
 logging.basicConfig(filename=f'logs/message_logs/{date_str}.log',level=logging.DEBUG)
 
 
-# In[96]:
+# In[9]:
 
 
 def print_and_log(message):
@@ -93,7 +102,7 @@ def print_and_log(message):
 
 # ### Add State Covid19 data from John's Hopkins
 
-# In[97]:
+# In[10]:
 
 
 #data from John Hopkins CSSE
@@ -103,7 +112,7 @@ covid_jh = request_multiple_attempts(api_url).json()
 
 # #### Test that data appears to be valid
 
-# In[98]:
+# In[11]:
 
 
 # there should be at least 1700 counties
@@ -114,13 +123,13 @@ for key in mandatory_keys:
     if not key in covid_jh[120]: raise ValueError("John's Hopkins Record missing key: ", key)
 
 
-# In[99]:
+# In[12]:
 
 
 covid_jh[0].keys()
 
 
-# In[100]:
+# In[13]:
 
 
 #includes ms which fromtimestamp doesnt accept so we cut it off
@@ -130,7 +139,7 @@ def get_str_from_timestamp(timestamp):
     return cur.strftime('%#m/%d %#I:%M%p')
 
 
-# In[101]:
+# In[14]:
 
 
 #initialize all state case data to 0
@@ -139,7 +148,7 @@ for state in state_json["features"]:
     state["properties"].update(null_dict)
 
 
-# In[102]:
+# In[15]:
 
 
 keys = ["deaths", "recovered", "active"]
@@ -154,7 +163,7 @@ def add_record_to_state(record):
     print_and_log(f"{record} unmatched")
 
 
-# In[103]:
+# In[16]:
 
 
 def add_unassigned_to_state(statename, record):
@@ -166,14 +175,18 @@ def add_unassigned_to_state(statename, record):
             props["unassigned_cases"] = record["confirmed"]
 
 
-# In[104]:
+# In[17]:
 
 
-skips = ["Diamond Princess, US", "Guam, US", "Grand Princess, US", "Puerto Rico, US", "Virgin Islands, US"]
+skips = ["Diamond Princess, US", "Guam, US", "Grand Princess, US", "Puerto Rico, US", "Virgin Islands, US", 
+         'Northern Mariana Islands, US', 'Unassigned, Northern Mariana Islands, US']
 for record in covid_jh:
     if(record == {}): continue
     if record["combinedKey"] in skips: continue
-    county, state, _ = map(str.strip, record["combinedKey"].split(','))
+    try:
+        county, state, _ = map(str.strip, record["combinedKey"].split(','))
+    except ValueError:
+        print("Skipping record", record)
     if county == "Unassigned":
         add_unassigned_to_state(state, record)
     add_record_to_state(record)
@@ -182,7 +195,7 @@ for record in covid_jh:
 # ### Add County Covid Data19 from John's Hopkins
 # 
 
-# In[105]:
+# In[18]:
 
 
 #initialize all county case data to 0
@@ -190,7 +203,7 @@ for county in counties:
     county["properties"].update(null_dict)
 
 
-# In[106]:
+# In[19]:
 
 
 skips = ["Diamond Princess, US", "Guam, US", "Grand Princess, US", "Puerto Rico, US", "Virgin Islands, US"]
@@ -201,7 +214,7 @@ missing_fips = {
 }
 
 
-# In[107]:
+# In[20]:
 
 
 def add_record_to_county(record):
@@ -210,22 +223,24 @@ def add_record_to_county(record):
     if(record["combinedKey"] in missing_fips): 
         record["fips"] = missing_fips[record["combinedKey"]]
     #skip anything without a countyID
-    if(record['fips'] is None or record['fips'] in ['00078', '80015', '80040', '46102']):
+    if(record['fips'] is None or record['fips'] in ['00078', '80015', '80040', '46102', '80013', 
+                                                   '80047', '80026', '00069']):
         print_and_log(f'No geo_id, skipping {record["combinedKey"]}')
         return
     #skip anything in the skip list
     if(record["combinedKey"] in skips): return
     geo_id = '0500000US' + record["fips"]
-    
-    county = counties[geo_id_index_dict[geo_id]]
-    #Add the contents of record to the county
-    for key in keys:
-        county["properties"][key] += int(record[key])
-    county["properties"]["cases"] += int(record["confirmed"])
-    county["properties"]["time_cases_update"] = get_str_from_timestamp(record["lastUpdate"])
+    try:    
+        county = counties[geo_id_index_dict[geo_id]]
+        #Add the contents of record to the county
+        for key in keys:
+            county["properties"][key] += int(record[key])
+        county["properties"]["cases"] += int(record["confirmed"])
+        county["properties"]["time_cases_update"] = get_str_from_timestamp(record["lastUpdate"])
+    except KeyError as e:
+        print(f"FIPS '{record['fips']}' NOT FOUND, SKIPPING:")
 
-
-# In[108]:
+# In[21]:
 
 
 for record in covid_jh:
@@ -234,7 +249,7 @@ for record in covid_jh:
 
 # #### Reassign NYC to the proper counties
 
-# In[109]:
+# In[22]:
 
 
 new_york_county = counties[geo_id_index_dict['0500000US36061']]
@@ -250,7 +265,7 @@ print_and_log(f"{queens_cases} in queens.")
 print_and_log(f"Reassign needed: {nyc_reassignment_needed}")
 
 
-# In[110]:
+# In[23]:
 
 
 # This is based on an estimate on 3/21/20 in which NYC had 5687 cases broken down as follows
@@ -287,7 +302,7 @@ deaths_proportion_dict = {
 # #get cases that were all aggregated in NY county
 
 
-# In[111]:
+# In[24]:
 
 
 ny_county_names = {
@@ -299,7 +314,7 @@ ny_county_names = {
 }
 
 
-# In[112]:
+# In[25]:
 
 
 print_and_log(f"\nTotal Cases listed for New York County {ny_cases}")
@@ -318,7 +333,7 @@ else:
 
 # ### Add Covid Test Data from Covid Tracking Project
 
-# In[113]:
+# In[26]:
 
 
 def format_test_time(test_time):
@@ -330,7 +345,7 @@ def format_test_time(test_time):
     return f"{d} {h}:{m}{am_pm}"
 
 
-# In[114]:
+# In[27]:
 
 
 #https://covidtracking.com/api/states/info <- this api has info about where the data comes from
@@ -340,7 +355,7 @@ state_tests = request_multiple_attempts(api_url).json()
 
 # #### Test that data appears to be valid
 
-# In[115]:
+# In[28]:
 
 
 # there should be at least 50 entries
@@ -351,13 +366,13 @@ for key in mandatory_keys:
     if not key in state_tests[20]: raise ValueError("CovidTracking testing missing key: ", key)
 
 
-# In[116]:
+# In[29]:
 
 
 state_tests[20]
 
 
-# In[117]:
+# In[30]:
 
 
 for state1 in state_tests:
@@ -373,7 +388,7 @@ for state1 in state_tests:
 
 # ## Per Capita Calculations and Data
 
-# In[118]:
+# In[31]:
 
 
 print_and_log("\nAdding per capita stats for county")
@@ -384,7 +399,7 @@ for county in counties:
     props["pc_deaths"] = props["deaths"]/per_cap
 
 
-# In[119]:
+# In[32]:
 
 
 print_and_log("Adding per capita stats for states")
@@ -401,7 +416,7 @@ for state in state_json["features"]:
 
 # ### Add County time series
 
-# In[120]:
+# In[33]:
 
 
 with open(county_data_folder/'countyTimeData.json', 'r') as f:
@@ -412,7 +427,7 @@ with open(county_data_folder/'countyTimeData.json', 'r') as f:
 
 # Note we wont display this in time series until tomorrow becauseit makes it look like curve is flattening
 
-# In[121]:
+# In[34]:
 
 
 today = datetime.datetime.today()
@@ -420,7 +435,7 @@ todays_date = f"{today.month}-{today.day}-{today.year}"
 print_and_log(f"Adding time series for today: {todays_date}")
 
 
-# In[122]:
+# In[35]:
 
 
 for county in counties:
@@ -433,7 +448,7 @@ for county in counties:
 
 # #### Add time series to county geojson
 
-# In[123]:
+# In[36]:
 
 
 for county in counties:
@@ -441,7 +456,7 @@ for county in counties:
     county["properties"]["time_series"] = county_time_data[geo_id]
 
 
-# In[124]:
+# In[37]:
 
 
 counties[0]
@@ -449,7 +464,7 @@ counties[0]
 
 # #### Save latest county time series data to file
 
-# In[125]:
+# In[38]:
 
 
 with open(county_data_folder/"countyTimeData.json", 'w') as f:
@@ -458,14 +473,14 @@ with open(county_data_folder/"countyTimeData.json", 'w') as f:
 
 # ### Add State time series
 
-# In[126]:
+# In[39]:
 
 
 with open(state_data_folder/'stateTimeData.json', 'r') as f:
     state_time_data = json.load(f)
 
 
-# In[127]:
+# In[40]:
 
 
 state_time_data
@@ -475,7 +490,7 @@ state_time_data
 
 # This makes it look like curve is flattening, so we adding it now, but dont display it until the next day
 
-# In[128]:
+# In[41]:
 
 
 for cur_state in state_json["features"]:
@@ -493,13 +508,13 @@ for cur_state in state_json["features"]:
 
 # #### Add old state date to state time series
 
-# In[129]:
+# In[42]:
 
 
 state_time_data["Alabama"]
 
 
-# In[130]:
+# In[43]:
 
 
 for state in state_json["features"]:
@@ -510,13 +525,13 @@ for state in state_json["features"]:
 
 # #### Save latest state time series data to file
 
-# In[131]:
+# In[44]:
 
 
 state_json["features"][0]
 
 
-# In[132]:
+# In[45]:
 
 
 with open(state_data_folder/"stateTimeData.json", 'w') as f:
@@ -527,7 +542,7 @@ with open(state_data_folder/"stateTimeData.json", 'w') as f:
 
 # ### Add in county risk
 
-# In[133]:
+# In[46]:
 
 
 #111 is to convert degrees to kilometers
@@ -540,7 +555,7 @@ def get_distance(c0, c1):
 
 # #### County Local Risk
 
-# In[134]:
+# In[47]:
 
 
 def calc_county_local_risk(props):
@@ -556,7 +571,7 @@ def calc_county_local_risk(props):
     return cases/(population/100000) if population != -1 else -1
 
 
-# In[135]:
+# In[48]:
 
 
 print_and_log("\nCalculating local county risk")
@@ -566,7 +581,7 @@ for county in counties:
 
 # #### County Neighbor Risk
 
-# In[136]:
+# In[49]:
 
 
 def calc_county_neighbor_risk(risks):
@@ -585,7 +600,7 @@ def calc_county_neighbor_risk(risks):
     return total_neighbor_risk
 
 
-# In[137]:
+# In[50]:
 
 
 def get_county_all_neighbor_risk(props):
@@ -598,7 +613,7 @@ def get_county_all_neighbor_risk(props):
     props["risk_total"] = props["risk_nearby"] + props["risk_local"]
 
 
-# In[138]:
+# In[51]:
 
 
 MAX_DISTANCE = 100
@@ -616,7 +631,7 @@ def get_county_neighbor_risk(props, neighbor_props):
         return {"distance":distance, "cases":neighbor_cases, "pop":neighbor_population}
 
 
-# In[139]:
+# In[52]:
 
 
 print_and_log("\nCalculating local county risk")
@@ -628,7 +643,7 @@ for county in counties:
 
 # ####  Local State Risk
 
-# In[140]:
+# In[53]:
 
 
 #111 is to convert degrees to kilometers
@@ -639,7 +654,7 @@ def get_distance(c0, c1):
     return distance
 
 
-# In[141]:
+# In[54]:
 
 
 def calc_state_local_risk(props):
@@ -650,7 +665,7 @@ def calc_state_local_risk(props):
     return cases/(population/100000) if population != -1 else -1
 
 
-# In[142]:
+# In[55]:
 
 
 print_and_log("Calculating local state risk")
@@ -660,7 +675,7 @@ for state in state_json["features"]:
 
 # #### Neighbor State Risk
 
-# In[143]:
+# In[56]:
 
 
 def get_state_all_neighbor_risk(props):
@@ -674,7 +689,7 @@ def get_state_all_neighbor_risk(props):
     props["risk_total"] = props["risk_nearby"] + props["risk_local"]
 
 
-# In[144]:
+# In[57]:
 
 
 def calc_state_neighbor_risk(risks):
@@ -686,7 +701,7 @@ def calc_state_neighbor_risk(risks):
     return total_neighbor_risk
 
 
-# In[145]:
+# In[58]:
 
 
 def get_state_neighbor_risk(props, neighbor_props):
@@ -702,7 +717,7 @@ def get_state_neighbor_risk(props, neighbor_props):
         return {"DISTANCE":distance, "CASES":neighbor_cases, "POP":neighbor_pop}
 
 
-# In[146]:
+# In[59]:
 
 
 print_and_log("Calculating neighbor state risk\n")
@@ -712,14 +727,14 @@ for state in state_json["features"]:
 
 # ## Add daily change to states
 
-# In[147]:
+# In[60]:
 
 
 def get_date_string(d):
     return f"{d.month}-{d.day}-{d.year}"
 
 
-# In[148]:
+# In[61]:
 
 
 today = datetime.datetime.today()
@@ -730,7 +745,7 @@ back_3 = get_date_string(yesterday - datetime.timedelta(days=3))
 back_7 = get_date_string(yesterday - datetime.timedelta(days=7))
 
 
-# In[149]:
+# In[62]:
 
 
 def add_change(state_or_county, feature_name, save_name):
@@ -761,7 +776,7 @@ def add_change(state_or_county, feature_name, save_name):
     state_or_county["properties"][save_name + "1w"] = percent_growth7d
 
 
-# In[150]:
+# In[63]:
 
 
 for state in state_json["features"]:
@@ -770,7 +785,7 @@ for state in state_json["features"]:
     add_change(state, "test_total", "growth_tests")
 
 
-# In[151]:
+# In[64]:
 
 
 for county in county_json["features"]:
@@ -778,7 +793,7 @@ for county in county_json["features"]:
     add_change(county, "deaths", "growth_deaths")
 
 
-# In[152]:
+# In[65]:
 
 
 county_json["features"][1441]
@@ -786,7 +801,7 @@ county_json["features"][1441]
 
 # ## Add state rank data
 
-# In[153]:
+# In[66]:
 
 
 def add_state_rank(feature_name, rank_name):
@@ -798,7 +813,7 @@ def add_state_rank(feature_name, rank_name):
         state["properties"][rank_name] = ordered.index(state["properties"][feature_name]) + 1
 
 
-# In[154]:
+# In[67]:
 
 
 add_state_rank("pc_cases", "rank_cases")
@@ -809,7 +824,7 @@ add_state_rank("risk_total", "rank_risk_total")
 
 # ## Add county rank data
 
-# In[155]:
+# In[68]:
 
 
 def add_county_rank(feature_name, rank_name):
@@ -821,7 +836,7 @@ def add_county_rank(feature_name, rank_name):
         county["properties"][rank_name] = ordered.index(county["properties"][feature_name]) + 1
 
 
-# In[156]:
+# In[69]:
 
 
 def get_counties_in_state(statename):
@@ -831,7 +846,7 @@ def is_in_state(county, statename):
     return county["properties"]["statename"] == statename
 
 
-# In[157]:
+# In[70]:
 
 
 def add_county_state_rank(feature_name, rank_name):
@@ -849,7 +864,7 @@ def add_county_state_rank(feature_name, rank_name):
             county["properties"]["num_counties_statewide"] = num_counties
 
 
-# In[158]:
+# In[71]:
 
 
 add_county_rank("pc_cases", "rank_cases")
@@ -857,7 +872,7 @@ add_county_rank("pc_deaths", "rank_deaths")
 add_county_rank("risk_total", "rank_risk_total")
 
 
-# In[159]:
+# In[72]:
 
 
 add_county_state_rank("pc_cases", "rank_cases_state")
@@ -865,13 +880,13 @@ add_county_state_rank("pc_deaths", "rank_deaths_state")
 add_county_state_rank("risk_total", "rank_risk_total_state")
 
 
-# In[160]:
+# In[73]:
 
 
 state_json["features"][0]["properties"]
 
 
-# In[161]:
+# In[74]:
 
 
 county_json["features"][0]["properties"]
@@ -879,21 +894,30 @@ county_json["features"][0]["properties"]
 
 # ## View Output
 
-# In[162]:
+# In[75]:
 
 
 county_json["features"][408]
 
 
-# In[163]:
+# In[76]:
 
 
 state_json["features"][0]
 
 
+# In[77]:
+
+
+for county in county_json["features"]:
+    if county["properties"]["geo_id"] == "0500000US36061": 
+        for k, v in county["properties"]["time_series"].items():
+            print(k,v)
+
+
 # ## Calculate US data in total
 
-# In[164]:
+# In[78]:
 
 
 us_json = {"properties":
@@ -908,11 +932,11 @@ us_json = {"properties":
                      'age65-74': 0,
                      'age75-84': 0,
                      'age85+': 0,
-                     'comorbid_obesity': .398,
-                     'comorbid_hypertension': .332,
+                     'comorbid_obesity': 39.8,
+                     'comorbid_hypertension': 33.2,
                      'comorbid_diabetes': 10.5,
                      'comorbid_cancer': .448,
-                     'comorbid_smoking': .157,
+                     'comorbid_smoking': 15.7,
                      'cases': 0,
                      'deaths': 0,
                      'active': 0,
@@ -933,7 +957,7 @@ us_json = {"properties":
           }
 
 
-# In[165]:
+# In[79]:
 
 
 summable_keys = ["population", "beds", "age0-19", "age20-44", "age45-54", "age55-64", "age65-74", "age75-84", "age85+",
@@ -949,7 +973,7 @@ for state in state_json["features"]:
 
 # ### Add Percapita data
 
-# In[166]:
+# In[80]:
 
 
 us_pop = us_json["properties"]["population"]
@@ -961,7 +985,7 @@ us_json["properties"]["pc_tests"] = us_json["properties"]["test_total"]/(us_pop/
 
 # ### Add time series data
 
-# In[167]:
+# In[81]:
 
 
 us_time_series = {}
@@ -974,19 +998,19 @@ for state in state_json["features"]:
             us_time_series[date][k] += addend
 
 
-# In[168]:
+# In[82]:
 
 
 us_json["properties"]["time_series"] = us_time_series
 
 
-# In[169]:
+# In[83]:
 
 
 state["properties"]["time_series"]
 
 
-# In[170]:
+# In[84]:
 
 
 us_json
@@ -994,7 +1018,7 @@ us_json
 
 # ### Add in daily changes in cases/deaths
 
-# In[171]:
+# In[85]:
 
 
 add_change(us_json, "cases", "growth_cases")
@@ -1003,7 +1027,7 @@ add_change(us_json, "deaths", "growth_deaths")
 
 # ## Export
 
-# In[172]:
+# In[86]:
 
 
 print_and_log("Exporting Files")
@@ -1038,7 +1062,7 @@ with open("countyData.js", 'w') as f:
     json.dump(county_json, f, cls=NpEncoder)
 
 
-# In[173]:
+# In[87]:
 
 
 live_path = Path("/var/www/html/data")
@@ -1063,16 +1087,22 @@ else:
         print_and_log(f"{test_path} test path not found, no data exported")
 
 
+# In[88]:
+
+
+us_json
+
+
 # ### Keep a record of each update for future time series use
 
-# In[174]:
+# In[89]:
 
 
 with open(f"logs/data_logs/state-{date_str}.json", 'w') as f:
     json.dump(state_json, f, cls=NpEncoder)
 
 
-# In[175]:
+# In[90]:
 
 
 with open(f"logs/data_logs/county-{date_str}.json", 'w') as f:
